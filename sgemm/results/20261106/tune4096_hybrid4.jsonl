@@ -1,0 +1,26 @@
+{"kind":"environment","gpu":"NVIDIA GeForce RTX 4070 Ti SUPER","cublas_version":120805,"math":"CUBLAS_PEDANTIC_MATH","M":4096,"N":4096,"K":4096}
+{"kind":"cpu_sample_check","samples":128,"max_abs":2.49146155e-05}
+{"kind":"check","label":"cublas_fp32","max_abs":0,"relative_l2":0}
+{"kind":"check","label":"v1","max_abs":0,"relative_l2":0}
+{"kind":"check","label":"v2","max_abs":0,"relative_l2":0}
+{"kind":"check","label":"hybrid_double_128x128x16_w8","max_abs":0,"relative_l2":0}
+{"kind":"sample","round":0,"impl":"cublas_fp32","ms":5.06183672,"tflops":27.15199266}
+{"kind":"sample","round":0,"impl":"v1","ms":5.976060867,"tflops":22.99825195}
+{"kind":"sample","round":0,"impl":"v2","ms":9.825689316,"tflops":13.98771619}
+{"kind":"sample","round":0,"impl":"hybrid_double_128x128x16_w8","ms":6.293401718,"tflops":21.83857946}
+{"kind":"sample","round":1,"impl":"cublas_fp32","ms":4.866867065,"tflops":28.239718}
+{"kind":"sample","round":1,"impl":"hybrid_double_128x128x16_w8","ms":6.244249821,"tflops":22.01048283}
+{"kind":"sample","round":1,"impl":"v2","ms":9.95153904,"tflops":13.81082393}
+{"kind":"sample","round":1,"impl":"v1","ms":5.950054646,"tflops":23.09877163}
+{"kind":"sample","round":2,"impl":"v2","ms":9.851186752,"tflops":13.95151233}
+{"kind":"sample","round":2,"impl":"hybrid_double_128x128x16_w8","ms":6.228480339,"tflops":22.06620973}
+{"kind":"sample","round":2,"impl":"cublas_fp32","ms":4.934860706,"tflops":27.8506247}
+{"kind":"sample","round":2,"impl":"v1","ms":6.030540943,"tflops":22.79048509}
+{"kind":"sample","round":3,"impl":"v2","ms":9.826815605,"tflops":13.986113}
+{"kind":"sample","round":3,"impl":"v1","ms":6.000435352,"tflops":22.9048303}
+{"kind":"sample","round":3,"impl":"cublas_fp32","ms":4.875673771,"tflops":28.1887099}
+{"kind":"sample","round":3,"impl":"hybrid_double_128x128x16_w8","ms":6.247219086,"tflops":22.00002138}
+{"kind":"sample","round":4,"impl":"cublas_fp32","ms":4.90946579,"tflops":27.99468605}
+{"kind":"sample","round":4,"impl":"v1","ms":5.946879864,"tflops":23.11110307}
+{"kind":"sample","round":4,"impl":"v2","ms":9.832742691,"tflops":13.9776823}
+{"kind":"sample","round":4,"impl":"hybrid_double_128x128x16_w8","ms":6.280006409,"tflops":21.88516134}

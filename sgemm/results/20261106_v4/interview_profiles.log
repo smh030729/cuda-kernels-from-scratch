@@ -1,0 +1,6 @@
+plain complete
+xor_sync complete
+v4 complete
+group8 complete
+cublas complete
+{"binary_sha256": "23c90393e23d8425eae73789cb190d06aaa560d1368d0a90525e9766487e26d5", "source_sha256": {"sgemm/sgemm_v4.cu": "b05855aacf681592d4250e9ce072f195657f1ad517924407b5735c629fc6720d", "sgemm/sgemm_v4.cuh": "2a87adf1992099d714ee6475ff0fa39b7f6c34d4843b5cb5cd020c1ab78c5865", "sgemm/benchmark_v4.cu": "6f4b511763af9453c6eeb07ff791d19f21e2d12faae2fc17b9a7a53546da7075", "sgemm/CMakeLists.txt": "5603c419493a82718870b36da7128df0ae5b06f91e00614605590cad77256207", "sgemm/run_compare_v4.py": "551bf8938fdc26213c850fe26f5f99b906547ef02e4cfb70743de6197b0ec48d"}, "clock_samples": 30, "requested_graphics_MHz": 2100, "clock_verified": true}

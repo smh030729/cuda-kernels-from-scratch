@@ -1,0 +1,85 @@
+========= COMPUTE-SANITIZER
+N=1 prepare=PASS
+  v0: PASS max_abs_error=0
+  v1: PASS max_abs_error=0
+  v2a: PASS max_abs_error=0
+  v0_fp16: PASS max_abs_error=0
+  v1_fp16: PASS max_abs_error=0
+  v2a_fp16: PASS max_abs_error=0
+N=31 prepare=PASS
+  v0: PASS max_abs_error=1.19209e-07
+  v1: PASS max_abs_error=7.59512e-05
+  v2a: PASS max_abs_error=7.59512e-05
+  v0_fp16: PASS max_abs_error=0.000121534
+  v1_fp16: PASS max_abs_error=0.000138044
+  v2a_fp16: PASS max_abs_error=0.000138044
+N=32 prepare=PASS
+  v0: PASS max_abs_error=1.49012e-07
+  v1: PASS max_abs_error=7.45952e-05
+  v2a: PASS max_abs_error=7.45952e-05
+  v0_fp16: PASS max_abs_error=0.000117719
+  v1_fp16: PASS max_abs_error=0.000171691
+  v2a_fp16: PASS max_abs_error=0.000171691
+N=33 prepare=PASS
+  v0: PASS max_abs_error=1.19209e-07
+  v1: PASS max_abs_error=7.88718e-05
+  v2a: PASS max_abs_error=7.88718e-05
+  v0_fp16: PASS max_abs_error=0.000119001
+  v1_fp16: PASS max_abs_error=0.000133097
+  v2a_fp16: PASS max_abs_error=0.000133097
+N=63 prepare=PASS
+  v0: PASS max_abs_error=1.2666e-07
+  v1: PASS max_abs_error=6.07502e-05
+  v2a: PASS max_abs_error=6.07502e-05
+  v0_fp16: PASS max_abs_error=6.1065e-05
+  v1_fp16: PASS max_abs_error=0.000101879
+  v2a_fp16: PASS max_abs_error=0.000101879
+N=64 prepare=PASS
+  v0: PASS max_abs_error=1.04308e-07
+  v1: PASS max_abs_error=5.85448e-05
+  v2a: PASS max_abs_error=5.85448e-05
+  v0_fp16: PASS max_abs_error=6.10352e-05
+  v1_fp16: PASS max_abs_error=0.00011082
+  v2a_fp16: PASS max_abs_error=0.00011082
+  v2b: PASS max_abs_error=0.00011082
+  v2c: PASS max_abs_error=0.00011082
+N=65 prepare=PASS
+  v0: PASS max_abs_error=1.11759e-07
+  v1: PASS max_abs_error=5.62537e-05
+  v2a: PASS max_abs_error=5.62537e-05
+  v0_fp16: PASS max_abs_error=6.07371e-05
+  v1_fp16: PASS max_abs_error=8.76486e-05
+  v2a_fp16: PASS max_abs_error=8.76486e-05
+N=127 prepare=PASS
+  v0: PASS max_abs_error=1.49012e-07
+  v1: PASS max_abs_error=4.2811e-05
+  v2a: PASS max_abs_error=4.2811e-05
+  v0_fp16: PASS max_abs_error=6.10203e-05
+  v1_fp16: PASS max_abs_error=8.45939e-05
+  v2a_fp16: PASS max_abs_error=8.45939e-05
+N=128 prepare=PASS
+  v0: PASS max_abs_error=1.19209e-07
+  v1: PASS max_abs_error=4.37656e-05
+  v2a: PASS max_abs_error=4.37656e-05
+  v0_fp16: PASS max_abs_error=6.09905e-05
+  v1_fp16: PASS max_abs_error=7.87824e-05
+  v2a_fp16: PASS max_abs_error=7.87824e-05
+  v2b: PASS max_abs_error=7.87824e-05
+  v2c: PASS max_abs_error=7.87824e-05
+N=129 prepare=PASS
+  v0: PASS max_abs_error=1.3411e-07
+  v1: PASS max_abs_error=4.28134e-05
+  v2a: PASS max_abs_error=4.28134e-05
+  v0_fp16: PASS max_abs_error=6.09457e-05
+  v1_fp16: PASS max_abs_error=8.62479e-05
+  v2a_fp16: PASS max_abs_error=8.62479e-05
+N=256 prepare=PASS
+  v0: PASS max_abs_error=1.3411e-07
+  v1: PASS max_abs_error=3.06219e-05
+  v2a: PASS max_abs_error=3.06219e-05
+  v0_fp16: PASS max_abs_error=3.05623e-05
+  v1_fp16: PASS max_abs_error=5.01201e-05
+  v2a_fp16: PASS max_abs_error=5.01201e-05
+  v2b: PASS max_abs_error=5.01201e-05
+  v2c: PASS max_abs_error=5.01201e-05
+========= ERROR SUMMARY: 0 errors

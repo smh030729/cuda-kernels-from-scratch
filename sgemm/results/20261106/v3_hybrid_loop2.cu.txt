@@ -1,0 +1,257 @@
+#include "sgemm_v3.cuh"
+#include <cstdint>
+#include <stdexcept>
+
+namespace {
+
+__device__ __forceinline__ void copy16(float* dst, const float* src) {
+  const unsigned address = static_cast<unsigned>(__cvta_generic_to_shared(dst));
+  asm volatile("cp.async.cg.shared.global [%0], [%1], 16;" ::
+               "r"(address), "l"(src) : "memory");
+}
+
+template<int BM, int BK, bool TRANSPOSED>
+__device__ __forceinline__ int a_offset(int row, int col) {
+  if constexpr (TRANSPOSED)
+    return col * BM + (row ^ (((col / 4) & 3) * 8));
+  // Preserve contiguous 16B segments, while separating the warp's four M groups.
+  return row * BK + (col ^ (((row / 8) & (BK / 4 - 1)) * 4));
+}
+
+template<int BM, int BN, int BK, int THREADS, bool ASYNC, bool TRANSPOSED>
+__device__ __forceinline__ void load_tile(
+    const float* A, const float* B, float* As, float* Bs,
+    int K, int N, int row0, int col0, int k0) {
+  #pragma unroll
+  for (int index = threadIdx.x * 4; index < BM * BK; index += THREADS * 4) {
+    const int row = index / BK, col = index % BK;
+    const float* src = A + size_t(row0 + row) * K + k0 + col;
+    if constexpr (TRANSPOSED) {
+      const float4 value = *reinterpret_cast<const float4*>(src);
+      As[a_offset<BM,BK,true>(row,col)] = value.x;
+      As[a_offset<BM,BK,true>(row,col+1)] = value.y;
+      As[a_offset<BM,BK,true>(row,col+2)] = value.z;
+      As[a_offset<BM,BK,true>(row,col+3)] = value.w;
+    } else {
+      float* dst = As + a_offset<BM,BK,false>(row, col);
+      if constexpr (ASYNC) copy16(dst, src);
+      else *reinterpret_cast<float4*>(dst) = *reinterpret_cast<const float4*>(src);
+    }
+  }
+  #pragma unroll
+  for (int index = threadIdx.x * 4; index < BK * BN; index += THREADS * 4) {
+    const int row = index / BN, col = index % BN;
+    const float* src = B + size_t(k0 + row) * N + col0 + col;
+    float* dst = Bs + index;
+    if constexpr (ASYNC) copy16(dst, src);
+    else *reinterpret_cast<float4*>(dst) = *reinterpret_cast<const float4*>(src);
+  }
+  if constexpr (ASYNC) asm volatile("cp.async.commit_group;" ::: "memory");
+}
+
+template<bool ASYNC>
+__device__ __forceinline__ void wait_tile() {
+  if constexpr (ASYNC) asm volatile("cp.async.wait_group 0;" ::: "memory");
+  // wait_group only waits for the issuing thread's copies. Publish the whole CTA tile.
+  __syncthreads();
+}
+
+template<int BM, int BN, int BK, int WM, int WN, bool ASYNC, int STAGES, bool TRANSPOSED = false>
+__global__ __launch_bounds__((BM / WM) * (BN / WN) * 32) void sgemm_v3_kernel(
+    const float* __restrict__ A, const float* __restrict__ B, float* __restrict__ C,
+    int M, int N, int K, float alpha, float beta) {
+  constexpr int TM = 8, TN = 4, WSUBM = 32, WSUBN = 32;
+  constexpr int MI = WM / WSUBM, NI = WN / WSUBN;
+  constexpr int THREADS = BM / WM * (BN / WN) * 32;
+  __shared__ __align__(16) float As[STAGES][BM * BK];
+  __shared__ __align__(16) float Bs[STAGES][BK * BN];
+  const int warp = threadIdx.x / 32, lane = threadIdx.x % 32;
+  const int warp_m = warp / (BN / WN), warp_n = warp % (BN / WN);
+  const int lane_m = lane / 8, lane_n = lane % 8;
+  const int row0 = blockIdx.y * BM, col0 = blockIdx.x * BN;
+  float accum[MI * TM][NI * TN] = {};
+
+  load_tile<BM, BN, BK, THREADS, ASYNC, TRANSPOSED>(A, B, As[0], Bs[0], K, N, row0, col0, 0);
+  wait_tile<ASYNC>();
+  int stage = 0;
+  for (int k0 = 0; k0 < K; k0 += BK) {
+    const int next = k0 + BK;
+    constexpr int A_COPIES = (BM * BK + THREADS * 4 - 1) / (THREADS * 4);
+    float4 prefetch_a[A_COPIES];
+    if constexpr (STAGES == 2) {
+      if (next < K) {
+        if constexpr (TRANSPOSED) {
+          #pragma unroll
+          for (int i = 0; i < A_COPIES; ++i) {
+            const int index = (threadIdx.x + i * THREADS) * 4;
+            if (index < BM * BK)
+              prefetch_a[i] = *reinterpret_cast<const float4*>(
+                  A + size_t(row0 + index / BK) * K + next + index % BK);
+          }
+          #pragma unroll
+          for (int index = threadIdx.x * 4; index < BK * BN; index += THREADS * 4) {
+            const float* src = B + size_t(next + index / BN) * N + col0 + index % BN;
+            float* dst = &Bs[stage ^ 1][index];
+            if constexpr (ASYNC) copy16(dst, src);
+            else *reinterpret_cast<float4*>(dst) = *reinterpret_cast<const float4*>(src);
+          }
+          if constexpr (ASYNC) asm volatile("cp.async.commit_group;" ::: "memory");
+        } else {
+          load_tile<BM, BN, BK, THREADS, ASYNC, false>(A, B, As[stage ^ 1], Bs[stage ^ 1],
+                                                     K, N, row0, col0, next);
+        }
+      }
+    }
+    #pragma unroll 2
+    for (int kk = 0; kk < BK; ++kk) {
+      float a[MI * TM], b[NI * TN];
+      #pragma unroll
+      for (int im = 0; im < MI; ++im) {
+        #pragma unroll
+        for (int i = 0; i < TM; i += (TRANSPOSED ? 4 : 1)) {
+          const int row = warp_m * WM + im * WSUBM + lane_m * TM + i;
+          if constexpr (TRANSPOSED) {
+            const float4 value = *reinterpret_cast<const float4*>(
+                &As[stage][a_offset<BM,BK,true>(row, kk)]);
+            a[im * TM + i] = value.x;
+            a[im * TM + i + 1] = value.y;
+            a[im * TM + i + 2] = value.z;
+            a[im * TM + i + 3] = value.w;
+          } else a[im * TM + i] = As[stage][a_offset<BM,BK,false>(row, kk)];
+        }
+      }
+      #pragma unroll
+      for (int jn = 0; jn < NI; ++jn) {
+        const int col = warp_n * WN + jn * WSUBN + lane_n * TN;
+        const float4 value = *reinterpret_cast<const float4*>(&Bs[stage][kk * BN + col]);
+        b[jn * TN] = value.x;
+        b[jn * TN + 1] = value.y;
+        b[jn * TN + 2] = value.z;
+        b[jn * TN + 3] = value.w;
+      }
+      #pragma unroll
+      for (int i = 0; i < MI * TM; ++i) {
+        #pragma unroll
+        for (int j = 0; j < NI * TN; ++j)
+          accum[i][j] = fmaf(a[i], b[j], accum[i][j]);
+      }
+    }
+    if (next < K) {
+      if constexpr (STAGES == 2 && TRANSPOSED) {
+        #pragma unroll
+        for (int i = 0; i < A_COPIES; ++i) {
+          const int index = (threadIdx.x + i * THREADS) * 4;
+          if (index < BM * BK) {
+            const int row = index / BK, col = index % BK;
+            const float4 value = prefetch_a[i];
+            As[stage ^ 1][a_offset<BM,BK,true>(row,col)] = value.x;
+            As[stage ^ 1][a_offset<BM,BK,true>(row,col+1)] = value.y;
+            As[stage ^ 1][a_offset<BM,BK,true>(row,col+2)] = value.z;
+            As[stage ^ 1][a_offset<BM,BK,true>(row,col+3)] = value.w;
+          }
+        }
+      }
+      if constexpr (STAGES == 1) {
+        __syncthreads();
+        load_tile<BM, BN, BK, THREADS, ASYNC, TRANSPOSED>(A, B, As[0], Bs[0], K, N, row0, col0, next);
+      }
+      wait_tile<ASYNC>();
+      if constexpr (STAGES == 2) stage ^= 1;
+    }
+  }
+  #pragma unroll
+  for (int im = 0; im < MI; ++im) {
+    #pragma unroll
+    for (int i = 0; i < TM; ++i) {
+      const int row = row0 + warp_m * WM + im * WSUBM + lane_m * TM + i;
+      #pragma unroll
+      for (int jn = 0; jn < NI; ++jn) {
+        const int col = col0 + warp_n * WN + jn * WSUBN + lane_n * TN;
+        float4 out;
+        out.x = alpha * accum[im * TM + i][jn * TN];
+        out.y = alpha * accum[im * TM + i][jn * TN + 1];
+        out.z = alpha * accum[im * TM + i][jn * TN + 2];
+        out.w = alpha * accum[im * TM + i][jn * TN + 3];
+        if (beta != 0.f) {
+          const float4 old = *reinterpret_cast<const float4*>(C + size_t(row) * N + col);
+          out.x = fmaf(beta, old.x, out.x);
+          out.y = fmaf(beta, old.y, out.y);
+          out.z = fmaf(beta, old.z, out.z);
+          out.w = fmaf(beta, old.w, out.w);
+        }
+        *reinterpret_cast<float4*>(C + size_t(row) * N + col) = out;
+      }
+    }
+  }
+}
+
+// Boundary / unaligned fallback, including K=0. The optimized path stays branch-free.
+__global__ void sgemm_v3_boundary(const float* A, const float* B, float* C,
+                                 int M, int N, int K, float alpha, float beta) {
+  __shared__ float a[16][16], b[16][16];
+  const int x = threadIdx.x, y = threadIdx.y;
+  const int row = blockIdx.y * 16 + y, col = blockIdx.x * 16 + x;
+  float sum = 0.f;
+  for (int k0 = 0; k0 < K; k0 += 16) {
+    a[y][x] = row < M && k0 + x < K ? A[size_t(row) * K + k0 + x] : 0.f;
+    b[y][x] = col < N && k0 + y < K ? B[size_t(k0 + y) * N + col] : 0.f;
+    __syncthreads();
+    #pragma unroll
+    for (int k = 0; k < 16; ++k) sum = fmaf(a[y][k], b[k][x], sum);
+    __syncthreads();
+  }
+  if (row < M && col < N) {
+    const size_t offset = size_t(row) * N + col;
+    C[offset] = beta == 0.f ? alpha * sum : fmaf(beta, C[offset], alpha * sum);
+  }
+}
+
+template<int BM, int BN, int BK, int WM, int WN, bool ASYNC, int STAGES, bool TRANSPOSED = false>
+void launch(const float* A, const float* B, float* C, int M, int N, int K,
+            float alpha, float beta, cudaStream_t stream) {
+  const bool aligned = ((reinterpret_cast<uintptr_t>(A) | reinterpret_cast<uintptr_t>(B) |
+                         reinterpret_cast<uintptr_t>(C)) & 15) == 0;
+  if (M % BM || N % BN || K == 0 || K % BK || !aligned) {
+    sgemm_v3_boundary<<<dim3((N + 15) / 16, (M + 15) / 16), dim3(16, 16), 0, stream>>>(
+        A, B, C, M, N, K, alpha, beta);
+  } else {
+    sgemm_v3_kernel<BM, BN, BK, WM, WN, ASYNC, STAGES, TRANSPOSED>
+        <<<dim3(N / BN, M / BM), BM / WM * (BN / WN) * 32, 0, stream>>>(A, B, C, M, N, K, alpha, beta);
+  }
+}
+
+} // namespace
+
+const char* sgemm_v3_variant_name(int variant) {
+  static const char* names[] = {"sync_128x128x16", "async_single_128x128x16",
+      "async_double_128x128x16", "async_double_64x128x16",
+      "async_double_128x64x16", "async_double_64x128x32",
+      "async_double_128x128x16_w8", "async_double_128x128x8_w8",
+      "hybrid_double_128x128x16_w8", "transpose_sync_128x128x16_w8"};
+  if (variant < 0 || variant >= SGEMM_V3_VARIANTS) throw std::invalid_argument("invalid v3 variant");
+  return names[variant];
+}
+
+void launch_sgemm_v3_variant(int variant, const float* A, const float* B, float* C,
+                            int M, int N, int K, float alpha, float beta, cudaStream_t stream) {
+  if (M < 0 || N < 0 || K < 0) throw std::invalid_argument("negative GEMM dimension");
+  if (M == 0 || N == 0) return;
+  switch (variant) {
+    case 0: return launch<128,128,16,64,64,false,1>(A,B,C,M,N,K,alpha,beta,stream);
+    case 1: return launch<128,128,16,64,64,true,1>(A,B,C,M,N,K,alpha,beta,stream);
+    case 2: return launch<128,128,16,64,64,true,2>(A,B,C,M,N,K,alpha,beta,stream);
+    case 3: return launch<64,128,16,32,64,true,2>(A,B,C,M,N,K,alpha,beta,stream);
+    case 4: return launch<128,64,16,64,32,true,2>(A,B,C,M,N,K,alpha,beta,stream);
+    case 5: return launch<64,128,32,32,64,true,2>(A,B,C,M,N,K,alpha,beta,stream);
+    case 6: return launch<128,128,16,32,64,true,2>(A,B,C,M,N,K,alpha,beta,stream);
+    case 7: return launch<128,128,8,32,64,true,2>(A,B,C,M,N,K,alpha,beta,stream);
+    case 8: return launch<128,128,16,32,64,true,2,true>(A,B,C,M,N,K,alpha,beta,stream);
+    case 9: return launch<128,128,16,32,64,false,2,true>(A,B,C,M,N,K,alpha,beta,stream);
+    default: throw std::invalid_argument("invalid v3 variant");
+  }
+}
+
+void launch_sgemm_v3(const float* A, const float* B, float* C, int M, int N, int K,
+                     float alpha, float beta, cudaStream_t stream) {
+  launch_sgemm_v3_variant(2, A, B, C, M, N, K, alpha, beta, stream);
+}

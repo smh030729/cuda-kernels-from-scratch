@@ -1,0 +1,174 @@
+#pragma once
+#include <cuda.h>
+#include <cuda_runtime.h>
+#include <cuda_fp16.h>
+
+// FP16 input, FP32 accumulation. A uses 64B TMA swizzle; B uses
+// 128B swizzle in consecutive BK x 64 panels. No tcgen05 instructions.
+template<int BM,int BN,int BK,int WM,int WN,int GROUP_M>
+__global__ void __launch_bounds__((BM/WM)*(BN/WN)*32)
+mysgemm_tma_grouped(int M,int N,int K,float alpha,float beta,float *C,
+    const __grid_constant__ CUtensorMap mapA,
+    const __grid_constant__ CUtensorMap mapB){
+    static_assert(BK==32,"this A descriptor and swizzle require BK=32");
+    static_assert(BM>0&&BM<=256&&BM%WM==0&&BN%WN==0&&BN%64==0,
+        "block tile must match warp tiles and 64-column B panels");
+    static_assert(WM%16==0&&WN%16==0,"matrix fragments use 16-row and 16-column loads");
+    constexpr int MITER=WM/16;
+    constexpr int NITER=WN/8;
+    constexpr int TILE_BYTES=(BM*BK+BK*BN)*sizeof(half);
+    // Alignment removes the base-dependent offset in TMA swizzle addressing.
+    __shared__ __align__(1024) half As[2][BM*BK];
+    __shared__ __align__(1024) half Bs[2][BK*BN];
+    __shared__ __align__(8) unsigned long long barrier[2];
+    // Group CTA rows to improve L2 reuse, following Triton matmul tutorial's
+    // grouped launch ordering. TMA/shared/MMA math is unchanged.
+    int tile_m=blockIdx.y,tile_n=blockIdx.x;
+    if constexpr(GROUP_M>1){
+        int tiles_m=M/BM,tiles_n=N/BN;
+        int linear=blockIdx.y*gridDim.x+blockIdx.x;
+        int group=linear/(GROUP_M*tiles_n);
+        int first_m=group*GROUP_M;
+        int actual_m=min(GROUP_M,tiles_m-first_m);
+        int within=linear%(GROUP_M*tiles_n);
+        tile_m=first_m+within%actual_m;
+        tile_n=within/actual_m;
+    }
+    int tid=threadIdx.x;
+    int lane=tid%32;
+    int warp_id=tid/32;
+    int warp_row=warp_id/(BN/WN);
+    int warp_col=warp_id%(BN/WN);
+    int load_row=(lane&7)+((lane>>3)&1)*8;
+    int load_col=(lane>>4)*8;
+    float sum[MITER][NITER][4]={0.f};
+    unsigned bar0=static_cast<unsigned>(__cvta_generic_to_shared(&barrier[0]));
+    unsigned bar1=static_cast<unsigned>(__cvta_generic_to_shared(&barrier[1]));
+    if(tid==0){
+        asm volatile("mbarrier.init.shared::cta.b64 [%0], 1;"::"r"(bar0):"memory");
+        asm volatile("mbarrier.init.shared::cta.b64 [%0], 1;"::"r"(bar1):"memory");
+        asm volatile("fence.proxy.async.shared::cta;":::"memory");
+    }
+    __syncthreads();
+    int load_index=0;
+    if(tid==0){
+        asm volatile("mbarrier.arrive.expect_tx.release.cta.shared::cta.b64 _, [%0], %1;"
+            ::"r"(bar0),"r"(TILE_BYTES):"memory");
+        unsigned dst=static_cast<unsigned>(__cvta_generic_to_shared(&As[0][0]));
+        int row=tile_m*BM;
+        asm volatile("cp.async.bulk.tensor.2d.shared::cluster.global.mbarrier::complete_tx::bytes "
+            "[%0], [%1, {%2,%3}], [%4];"
+            ::"r"(dst),"l"(&mapA),"r"(0),"r"(row),"r"(bar0):"memory");
+        #pragma unroll
+        for(int panel=0;panel<BN/64;panel++){
+            dst=static_cast<unsigned>(__cvta_generic_to_shared(&Bs[0][panel*BK*64]));
+            int col=tile_n*BN+panel*64;
+            asm volatile("cp.async.bulk.tensor.2d.shared::cluster.global.mbarrier::complete_tx::bytes "
+                "[%0], [%1, {%2,%3}], [%4];"
+                ::"r"(dst),"l"(&mapB),"r"(col),"r"(0),"r"(bar0):"memory");
+        }
+    }
+    // Each stage's initial phase is zero; it toggles after every reuse.
+    asm volatile("{ .reg .pred done; wait_initial: "
+        "mbarrier.try_wait.parity.acquire.cta.shared::cta.b64 done, [%0], 0; "
+        "@!done bra wait_initial; }"::"r"(bar0):"memory");
+    __syncthreads();
+    for(int k=0;k<K;k+=BK){
+        int write_index=load_index^1;
+        unsigned next_bar=write_index?bar1:bar0;
+        if(k+BK<K&&tid==0){
+            asm volatile("mbarrier.arrive.expect_tx.release.cta.shared::cta.b64 _, [%0], %1;"
+                ::"r"(next_bar),"r"(TILE_BYTES):"memory");
+            unsigned dst=static_cast<unsigned>(__cvta_generic_to_shared(&As[write_index][0]));
+            int row=tile_m*BM;
+            int next_k=k+BK;
+            asm volatile("cp.async.bulk.tensor.2d.shared::cluster.global.mbarrier::complete_tx::bytes "
+                "[%0], [%1, {%2,%3}], [%4];"
+                ::"r"(dst),"l"(&mapA),"r"(next_k),"r"(row),"r"(next_bar):"memory");
+            #pragma unroll
+            for(int panel=0;panel<BN/64;panel++){
+                dst=static_cast<unsigned>(__cvta_generic_to_shared(&Bs[write_index][panel*BK*64]));
+                int col=tile_n*BN+panel*64;
+                asm volatile("cp.async.bulk.tensor.2d.shared::cluster.global.mbarrier::complete_tx::bytes "
+                    "[%0], [%1, {%2,%3}], [%4];"
+                    ::"r"(dst),"l"(&mapB),"r"(col),"r"(next_k),"r"(next_bar):"memory");
+            }
+        }
+        #pragma unroll
+        for(int bk=0;bk<BK;bk+=16){
+            unsigned a_frag[MITER][4];
+            unsigned b_frag[NITER][2];
+            #pragma unroll
+            for(int m=0;m<MITER;m++){
+                int row=warp_row*WM+m*16+load_row;
+                int col=bk+load_col;
+                int index=row*BK+((col/8)^((row>>1)&3))*8+col%8;
+                unsigned addr=static_cast<unsigned>(__cvta_generic_to_shared(&As[load_index][index]));
+                asm volatile("ldmatrix.sync.aligned.m8n8.x4.shared.b16 {%0,%1,%2,%3}, [%4];"
+                    :"=r"(a_frag[m][0]),"=r"(a_frag[m][1]),"=r"(a_frag[m][2]),"=r"(a_frag[m][3]):"r"(addr));
+            }
+            #pragma unroll
+            for(int n=0;n<NITER;n+=2){
+                int row=bk+load_row;
+                int col=warp_col*WN+n*8+load_col;
+                int index=(col/64)*BK*64+row*64+(((col%64)/8)^(row&7))*8+col%8;
+                unsigned addr=static_cast<unsigned>(__cvta_generic_to_shared(&Bs[load_index][index]));
+                unsigned reg[4];
+                asm volatile("ldmatrix.sync.aligned.m8n8.x4.trans.shared.b16 {%0,%1,%2,%3}, [%4];"
+                    :"=r"(reg[0]),"=r"(reg[1]),"=r"(reg[2]),"=r"(reg[3]):"r"(addr));
+                b_frag[n][0]=reg[0];b_frag[n][1]=reg[1];
+                b_frag[n+1][0]=reg[2];b_frag[n+1][1]=reg[3];
+            }
+            #pragma unroll
+            for(int m=0;m<MITER;m++){
+                #pragma unroll
+                for(int n=0;n<NITER;n++){
+                    asm volatile("mma.sync.aligned.m16n8k16.row.col.f32.f16.f16.f32 "
+                        "{%0,%1,%2,%3}, {%4,%5,%6,%7}, {%8,%9}, {%0,%1,%2,%3};"
+                        :"+f"(sum[m][n][0]),"+f"(sum[m][n][1]),"+f"(sum[m][n][2]),"+f"(sum[m][n][3])
+                        :"r"(a_frag[m][0]),"r"(a_frag[m][1]),"r"(a_frag[m][2]),"r"(a_frag[m][3]),"r"(b_frag[n][0]),"r"(b_frag[n][1]));
+                }
+            }
+        }
+        if(k+BK<K){
+            unsigned next_phase=((k/BK+1)/2)&1;
+            asm volatile("{ .reg .pred done; wait_next: "
+                "mbarrier.try_wait.parity.acquire.cta.shared::cta.b64 done, [%0], %1; "
+                "@!done bra wait_next; }"::"r"(next_bar),"r"(next_phase):"memory");
+        }
+        // All generic shared reads finish before a later TMA overwrites this stage.
+        asm volatile("fence.proxy.async.shared::cta;":::"memory");
+        __syncthreads();
+        load_index=write_index;
+    }
+    if(tid==0){
+        asm volatile("mbarrier.inval.shared::cta.b64 [%0];"::"r"(bar0):"memory");
+        asm volatile("mbarrier.inval.shared::cta.b64 [%0];"::"r"(bar1):"memory");
+    }
+    #pragma unroll
+    for(int m=0;m<MITER;m++){
+        #pragma unroll
+        for(int n=0;n<NITER;n++){
+            int row=tile_m*BM+warp_row*WM+m*16+lane/4;
+            int col=tile_n*BN+warp_col*WN+n*8+2*(lane%4);
+            #pragma unroll
+            for(int r=0;r<2;r++){
+                int global_row=row+r*8;
+                size_t index=static_cast<size_t>(global_row)*N+col;
+                if(global_row<M&&col+1<N&&(index&1)==0){
+                    float2 value;
+                    float2 old={0.f,0.f};
+                    if(beta!=0.f)old=reinterpret_cast<float2*>(&C[index])[0];
+                    value.x=alpha*sum[m][n][r*2]+beta*old.x;
+                    value.y=alpha*sum[m][n][r*2+1]+beta*old.y;
+                    reinterpret_cast<float2*>(&C[index])[0]=value;
+                }else{
+                    #pragma unroll
+                    for(int j=0;j<2;j++){
+                        if(global_row<M&&col+j<N)C[index+j]=(beta==0.f)?alpha*sum[m][n][r*2+j]:alpha*sum[m][n][r*2+j]+beta*C[index+j];
+                    }
+                }
+            }
+        }
+    }
+}

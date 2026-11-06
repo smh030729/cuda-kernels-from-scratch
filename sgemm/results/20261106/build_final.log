@@ -1,0 +1,27 @@
+Consolidate compiler generated dependencies of target sgemm_compare
+[ 40%] Building CUDA object sgemm/CMakeFiles/sgemm_compare.dir/sgemm_v3.cu.o
+[ 40%] Building CUDA object sgemm/CMakeFiles/sgemm_compare.dir/benchmark_compare.cu.o
+ptxas info    : 0 bytes gmem
+ptxas info    : Compiling entry function '_ZN44_GLOBAL__N__71d800ec_11_sgemm_v3_cu_6beaad8f15sgemm_v3_kernelILb1ELi2EEEvPKfS2_Pfiiff' for 'sm_89'
+ptxas info    : Function properties for _ZN44_GLOBAL__N__71d800ec_11_sgemm_v3_cu_6beaad8f15sgemm_v3_kernelILb1ELi2EEEvPKfS2_Pfiiff
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 127 registers, used 1 barriers, 32768 bytes smem, 392 bytes cmem[0]
+ptxas info    : Compile time = 24.865 ms
+ptxas info    : Compiling entry function '_ZN44_GLOBAL__N__71d800ec_11_sgemm_v3_cu_6beaad8f15sgemm_v3_kernelILb1ELi1EEEvPKfS2_Pfiiff' for 'sm_89'
+ptxas info    : Function properties for _ZN44_GLOBAL__N__71d800ec_11_sgemm_v3_cu_6beaad8f15sgemm_v3_kernelILb1ELi1EEEvPKfS2_Pfiiff
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 122 registers, used 1 barriers, 16384 bytes smem, 392 bytes cmem[0]
+ptxas info    : Compile time = 17.803 ms
+ptxas info    : Compiling entry function '_ZN44_GLOBAL__N__71d800ec_11_sgemm_v3_cu_6beaad8f15sgemm_v3_kernelILb0ELi1EEEvPKfS2_Pfiiff' for 'sm_89'
+ptxas info    : Function properties for _ZN44_GLOBAL__N__71d800ec_11_sgemm_v3_cu_6beaad8f15sgemm_v3_kernelILb0ELi1EEEvPKfS2_Pfiiff
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 125 registers, used 1 barriers, 16384 bytes smem, 392 bytes cmem[0]
+ptxas info    : Compile time = 19.596 ms
+ptxas info    : Compiling entry function '_ZN44_GLOBAL__N__71d800ec_11_sgemm_v3_cu_6beaad8f17sgemm_v3_boundaryEPKfS1_Pfiiiff' for 'sm_89'
+ptxas info    : Function properties for _ZN44_GLOBAL__N__71d800ec_11_sgemm_v3_cu_6beaad8f17sgemm_v3_boundaryEPKfS1_Pfiiiff
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 37 registers, used 1 barriers, 2048 bytes smem, 396 bytes cmem[0]
+ptxas info    : Compile time = 3.248 ms
+ptxas info    : 0 bytes gmem
+[ 60%] Linking CUDA executable sgemm_compare
+[100%] Built target sgemm_compare

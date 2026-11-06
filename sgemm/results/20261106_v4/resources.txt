@@ -1,0 +1,58 @@
+
+Fatbin ptx code:
+================
+arch = sm_89
+code version = [8,7]
+host = linux
+compile_size = 64bit
+compressed
+identifier = /home/smh/ai_infra/cuda-kernels-from-scratch/sgemm/benchmark_v4.cu
+ptxasOptions = -v  --generate-line-info 
+
+Fatbin elf code:
+================
+arch = sm_89
+code version = [1,7]
+host = linux
+compile_size = 64bit
+identifier = /home/smh/ai_infra/cuda-kernels-from-scratch/sgemm/benchmark_v4.cu
+
+Resource usage:
+ Common:
+  GLOBAL:0
+
+Fatbin ptx code:
+================
+arch = sm_89
+code version = [8,7]
+host = linux
+compile_size = 64bit
+compressed
+identifier = /home/smh/ai_infra/cuda-kernels-from-scratch/sgemm/sgemm_v4.cu
+ptxasOptions = -v  --generate-line-info 
+
+Fatbin elf code:
+================
+arch = sm_89
+code version = [1,7]
+host = linux
+compile_size = 64bit
+identifier = /home/smh/ai_infra/cuda-kernels-from-scratch/sgemm/sgemm_v4.cu
+
+Resource usage:
+ Common:
+  GLOBAL:0
+ Function _ZN44_GLOBAL__N__ec0f3855_11_sgemm_v4_cu_f0eba29515sgemm_v4_kernelILi128ELi128ELi32ELi64ELi8ELb1ELb1ELi2EEEvPK6__halfS3_Pfiiiff:
+  REG:128 STACK:8 SHARED:32768 LOCAL:0 CONSTANT[0]:396 TEXTURE:0 SURFACE:0 SAMPLER:0
+ Function _ZN44_GLOBAL__N__ec0f3855_11_sgemm_v4_cu_f0eba29515sgemm_v4_kernelILi128ELi128ELi32ELi64ELi1ELb1ELb1ELi2EEEvPK6__halfS3_Pfiiiff:
+  REG:126 STACK:0 SHARED:32768 LOCAL:0 CONSTANT[0]:396 TEXTURE:0 SURFACE:0 SAMPLER:0
+ Function _ZN44_GLOBAL__N__ec0f3855_11_sgemm_v4_cu_f0eba29515sgemm_v4_kernelILi128ELi128ELi32ELi64ELi1ELb1ELb1ELi1EEEvPK6__halfS3_Pfiiiff:
+  REG:127 STACK:0 SHARED:16384 LOCAL:0 CONSTANT[0]:396 TEXTURE:0 SURFACE:0 SAMPLER:0
+ Function _ZN44_GLOBAL__N__ec0f3855_11_sgemm_v4_cu_f0eba29515sgemm_v4_kernelILi128ELi128ELi32ELi64ELi1ELb1ELb0ELi1EEEvPK6__halfS3_Pfiiiff:
+  REG:126 STACK:0 SHARED:16384 LOCAL:0 CONSTANT[0]:396 TEXTURE:0 SURFACE:0 SAMPLER:0
+ Function _ZN44_GLOBAL__N__ec0f3855_11_sgemm_v4_cu_f0eba29515sgemm_v4_kernelILi128ELi128ELi32ELi64ELi1ELb0ELb0ELi1EEEvPK6__halfS3_Pfiiiff:
+  REG:127 STACK:0 SHARED:16384 LOCAL:0 CONSTANT[0]:396 TEXTURE:0 SURFACE:0 SAMPLER:0
+ Function _ZN44_GLOBAL__N__ec0f3855_11_sgemm_v4_cu_f0eba29517sgemm_v4_boundaryEPK6__halfS2_Pfiiiff:
+  REG:37 STACK:0 SHARED:2048 LOCAL:0 CONSTANT[0]:396 TEXTURE:0 SURFACE:0 SAMPLER:0
+ Function _ZN44_GLOBAL__N__ec0f3855_11_sgemm_v4_cu_f0eba29513sgemm_v4_wmmaEPK6__halfS2_Pfiiff:
+  REG:124 STACK:0 SHARED:24576 LOCAL:0 CONSTANT[0]:392 TEXTURE:0 SURFACE:0 SAMPLER:0

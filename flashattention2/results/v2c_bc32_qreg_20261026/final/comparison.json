@@ -1,0 +1,57 @@
+{
+  "clock_control": "none; preliminary",
+  "resources": {
+    "v2c": {
+      "derived__local_spilling_requests": "0",
+      "derived__local_spilling_requests_pct": "0",
+      "launch__occupancy_limit_blocks": "24.000000",
+      "launch__occupancy_limit_registers": "5.000000",
+      "launch__occupancy_limit_shared_mem": "2.000000",
+      "launch__occupancy_limit_warps": "12.000000",
+      "launch__registers_per_thread": "96",
+      "launch__registers_per_thread_allocated": "96.000000",
+      "launch__shared_mem_per_block_static": "40.960000",
+      "sm__maximum_warps_per_active_cycle_pct": "16.666667",
+      "sm__warps_active.avg.pct_of_peak_sustained_active": "15.437879"
+    },
+    "v2c_bc32_qreg": {
+      "derived__local_spilling_requests": "0",
+      "derived__local_spilling_requests_pct": "0",
+      "launch__occupancy_limit_blocks": "24.000000",
+      "launch__occupancy_limit_registers": "5.000000",
+      "launch__occupancy_limit_shared_mem": "5.000000",
+      "launch__occupancy_limit_warps": "12.000000",
+      "launch__registers_per_thread": "96",
+      "launch__registers_per_thread_allocated": "96.000000",
+      "launch__shared_mem_per_block_static": "16.384000",
+      "sm__maximum_warps_per_active_cycle_pct": "41.666667",
+      "sm__warps_active.avg.pct_of_peak_sustained_active": "27.037847"
+    }
+  },
+  "comparison": [
+    {
+      "n": 1024,
+      "old_ms": 0.023817805050068374,
+      "new_ms": 0.029010729875393257,
+      "latency_change_pct": 21.8027010230734,
+      "percent_of_official": 29.808939514530508,
+      "max_abs_error": 0.00010660290718078613
+    },
+    {
+      "n": 4096,
+      "old_ms": 0.09202611606751857,
+      "new_ms": 0.11100592226595492,
+      "latency_change_pct": 20.62436948280102,
+      "percent_of_official": 58.457978617264885,
+      "max_abs_error": 4.795193672180176e-05
+    },
+    {
+      "n": 16384,
+      "old_ms": 1.1383649706840515,
+      "new_ms": 1.0754559834798176,
+      "latency_change_pct": -5.526258170649035,
+      "percent_of_official": 84.18836124721747,
+      "max_abs_error": 2.5063753128051758e-05
+    }
+  ]
+}

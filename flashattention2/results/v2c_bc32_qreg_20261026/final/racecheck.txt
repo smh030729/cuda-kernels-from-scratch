@@ -1,0 +1,11 @@
+========= COMPUTE-SANITIZER
+=====================================
+FlashAttention-2 Profiling
+Version  : v2c_bc32_qreg
+N        : 256
+Head Dim : 64
+Input    : FP16, Output: FP16
+K layout : Kt [64, N]
+Q/K/V/O  : [256, 64]
+=====================================
+========= RACECHECK SUMMARY: 0 hazards displayed (0 errors, 0 warnings)

@@ -1,0 +1,6 @@
+ptxas info    : 0 bytes gmem
+ptxas info    : Compiling entry function '_ZN17fa2_v2c_bc32_qreg29flashattention2_v2c_bc32_qregEPK6__halfS2_S2_PS0_i' for 'sm_89'
+ptxas info    : Function properties for _ZN17fa2_v2c_bc32_qreg29flashattention2_v2c_bc32_qregEPK6__halfS2_S2_PS0_i
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 96 registers, used 1 barriers, 16384 bytes smem, 388 bytes cmem[0]
+ptxas info    : Compile time = 21.891 ms

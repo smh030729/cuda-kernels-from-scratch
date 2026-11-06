@@ -1,0 +1,1094 @@
+{
+  "plain": {
+    "metrics": {
+      "smsp__warps_active.avg.per_cycle_active": {
+        "value": "3.927775",
+        "unit": "warp"
+      },
+      "smsp__warps_eligible.avg.per_cycle_active": {
+        "value": "0.135163",
+        "unit": "warp"
+      },
+      "smsp__issue_inst0.avg.pct_of_peak_sustained_active": {
+        "value": "89.741140",
+        "unit": "%"
+      },
+      "smsp__issue_active.avg.per_cycle_active": {
+        "value": "0.10",
+        "unit": ""
+      },
+      "smsp__inst_executed.sum": {
+        "value": "194510848.000000",
+        "unit": "inst"
+      },
+      "sm__maximum_warps_per_active_cycle_pct": {
+        "value": "33.333333",
+        "unit": "%"
+      },
+      "sm__warps_active.avg.pct_of_peak_sustained_active": {
+        "value": "32.591059",
+        "unit": "%"
+      },
+      "sm__pipe_tensor_cycles_active_v2.avg.pct_of_peak_sustained_active": {
+        "value": "28.329981",
+        "unit": "%"
+      },
+      "l1tex__data_bank_conflicts_pipe_lsu_mem_shared_op_ld.sum": {
+        "value": "285212672",
+        "unit": ""
+      },
+      "lts__t_sector_op_read_hit_rate.pct": {
+        "value": "94.038432",
+        "unit": "%"
+      }
+    },
+    "instructions": 194510848.0,
+    "hmma_instructions": 33554432.0,
+    "non_hmma_instructions": 160956416.0,
+    "full_opcodes": {
+      "IMAD": 147456.0,
+      "SHF.R.S32.HI": 3358720.0,
+      "LEA.HI": 2228224.0,
+      "LOP3.LUT": 24338432.0,
+      "IMAD.IADD": 6471680.0,
+      "IMAD.SHL.U32": 13746176.0,
+      "CS2R": 8388608.0,
+      "LDG.E.128.CONSTANT": 4194304.0,
+      "ISETP.LT.AND": 4218880.0,
+      "IMAD.MOV.U32": 2211840.0,
+      "STS.128": 4194304.0,
+      "IADD3": 11649024.0,
+      "ISETP.NE.AND": 4194304.0,
+      "BSYNC": 4218880.0,
+      "ISETP.GT.AND": 1056768.0,
+      "BRA": 10534912.0,
+      "IMNMX": 2097152.0,
+      "ISETP.GE.U32.AND": 2097152.0,
+      "BSSY": 4218880.0,
+      "ISETP.GE.AND": 5275648.0,
+      "LEA.HI.SX32": 40960.0,
+      "IMAD.WIDE.U32": 49152.0,
+      "LEA": 4227072.0,
+      "LEA.HI.X": 4227072.0,
+      "SEL": 8355840.0,
+      "LEA.HI.X.SX32": 4177920.0,
+      "IMAD.WIDE": 4177920.0,
+      "BAR.SYNC.DEFER_BLOCKING": 2088960.0,
+      "S2UR": 8192.0,
+      "ULDC.64": 8192.0,
+      "S2R": 16384.0,
+      "USHF.L.U32": 8192.0,
+      "SHF.R.U32.HI": 24576.0,
+      "LDSM.16.M88.4": 4194304.0,
+      "LDSM.16.MT88.4": 8388608.0,
+      "HMMA.16816.F32": 33554432.0,
+      "CALL.REL.NOINC": 1040384.0,
+      "NOP": 8192.0,
+      "FSETP.NEU.AND": 8192.0,
+      "ULDC": 8192.0,
+      "USHF.R.S32.HI": 8192.0,
+      "ISETP.GE.OR": 245760.0,
+      "EXIT": 16384.0,
+      "FMUL": 524288.0,
+      "P2R": 0.0,
+      "LDG.E.64": 0.0,
+      "FFMA": 0.0,
+      "STG.E.64": 262144.0
+    },
+    "ldsm": {
+      "Instructions Executed": 12582912.0,
+      "L1 Wavefronts Shared Excessive": 285212672.0,
+      "L1 Wavefronts Shared": 335544320.0,
+      "L1 Wavefronts Shared Ideal": 50331648.0,
+      "stall_long_sb": 0.0,
+      "stall_short_sb": 0.0,
+      "stall_barrier": 17247.0,
+      "stall_math": 0.0,
+      "stall_wait": 1010.0
+    },
+    "ldsm_by_cuda_line": {
+      "109": {
+        "Instructions Executed": 4194304.0,
+        "L1 Wavefronts Shared Excessive": 50331648.0,
+        "L1 Wavefronts Shared": 67108864.0,
+        "L1 Wavefronts Shared Ideal": 16777216.0,
+        "stall_long_sb": 0.0,
+        "stall_short_sb": 0.0,
+        "stall_barrier": 17247.0,
+        "stall_math": 0.0,
+        "stall_wait": 204.0
+      },
+      "119": {
+        "Instructions Executed": 8388608.0,
+        "L1 Wavefronts Shared Excessive": 234881024.0,
+        "L1 Wavefronts Shared": 268435456.0,
+        "L1 Wavefronts Shared Ideal": 33554432.0,
+        "stall_long_sb": 0.0,
+        "stall_short_sb": 0.0,
+        "stall_barrier": 0.0,
+        "stall_math": 0.0,
+        "stall_wait": 806.0
+      }
+    },
+    "top_long_scoreboard": [
+      {
+        "line": "33",
+        "source": "*reinterpret_cast<uint4*>(dst) = value;",
+        "sass": "STS.128 [R104.X16], R4",
+        "Instructions Executed": 1040384.0,
+        "L1 Wavefronts Shared Excessive": 0.0,
+        "L1 Wavefronts Shared": 4161536.0,
+        "L1 Wavefronts Shared Ideal": 4161536.0,
+        "stall_long_sb": 40590.0,
+        "stall_short_sb": 0.0,
+        "stall_barrier": 0.0,
+        "stall_math": 0.0,
+        "stall_wait": 0.0
+      },
+      {
+        "line": "33",
+        "source": "*reinterpret_cast<uint4*>(dst) = value;",
+        "sass": "STS.128 [R2+0x2000], R4",
+        "Instructions Executed": 1040384.0,
+        "L1 Wavefronts Shared Excessive": 0.0,
+        "L1 Wavefronts Shared": 4161536.0,
+        "L1 Wavefronts Shared Ideal": 4161536.0,
+        "stall_long_sb": 32886.0,
+        "stall_short_sb": 0.0,
+        "stall_barrier": 0.0,
+        "stall_math": 0.0,
+        "stall_wait": 0.0
+      },
+      {
+        "line": "33",
+        "source": "*reinterpret_cast<uint4*>(dst) = value;",
+        "sass": "STS.128 [R3+0x2000], R4",
+        "Instructions Executed": 1040384.0,
+        "L1 Wavefronts Shared Excessive": 0.0,
+        "L1 Wavefronts Shared": 4161536.0,
+        "L1 Wavefronts Shared Ideal": 4161536.0,
+        "stall_long_sb": 29928.0,
+        "stall_short_sb": 0.0,
+        "stall_barrier": 0.0,
+        "stall_math": 0.0,
+        "stall_wait": 0.0
+      }
+    ],
+    "top_short_scoreboard": [
+      {
+        "line": "130",
+        "source": ": r\"(af[m][0])",
+        "sass": "HMMA.16816.F32 R68, R100, R48, R68",
+        "Instructions Executed": 1040384.0,
+        "L1 Wavefronts Shared Excessive": 0.0,
+        "L1 Wavefronts Shared": 0.0,
+        "L1 Wavefronts Shared Ideal": 0.0,
+        "stall_long_sb": 0.0,
+        "stall_short_sb": 10325.0,
+        "stall_barrier": 0.0,
+        "stall_math": 6127.0,
+        "stall_wait": 500.0
+      },
+      {
+        "line": "51",
+        "source": "const half* src = valid ? B + size_t(k0 + row) * N + col0 + col : B;",
+        "sass": "IADD3 R6, P0, R122, R111, RZ",
+        "Instructions Executed": 1040384.0,
+        "L1 Wavefronts Shared Excessive": 0.0,
+        "L1 Wavefronts Shared": 0.0,
+        "L1 Wavefronts Shared Ideal": 0.0,
+        "stall_long_sb": 0.0,
+        "stall_short_sb": 9825.0,
+        "stall_barrier": 0.0,
+        "stall_math": 12.0,
+        "stall_wait": 276.0
+      },
+      {
+        "line": "130",
+        "source": ": r\"(af[m][0])",
+        "sass": "HMMA.16816.F32 R32, R44, R96, R32",
+        "Instructions Executed": 1040384.0,
+        "L1 Wavefronts Shared Excessive": 0.0,
+        "L1 Wavefronts Shared": 0.0,
+        "L1 Wavefronts Shared Ideal": 0.0,
+        "stall_long_sb": 0.0,
+        "stall_short_sb": 6837.0,
+        "stall_barrier": 0.0,
+        "stall_math": 1504.0,
+        "stall_wait": 492.0
+      }
+    ]
+  },
+  "xor_sync": {
+    "metrics": {
+      "smsp__warps_active.avg.per_cycle_active": {
+        "value": "3.849406",
+        "unit": "warp"
+      },
+      "smsp__warps_eligible.avg.per_cycle_active": {
+        "value": "0.230809",
+        "unit": "warp"
+      },
+      "smsp__issue_inst0.avg.pct_of_peak_sustained_active": {
+        "value": "82.626633",
+        "unit": "%"
+      },
+      "smsp__issue_active.avg.per_cycle_active": {
+        "value": "0.17",
+        "unit": ""
+      },
+      "smsp__inst_executed.sum": {
+        "value": "226354075.000000",
+        "unit": "inst"
+      },
+      "sm__maximum_warps_per_active_cycle_pct": {
+        "value": "33.333333",
+        "unit": "%"
+      },
+      "sm__warps_active.avg.pct_of_peak_sustained_active": {
+        "value": "32.873268",
+        "unit": "%"
+      },
+      "sm__pipe_tensor_cycles_active_v2.avg.pct_of_peak_sustained_active": {
+        "value": "41.727537",
+        "unit": "%"
+      },
+      "l1tex__data_bank_conflicts_pipe_lsu_mem_shared_op_ld.sum": {
+        "value": "0",
+        "unit": ""
+      },
+      "lts__t_sector_op_read_hit_rate.pct": {
+        "value": "92.085621",
+        "unit": "%"
+      }
+    },
+    "instructions": 226353152.0,
+    "hmma_instructions": 33554432.0,
+    "non_hmma_instructions": 192798720.0,
+    "full_opcodes": {
+      "SHF.R.S32.HI": 3481600.0,
+      "SHF.R.U32.HI": 3276800.0,
+      "LEA.HI": 2310144.0,
+      "LOP3.LUT": 41164800.0,
+      "IMAD": 1318912.0,
+      "IMAD.SHL.U32": 21102592.0,
+      "IMAD.IADD": 6430720.0,
+      "CS2R": 8388608.0,
+      "LDG.E.128.CONSTANT": 4194304.0,
+      "ISETP.LT.AND": 4218880.0,
+      "IMAD.MOV.U32": 2211840.0,
+      "STS.128": 4194304.0,
+      "IADD3": 13737984.0,
+      "ISETP.NE.AND": 4194304.0,
+      "BSYNC": 4218880.0,
+      "ISETP.GT.AND": 1056768.0,
+      "BRA": 11575296.0,
+      "IMNMX": 2097152.0,
+      "BSSY": 4218880.0,
+      "ISETP.GE.U32.AND": 2097152.0,
+      "ISETP.GE.AND": 5275648.0,
+      "IMAD.WIDE.U32": 49152.0,
+      "LEA": 4227072.0,
+      "LEA.HI.X": 4227072.0,
+      "SEL": 8355840.0,
+      "LEA.HI.X.SX32": 4177920.0,
+      "IMAD.WIDE": 4177920.0,
+      "BAR.SYNC.DEFER_BLOCKING": 2088960.0,
+      "S2R": 24576.0,
+      "ULDC.64": 8192.0,
+      "LDSM.16.M88.4": 4194304.0,
+      "LDSM.16.MT88.4": 8388608.0,
+      "HMMA.16816.F32": 33554432.0,
+      "CALL.REL.NOINC": 1040384.0,
+      "FSETP.NEU.AND": 8192.0,
+      "ULDC": 8192.0,
+      "USHF.R.S32.HI": 8192.0,
+      "ISETP.GE.OR": 245760.0,
+      "EXIT": 16384.0,
+      "FMUL": 524288.0,
+      "LDG.E.64": 0.0,
+      "FFMA": 0.0,
+      "P2R": 0.0,
+      "STG.E.64": 262144.0,
+      "NOP": 0.0
+    },
+    "ldsm": {
+      "Instructions Executed": 12582912.0,
+      "L1 Wavefronts Shared Excessive": 0.0,
+      "L1 Wavefronts Shared": 50331648.0,
+      "L1 Wavefronts Shared Ideal": 50331648.0,
+      "stall_long_sb": 0.0,
+      "stall_short_sb": 0.0,
+      "stall_barrier": 7491.0,
+      "stall_math": 0.0,
+      "stall_wait": 978.0
+    },
+    "ldsm_by_cuda_line": {
+      "109": {
+        "Instructions Executed": 4194304.0,
+        "L1 Wavefronts Shared Excessive": 0.0,
+        "L1 Wavefronts Shared": 16777216.0,
+        "L1 Wavefronts Shared Ideal": 16777216.0,
+        "stall_long_sb": 0.0,
+        "stall_short_sb": 0.0,
+        "stall_barrier": 7491.0,
+        "stall_math": 0.0,
+        "stall_wait": 136.0
+      },
+      "119": {
+        "Instructions Executed": 8388608.0,
+        "L1 Wavefronts Shared Excessive": 0.0,
+        "L1 Wavefronts Shared": 33554432.0,
+        "L1 Wavefronts Shared Ideal": 33554432.0,
+        "stall_long_sb": 0.0,
+        "stall_short_sb": 0.0,
+        "stall_barrier": 0.0,
+        "stall_math": 0.0,
+        "stall_wait": 842.0
+      }
+    },
+    "top_long_scoreboard": [
+      {
+        "line": "33",
+        "source": "*reinterpret_cast<uint4*>(dst) = value;",
+        "sass": "STS.128 [R118], R8",
+        "Instructions Executed": 1040384.0,
+        "L1 Wavefronts Shared Excessive": 0.0,
+        "L1 Wavefronts Shared": 4161536.0,
+        "L1 Wavefronts Shared Ideal": 4161536.0,
+        "stall_long_sb": 28531.0,
+        "stall_short_sb": 0.0,
+        "stall_barrier": 0.0,
+        "stall_math": 0.0,
+        "stall_wait": 0.0
+      },
+      {
+        "line": "33",
+        "source": "*reinterpret_cast<uint4*>(dst) = value;",
+        "sass": "STS.128 [R114], R8",
+        "Instructions Executed": 1040384.0,
+        "L1 Wavefronts Shared Excessive": 0.0,
+        "L1 Wavefronts Shared": 4161536.0,
+        "L1 Wavefronts Shared Ideal": 4161536.0,
+        "stall_long_sb": 28329.0,
+        "stall_short_sb": 0.0,
+        "stall_barrier": 0.0,
+        "stall_math": 0.0,
+        "stall_wait": 0.0
+      },
+      {
+        "line": "33",
+        "source": "*reinterpret_cast<uint4*>(dst) = value;",
+        "sass": "STS.128 [R2+0x2000], R8",
+        "Instructions Executed": 1040384.0,
+        "L1 Wavefronts Shared Excessive": 0.0,
+        "L1 Wavefronts Shared": 4161536.0,
+        "L1 Wavefronts Shared Ideal": 4161536.0,
+        "stall_long_sb": 22269.0,
+        "stall_short_sb": 0.0,
+        "stall_barrier": 0.0,
+        "stall_math": 0.0,
+        "stall_wait": 0.0
+      }
+    ],
+    "top_short_scoreboard": [
+      {
+        "line": "130",
+        "source": ": r\"(af[m][0])",
+        "sass": "HMMA.16816.F32 R92, R64, R52, R92",
+        "Instructions Executed": 1040384.0,
+        "L1 Wavefronts Shared Excessive": 0.0,
+        "L1 Wavefronts Shared": 0.0,
+        "L1 Wavefronts Shared Ideal": 0.0,
+        "stall_long_sb": 0.0,
+        "stall_short_sb": 1276.0,
+        "stall_barrier": 0.0,
+        "stall_math": 12916.0,
+        "stall_wait": 0.0
+      },
+      {
+        "line": "43",
+        "source": "const bool valid = row0 + row < M && k0 + col < K;",
+        "sass": "IMAD.IADD R8, R117, 0x1, R106",
+        "Instructions Executed": 1040384.0,
+        "L1 Wavefronts Shared Excessive": 0.0,
+        "L1 Wavefronts Shared": 0.0,
+        "L1 Wavefronts Shared Ideal": 0.0,
+        "stall_long_sb": 0.0,
+        "stall_short_sb": 486.0,
+        "stall_barrier": 0.0,
+        "stall_math": 2.0,
+        "stall_wait": 277.0
+      },
+      {
+        "line": "130",
+        "source": ": r\"(af[m][0])",
+        "sass": "HMMA.16816.F32 R40, R20, R52, R40",
+        "Instructions Executed": 1040384.0,
+        "L1 Wavefronts Shared Excessive": 0.0,
+        "L1 Wavefronts Shared": 0.0,
+        "L1 Wavefronts Shared Ideal": 0.0,
+        "stall_long_sb": 0.0,
+        "stall_short_sb": 420.0,
+        "stall_barrier": 0.0,
+        "stall_math": 3097.0,
+        "stall_wait": 487.0
+      }
+    ]
+  },
+  "v4": {
+    "metrics": {
+      "smsp__warps_active.avg.per_cycle_active": {
+        "value": "3.879799",
+        "unit": "warp"
+      },
+      "smsp__warps_eligible.avg.per_cycle_active": {
+        "value": "0.318665",
+        "unit": "warp"
+      },
+      "smsp__issue_inst0.avg.pct_of_peak_sustained_active": {
+        "value": "78.833684",
+        "unit": "%"
+      },
+      "smsp__issue_active.avg.per_cycle_active": {
+        "value": "0.21",
+        "unit": ""
+      },
+      "smsp__inst_executed.sum": {
+        "value": "244433133.000000",
+        "unit": "inst"
+      },
+      "sm__maximum_warps_per_active_cycle_pct": {
+        "value": "33.333333",
+        "unit": "%"
+      },
+      "sm__warps_active.avg.pct_of_peak_sustained_active": {
+        "value": "32.336776",
+        "unit": "%"
+      },
+      "sm__pipe_tensor_cycles_active_v2.avg.pct_of_peak_sustained_active": {
+        "value": "46.494704",
+        "unit": "%"
+      },
+      "l1tex__data_bank_conflicts_pipe_lsu_mem_shared_op_ld.sum": {
+        "value": "77930",
+        "unit": ""
+      },
+      "lts__t_sector_op_read_hit_rate.pct": {
+        "value": "93.875820",
+        "unit": "%"
+      }
+    },
+    "instructions": 244432896.0,
+    "hmma_instructions": 33554432.0,
+    "non_hmma_instructions": 210878464.0,
+    "full_opcodes": {
+      "SHF.R.U32.HI": 3276800.0,
+      "SHF.R.S32.HI": 4521984.0,
+      "LEA.HI": 2310144.0,
+      "ISETP.LT.AND": 4218880.0,
+      "LOP3.LUT": 43245568.0,
+      "IMAD": 17014784.0,
+      "IMAD.SHL.U32": 12664832.0,
+      "IMAD.IADD": 6430720.0,
+      "IMAD.MOV.U32": 18923520.0,
+      "LEA": 5267456.0,
+      "LDS": 6340608.0,
+      "LDGSTS.E.BYPASS.128": 4194304.0,
+      "IADD3": 13746176.0,
+      "BSYNC": 4235264.0,
+      "ISETP.GT.AND": 1048576.0,
+      "BRA": 12648448.0,
+      "IMNMX": 2097152.0,
+      "BSSY": 4235264.0,
+      "ISETP.NE.AND": 4194304.0,
+      "ISETP.GE.U32.AND": 2097152.0,
+      "ISETP.GE.AND": 6332416.0,
+      "IMAD.WIDE.U32": 49152.0,
+      "LEA.HI.X": 4227072.0,
+      "LEA.HI.X.SX32": 4177920.0,
+      "IMAD.WIDE": 4177920.0,
+      "LDGDEPBAR": 1048576.0,
+      "DEPBAR.LE": 1048576.0,
+      "BAR.SYNC.DEFER_BLOCKING": 1048576.0,
+      "S2R": 24576.0,
+      "ULDC.64": 8192.0,
+      "CS2R": 262144.0,
+      "CALL.REL.NOINC": 1048576.0,
+      "NOP": 1056768.0,
+      "LDSM.16.M88.4": 4194304.0,
+      "LDSM.16.MT88.4": 8388608.0,
+      "HMMA.16816.F32": 33554432.0,
+      "FSETP.NEU.AND": 8192.0,
+      "ULDC": 8192.0,
+      "USHF.R.S32.HI": 8192.0,
+      "ISETP.GE.OR": 245760.0,
+      "EXIT": 16384.0,
+      "FMUL": 524288.0,
+      "P2R": 0.0,
+      "LDG.E.64": 0.0,
+      "FFMA": 0.0,
+      "STG.E.64": 262144.0
+    },
+    "ldsm": {
+      "Instructions Executed": 12582912.0,
+      "L1 Wavefronts Shared Excessive": 0.0,
+      "L1 Wavefronts Shared": 50331648.0,
+      "L1 Wavefronts Shared Ideal": 50331648.0,
+      "stall_long_sb": 0.0,
+      "stall_short_sb": 0.0,
+      "stall_barrier": 0.0,
+      "stall_math": 0.0,
+      "stall_wait": 915.0
+    },
+    "ldsm_by_cuda_line": {
+      "109": {
+        "Instructions Executed": 4194304.0,
+        "L1 Wavefronts Shared Excessive": 0.0,
+        "L1 Wavefronts Shared": 16777216.0,
+        "L1 Wavefronts Shared Ideal": 16777216.0,
+        "stall_long_sb": 0.0,
+        "stall_short_sb": 0.0,
+        "stall_barrier": 0.0,
+        "stall_math": 0.0,
+        "stall_wait": 392.0
+      },
+      "119": {
+        "Instructions Executed": 8388608.0,
+        "L1 Wavefronts Shared Excessive": 0.0,
+        "L1 Wavefronts Shared": 33554432.0,
+        "L1 Wavefronts Shared Ideal": 33554432.0,
+        "stall_long_sb": 0.0,
+        "stall_short_sb": 0.0,
+        "stall_barrier": 0.0,
+        "stall_math": 0.0,
+        "stall_wait": 523.0
+      }
+    },
+    "top_long_scoreboard": [
+      {
+        "line": "43",
+        "source": "const bool valid = row0 + row < M && k0 + col < K;",
+        "sass": "IMAD.IADD R4, R119, 0x1, R104",
+        "Instructions Executed": 1040384.0,
+        "L1 Wavefronts Shared Excessive": 0.0,
+        "L1 Wavefronts Shared": 0.0,
+        "L1 Wavefronts Shared Ideal": 0.0,
+        "stall_long_sb": 1341.0,
+        "stall_short_sb": 0.0,
+        "stall_barrier": 0.0,
+        "stall_math": 5.0,
+        "stall_wait": 289.0
+      },
+      {
+        "line": "84",
+        "source": "const int row0 = tile_m * BM, col0 = tile_n * BN;",
+        "sass": "IMAD.IADD R4, R123, 0x1, R112",
+        "Instructions Executed": 1040384.0,
+        "L1 Wavefronts Shared Excessive": 0.0,
+        "L1 Wavefronts Shared": 0.0,
+        "L1 Wavefronts Shared Ideal": 0.0,
+        "stall_long_sb": 458.0,
+        "stall_short_sb": 0.0,
+        "stall_barrier": 0.0,
+        "stall_math": 52.0,
+        "stall_wait": 294.0
+      },
+      {
+        "line": "60",
+        "source": "__syncthreads();",
+        "sass": "BAR.SYNC.DEFER_BLOCKING 0x0",
+        "Instructions Executed": 8192.0,
+        "L1 Wavefronts Shared Excessive": 0.0,
+        "L1 Wavefronts Shared": 0.0,
+        "L1 Wavefronts Shared Ideal": 0.0,
+        "stall_long_sb": 311.0,
+        "stall_short_sb": 0.0,
+        "stall_barrier": 0.0,
+        "stall_math": 0.0,
+        "stall_wait": 2.0
+      }
+    ],
+    "top_short_scoreboard": [
+      {
+        "line": "130",
+        "source": ": r\"(af[m][0])",
+        "sass": "HMMA.16816.F32 R80, R44, R40, R80",
+        "Instructions Executed": 1048576.0,
+        "L1 Wavefronts Shared Excessive": 0.0,
+        "L1 Wavefronts Shared": 0.0,
+        "L1 Wavefronts Shared Ideal": 0.0,
+        "stall_long_sb": 0.0,
+        "stall_short_sb": 2517.0,
+        "stall_barrier": 0.0,
+        "stall_math": 35247.0,
+        "stall_wait": 0.0
+      },
+      {
+        "line": "130",
+        "source": ": r\"(af[m][0])",
+        "sass": "HMMA.16816.F32 R72, R44, R36, R72",
+        "Instructions Executed": 1048576.0,
+        "L1 Wavefronts Shared Excessive": 0.0,
+        "L1 Wavefronts Shared": 0.0,
+        "L1 Wavefronts Shared Ideal": 0.0,
+        "stall_long_sb": 0.0,
+        "stall_short_sb": 28.0,
+        "stall_barrier": 0.0,
+        "stall_math": 1898.0,
+        "stall_wait": 480.0
+      },
+      {
+        "line": "41",
+        "source": "for (int index = threadIdx.x * 8; index < BM * BK; index += THREADS * 8) {",
+        "sass": "IMAD.SHL.U32 R3, R0, 0x8, RZ",
+        "Instructions Executed": 8192.0,
+        "L1 Wavefronts Shared Excessive": 0.0,
+        "L1 Wavefronts Shared": 0.0,
+        "L1 Wavefronts Shared Ideal": 0.0,
+        "stall_long_sb": 0.0,
+        "stall_short_sb": 9.0,
+        "stall_barrier": 0.0,
+        "stall_math": 0.0,
+        "stall_wait": 0.0
+      }
+    ]
+  },
+  "group8": {
+    "metrics": {
+      "smsp__warps_active.avg.per_cycle_active": {
+        "value": "3.886287",
+        "unit": "warp"
+      },
+      "smsp__warps_eligible.avg.per_cycle_active": {
+        "value": "0.319008",
+        "unit": "warp"
+      },
+      "smsp__issue_inst0.avg.pct_of_peak_sustained_active": {
+        "value": "79.713511",
+        "unit": "%"
+      },
+      "smsp__issue_active.avg.per_cycle_active": {
+        "value": "0.20",
+        "unit": ""
+      },
+      "smsp__inst_executed.sum": {
+        "value": "237764608.000000",
+        "unit": "inst"
+      },
+      "sm__maximum_warps_per_active_cycle_pct": {
+        "value": "33.333333",
+        "unit": "%"
+      },
+      "sm__warps_active.avg.pct_of_peak_sustained_active": {
+        "value": "32.396951",
+        "unit": "%"
+      },
+      "sm__pipe_tensor_cycles_active_v2.avg.pct_of_peak_sustained_active": {
+        "value": "45.811029",
+        "unit": "%"
+      },
+      "l1tex__data_bank_conflicts_pipe_lsu_mem_shared_op_ld.sum": {
+        "value": "46803",
+        "unit": ""
+      },
+      "lts__t_sector_op_read_hit_rate.pct": {
+        "value": "89.717853",
+        "unit": "%"
+      }
+    },
+    "instructions": 237764608.0,
+    "hmma_instructions": 33554432.0,
+    "non_hmma_instructions": 204210176.0,
+    "full_opcodes": {
+      "SHF.R.S32.HI": 2457600.0,
+      "LEA.HI": 2318336.0,
+      "SHF.R.U32.HI": 3276800.0,
+      "ISETP.LT.AND": 4218880.0,
+      "LOP3.LUT": 43253760.0,
+      "IMAD": 17072128.0,
+      "IMAD.SHL.U32": 12681216.0,
+      "IMAD.MOV.U32": 18948096.0,
+      "IMAD.IADD": 4407296.0,
+      "LEA": 5267456.0,
+      "LDS": 6340608.0,
+      "LDGSTS.E.BYPASS.128": 4194304.0,
+      "IADD3": 11763712.0,
+      "BSYNC": 4235264.0,
+      "ISETP.GT.AND": 1048576.0,
+      "BRA": 12648448.0,
+      "IMNMX": 2105344.0,
+      "BSSY": 4235264.0,
+      "ISETP.NE.AND": 6283264.0,
+      "ISETP.GE.U32.AND": 2121728.0,
+      "ISETP.GE.AND": 4284416.0,
+      "IMAD.WIDE.U32": 49152.0,
+      "LEA.HI.X": 4227072.0,
+      "LEA.HI.X.SX32": 2121728.0,
+      "IMAD.WIDE": 4177920.0,
+      "LDL.64": 1040384.0,
+      "LDGDEPBAR": 1048576.0,
+      "DEPBAR.LE": 1048576.0,
+      "BAR.SYNC.DEFER_BLOCKING": 1048576.0,
+      "S2R": 24576.0,
+      "ULDC.64": 8192.0,
+      "I2F.U32.RP": 8192.0,
+      "IMAD.MOV": 57344.0,
+      "ISETP.NE.U32.AND": 8192.0,
+      "MUFU.RCP": 16384.0,
+      "F2I.FTZ.U32.TRUNC.NTZ": 16384.0,
+      "IMAD.HI.U32": 32768.0,
+      "LEA.HI.SX32": 8192.0,
+      "IABS": 24576.0,
+      "I2F.RP": 8192.0,
+      "ISETP.GT.U32.AND": 8192.0,
+      "CS2R": 270336.0,
+      "P2R": 24576.0,
+      "STL.64": 8192.0,
+      "CALL.REL.NOINC": 1048576.0,
+      "NOP": 1056768.0,
+      "LDSM.16.M88.4": 4194304.0,
+      "LDSM.16.MT88.4": 8388608.0,
+      "HMMA.16816.F32": 33554432.0,
+      "FSETP.NEU.AND": 8192.0,
+      "ULDC": 8192.0,
+      "USHF.R.S32.HI": 8192.0,
+      "ISETP.GE.OR": 245760.0,
+      "EXIT": 16384.0,
+      "FMUL": 524288.0,
+      "LDG.E.64": 0.0,
+      "FFMA": 0.0,
+      "STG.E.64": 262144.0
+    },
+    "ldsm": {
+      "Instructions Executed": 12582912.0,
+      "L1 Wavefronts Shared Excessive": 0.0,
+      "L1 Wavefronts Shared": 50331648.0,
+      "L1 Wavefronts Shared Ideal": 50331648.0,
+      "stall_long_sb": 0.0,
+      "stall_short_sb": 0.0,
+      "stall_barrier": 0.0,
+      "stall_math": 0.0,
+      "stall_wait": 1454.0
+    },
+    "ldsm_by_cuda_line": {
+      "109": {
+        "Instructions Executed": 4194304.0,
+        "L1 Wavefronts Shared Excessive": 0.0,
+        "L1 Wavefronts Shared": 16777216.0,
+        "L1 Wavefronts Shared Ideal": 16777216.0,
+        "stall_long_sb": 0.0,
+        "stall_short_sb": 0.0,
+        "stall_barrier": 0.0,
+        "stall_math": 0.0,
+        "stall_wait": 316.0
+      },
+      "119": {
+        "Instructions Executed": 8388608.0,
+        "L1 Wavefronts Shared Excessive": 0.0,
+        "L1 Wavefronts Shared": 33554432.0,
+        "L1 Wavefronts Shared Ideal": 33554432.0,
+        "stall_long_sb": 0.0,
+        "stall_short_sb": 0.0,
+        "stall_barrier": 0.0,
+        "stall_math": 0.0,
+        "stall_wait": 1138.0
+      }
+    },
+    "top_long_scoreboard": [
+      {
+        "line": "50",
+        "source": "const bool valid = k0 + row < K && col0 + col < N;",
+        "sass": "IMAD.IADD R5, R111, 0x1, R105",
+        "Instructions Executed": 1040384.0,
+        "L1 Wavefronts Shared Excessive": 0.0,
+        "L1 Wavefronts Shared": 0.0,
+        "L1 Wavefronts Shared Ideal": 0.0,
+        "stall_long_sb": 1401.0,
+        "stall_short_sb": 0.0,
+        "stall_barrier": 0.0,
+        "stall_math": 20.0,
+        "stall_wait": 307.0
+      },
+      {
+        "line": "51",
+        "source": "const half* src = valid ? B + size_t(k0 + row) * N + col0 + col : B;",
+        "sass": "@P3   IMAD.WIDE R4, R4, c[0x0][0x17c], R6",
+        "Instructions Executed": 1040384.0,
+        "L1 Wavefronts Shared Excessive": 0.0,
+        "L1 Wavefronts Shared": 0.0,
+        "L1 Wavefronts Shared Ideal": 0.0,
+        "stall_long_sb": 1196.0,
+        "stall_short_sb": 0.0,
+        "stall_barrier": 0.0,
+        "stall_math": 26.0,
+        "stall_wait": 766.0
+      },
+      {
+        "line": "43",
+        "source": "const bool valid = row0 + row < M && k0 + col < K;",
+        "sass": "IMAD.IADD R4, R115, 0x1, R105",
+        "Instructions Executed": 1040384.0,
+        "L1 Wavefronts Shared Excessive": 0.0,
+        "L1 Wavefronts Shared": 0.0,
+        "L1 Wavefronts Shared Ideal": 0.0,
+        "stall_long_sb": 1169.0,
+        "stall_short_sb": 0.0,
+        "stall_barrier": 0.0,
+        "stall_math": 4.0,
+        "stall_wait": 287.0
+      }
+    ],
+    "top_short_scoreboard": [
+      {
+        "line": "130",
+        "source": ": r\"(af[m][0])",
+        "sass": "HMMA.16816.F32 R84, R4, R44, R84",
+        "Instructions Executed": 1048576.0,
+        "L1 Wavefronts Shared Excessive": 0.0,
+        "L1 Wavefronts Shared": 0.0,
+        "L1 Wavefronts Shared Ideal": 0.0,
+        "stall_long_sb": 0.0,
+        "stall_short_sb": 2457.0,
+        "stall_barrier": 0.0,
+        "stall_math": 49726.0,
+        "stall_wait": 0.0
+      },
+      {
+        "line": "130",
+        "source": ": r\"(af[m][0])",
+        "sass": "HMMA.16816.F32 R84, R44, R48, R84",
+        "Instructions Executed": 1048576.0,
+        "L1 Wavefronts Shared Excessive": 0.0,
+        "L1 Wavefronts Shared": 0.0,
+        "L1 Wavefronts Shared Ideal": 0.0,
+        "stall_long_sb": 0.0,
+        "stall_short_sb": 1382.0,
+        "stall_barrier": 0.0,
+        "stall_math": 66054.0,
+        "stall_wait": 0.0
+      },
+      {
+        "line": "81",
+        "source": "tile_m = first_m + within % actual_m;",
+        "sass": "IMAD.MOV R8, RZ, RZ, -R3",
+        "Instructions Executed": 8192.0,
+        "L1 Wavefronts Shared Excessive": 0.0,
+        "L1 Wavefronts Shared": 0.0,
+        "L1 Wavefronts Shared Ideal": 0.0,
+        "stall_long_sb": 0.0,
+        "stall_short_sb": 9.0,
+        "stall_barrier": 0.0,
+        "stall_math": 0.0,
+        "stall_wait": 0.0
+      }
+    ]
+  },
+  "cublas": {
+    "metrics": {
+      "smsp__warps_active.avg.per_cycle_active": {
+        "value": "1.952027",
+        "unit": "warp"
+      },
+      "smsp__warps_eligible.avg.per_cycle_active": {
+        "value": "0.143038",
+        "unit": "warp"
+      },
+      "smsp__issue_inst0.avg.pct_of_peak_sustained_active": {
+        "value": "90.905384",
+        "unit": "%"
+      },
+      "smsp__issue_active.avg.per_cycle_active": {
+        "value": "0.09",
+        "unit": ""
+      },
+      "smsp__inst_executed.sum": {
+        "value": "98578432.000000",
+        "unit": "inst"
+      },
+      "sm__maximum_warps_per_active_cycle_pct": {
+        "value": "16.666667",
+        "unit": "%"
+      },
+      "sm__warps_active.avg.pct_of_peak_sustained_active": {
+        "value": "16.269824",
+        "unit": "%"
+      },
+      "sm__pipe_tensor_cycles_active_v2.avg.pct_of_peak_sustained_active": {
+        "value": "49.537361",
+        "unit": "%"
+      },
+      "l1tex__data_bank_conflicts_pipe_lsu_mem_shared_op_ld.sum": {
+        "value": "44346",
+        "unit": ""
+      },
+      "lts__t_sector_op_read_hit_rate.pct": {
+        "value": "94.512513",
+        "unit": "%"
+      }
+    },
+    "instructions": 98578432.0,
+    "hmma_instructions": 67108864.0,
+    "non_hmma_instructions": 31469568.0,
+    "full_opcodes": {
+      "MOV": 155648.0,
+      "S2R": 32768.0,
+      "ISETP.NE.AND": 12288.0,
+      "LOP3.LUT": 1314816.0,
+      "SHF.R.U32.HI": 32768.0,
+      "BMSK": 16384.0,
+      "PLOP3.LUT": 24576.0,
+      "ISETP.EQ.AND": 28672.0,
+      "ISETP.LT.AND": 241664.0,
+      "IMAD.U32": 16384.0,
+      "ISETP.EQ.XOR": 8192.0,
+      "BRA": 28672.0,
+      "IADD3": 3788800.0,
+      "IMAD.WIDE.U32": 32768.0,
+      "IADD3.X": 3203072.0,
+      "LDG.E.LTC128B.CONSTANT": 8192.0,
+      "SHF.L.U32": 53248.0,
+      "STS": 528384.0,
+      "UMOV": 8192.0,
+      "LEA": 217088.0,
+      "SHF.R.S32.HI": 73728.0,
+      "BRA.U": 610304.0,
+      "LEA.HI.X": 151552.0,
+      "LDG.E.LTC128B.64.CONSTANT": 0.0,
+      "ISETP.GT.AND": 40960.0,
+      "P2R": 24576.0,
+      "P2R.B1": 24576.0,
+      "BAR.SYNC.DEFER_BLOCKING": 569344.0,
+      "ISETP.LE.AND": 4096.0,
+      "R2P": 1146880.0,
+      "LDG.E.LTC128B.128.CONSTANT": 4259840.0,
+      "IMAD": 12288.0,
+      "IMAD.WIDE": 8192.0,
+      "ISETP.GE.AND": 532480.0,
+      "LDS.128": 196608.0,
+      "CS2R": 131072.0,
+      "IMAD.SHL": 8192.0,
+      "STS.128": 4227072.0,
+      "LDSM.16.MT88.4": 4202496.0,
+      "LDSM.16.M88.4": 4202496.0,
+      "HMMA.1688.F32": 67108864.0,
+      "ULOP3.LUT": 524288.0,
+      "FSETP.NE.AND": 4096.0,
+      "LDG.E.EL.LTC128B.STRONG.GPU": 0.0,
+      "P2R.B2": 20480.0,
+      "P2R.B3": 20480.0,
+      "LDG.E.LTC128B.128.STRONG.GPU": 0.0,
+      "FMUL": 524288.0,
+      "LEPC": 16384.0,
+      "CALL.REL": 16384.0,
+      "BAR.SYNC": 4096.0,
+      "MEMBAR.GPU": 4096.0,
+      "STG.E.EF.STRONG.GPU": 4096.0,
+      "EXIT": 4096.0,
+      "FFMA": 0.0,
+      "STG.E.EF.128": 131072.0,
+      "RET.ABS": 16384.0,
+      "NOP": 0.0
+    },
+    "ldsm": {
+      "Instructions Executed": 8404992.0,
+      "L1 Wavefronts Shared Excessive": 0.0,
+      "L1 Wavefronts Shared": 33619968.0,
+      "L1 Wavefronts Shared Ideal": 33619968.0,
+      "stall_long_sb": 0.0,
+      "stall_short_sb": 0.0,
+      "stall_barrier": 15189.0,
+      "stall_math": 0.0,
+      "stall_wait": 1044.0
+    },
+    "ldsm_by_cuda_line": {},
+    "top_long_scoreboard": [
+      {
+        "line": "",
+        "source": "",
+        "sass": "STS.128 [R166], R148",
+        "Instructions Executed": 4096.0,
+        "L1 Wavefronts Shared Excessive": 0.0,
+        "L1 Wavefronts Shared": 16384.0,
+        "L1 Wavefronts Shared Ideal": 16384.0,
+        "stall_long_sb": 137.0,
+        "stall_short_sb": 0.0,
+        "stall_barrier": 0.0,
+        "stall_math": 0.0,
+        "stall_wait": 0.0
+      },
+      {
+        "line": "",
+        "source": "",
+        "sass": "LEA R140, P2, R143, R140, 0x6",
+        "Instructions Executed": 4096.0,
+        "L1 Wavefronts Shared Excessive": 0.0,
+        "L1 Wavefronts Shared": 0.0,
+        "L1 Wavefronts Shared Ideal": 0.0,
+        "stall_long_sb": 108.0,
+        "stall_short_sb": 0.0,
+        "stall_barrier": 0.0,
+        "stall_math": 0.0,
+        "stall_wait": 5.0
+      },
+      {
+        "line": "",
+        "source": "",
+        "sass": "LEA R140, P2, R143, R140, 0x6",
+        "Instructions Executed": 4096.0,
+        "L1 Wavefronts Shared Excessive": 0.0,
+        "L1 Wavefronts Shared": 0.0,
+        "L1 Wavefronts Shared Ideal": 0.0,
+        "stall_long_sb": 81.0,
+        "stall_short_sb": 0.0,
+        "stall_barrier": 0.0,
+        "stall_math": 0.0,
+        "stall_wait": 1.0
+      }
+    ],
+    "top_short_scoreboard": [
+      {
+        "line": "",
+        "source": "",
+        "sass": "LOP3.LUT R129, R129, 0x4000, RZ, 0x3c, !PT",
+        "Instructions Executed": 524288.0,
+        "L1 Wavefronts Shared Excessive": 0.0,
+        "L1 Wavefronts Shared": 0.0,
+        "L1 Wavefronts Shared Ideal": 0.0,
+        "stall_long_sb": 0.0,
+        "stall_short_sb": 438.0,
+        "stall_barrier": 0.0,
+        "stall_math": 0.0,
+        "stall_wait": 69.0
+      },
+      {
+        "line": "",
+        "source": "",
+        "sass": "@P3   STG.E.EF.128 [R140], R184",
+        "Instructions Executed": 16384.0,
+        "L1 Wavefronts Shared Excessive": 0.0,
+        "L1 Wavefronts Shared": 0.0,
+        "L1 Wavefronts Shared Ideal": 0.0,
+        "stall_long_sb": 0.0,
+        "stall_short_sb": 87.0,
+        "stall_barrier": 0.0,
+        "stall_math": 0.0,
+        "stall_wait": 0.0
+      },
+      {
+        "line": "",
+        "source": "",
+        "sass": "HMMA.1688.F32 R0, R176, R192, R0",
+        "Instructions Executed": 524288.0,
+        "L1 Wavefronts Shared Excessive": 0.0,
+        "L1 Wavefronts Shared": 0.0,
+        "L1 Wavefronts Shared Ideal": 0.0,
+        "stall_long_sb": 0.0,
+        "stall_short_sb": 65.0,
+        "stall_barrier": 0.0,
+        "stall_math": 2755.0,
+        "stall_wait": 2.0
+      }
+    ]
+  }
+}

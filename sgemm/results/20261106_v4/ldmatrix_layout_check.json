@@ -1,0 +1,19 @@
+{
+  "plain": {
+    "A_wavefronts_per_ldmatrix_x4": 16,
+    "B_wavefronts_per_ldmatrix_x4_trans": 32,
+    "ideal_wavefronts_per_x4": 4,
+    "A_dynamic_ldmatrix_warp_instructions": 4194304,
+    "B_dynamic_ldmatrix_warp_instructions": 8388608,
+    "predicted_layout_excess_wavefronts": 285212672,
+    "measured_aggregate_load_bank_conflicts": 285212672
+  },
+  "xor": {
+    "A_wavefronts_per_ldmatrix_x4": 4,
+    "B_wavefronts_per_ldmatrix_x4_trans": 4,
+    "ideal_wavefronts_per_x4": 4,
+    "A_dynamic_ldmatrix_warp_instructions": 4194304,
+    "B_dynamic_ldmatrix_warp_instructions": 8388608,
+    "predicted_layout_excess_wavefronts": 0
+  }
+}

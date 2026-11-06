@@ -1,0 +1,665 @@
+{
+  "kernel": "v2c_bc32_qreg",
+  "clock_control": "none",
+  "cache_control": "all",
+  "lengths": [
+    16384,
+    32768,
+    65536
+  ],
+  "repeats": 3,
+  "source_sha256": "a12cc684a3689130cccf4829c14e56bfaa69619c4661bb4a5a0cecc4801dc1df",
+  "profile_sha256": "f716d58f1e8dab3c6830c621bda16703627dfa5bd81ac84fc80359bf77f71063",
+  "gpu_before": "name, clocks.current.sm [MHz], clocks.current.memory [MHz], temperature.gpu, memory.used [MiB]\nNVIDIA GeForce RTX 4070 Ti SUPER, 210 MHz, 405 MHz, 45, 3529 MiB\n",
+  "runs": [
+    {
+      "n": 32768,
+      "repeat": 1,
+      "command": [
+        "/tmp/var/target/linux-desktop-glibc_2_11_3-x64/ncu",
+        "--clock-control",
+        "none",
+        "--cache-control",
+        "all",
+        "--profile-from-start",
+        "off",
+        "--launch-count",
+        "1",
+        "--section",
+        "SpeedOfLight",
+        "--section",
+        "Occupancy",
+        "--section",
+        "LaunchStats",
+        "--export",
+        "/home/smh/ai_infra/cuda-kernels-from-scratch/flashattention2/results/v2c_bc32_qreg_large_n_20261026_200638/n32768_r1",
+        "/home/smh/ai_infra/cuda-kernels-from-scratch/build/flashattention2/flashattention2_profile",
+        "v2c_bc32_qreg",
+        "32768"
+      ],
+      "metrics": {
+        "launch__grid_size": {
+          "value": "512",
+          "unit": ""
+        },
+        "launch__block_size": {
+          "value": "128",
+          "unit": ""
+        },
+        "launch__registers_per_thread": {
+          "value": "96",
+          "unit": "register/thread"
+        },
+        "launch__shared_mem_per_block_static": {
+          "value": "16.384000",
+          "unit": "Kbyte/block"
+        },
+        "launch__waves_per_multiprocessor": {
+          "value": "1.55",
+          "unit": ""
+        },
+        "launch__occupancy_limit_registers": {
+          "value": "5.000000",
+          "unit": "block"
+        },
+        "launch__occupancy_limit_shared_mem": {
+          "value": "5.000000",
+          "unit": "block"
+        },
+        "sm__maximum_warps_per_active_cycle_pct": {
+          "value": "41.666667",
+          "unit": "%"
+        },
+        "sm__warps_active.avg.pct_of_peak_sustained_active": {
+          "value": "36.204636",
+          "unit": "%"
+        },
+        "sm__warps_active.avg.per_cycle_active": {
+          "value": "17.378225",
+          "unit": "warp"
+        },
+        "gpu__time_duration.sum": {
+          "value": "4.527136",
+          "unit": "ms"
+        }
+      }
+    },
+    {
+      "n": 16384,
+      "repeat": 1,
+      "command": [
+        "/tmp/var/target/linux-desktop-glibc_2_11_3-x64/ncu",
+        "--clock-control",
+        "none",
+        "--cache-control",
+        "all",
+        "--profile-from-start",
+        "off",
+        "--launch-count",
+        "1",
+        "--section",
+        "SpeedOfLight",
+        "--section",
+        "Occupancy",
+        "--section",
+        "LaunchStats",
+        "--export",
+        "/home/smh/ai_infra/cuda-kernels-from-scratch/flashattention2/results/v2c_bc32_qreg_large_n_20261026_200638/n16384_r1",
+        "/home/smh/ai_infra/cuda-kernels-from-scratch/build/flashattention2/flashattention2_profile",
+        "v2c_bc32_qreg",
+        "16384"
+      ],
+      "metrics": {
+        "launch__grid_size": {
+          "value": "256",
+          "unit": ""
+        },
+        "launch__block_size": {
+          "value": "128",
+          "unit": ""
+        },
+        "launch__registers_per_thread": {
+          "value": "96",
+          "unit": "register/thread"
+        },
+        "launch__shared_mem_per_block_static": {
+          "value": "16.384000",
+          "unit": "Kbyte/block"
+        },
+        "launch__waves_per_multiprocessor": {
+          "value": "0.78",
+          "unit": ""
+        },
+        "launch__occupancy_limit_registers": {
+          "value": "5.000000",
+          "unit": "block"
+        },
+        "launch__occupancy_limit_shared_mem": {
+          "value": "5.000000",
+          "unit": "block"
+        },
+        "sm__maximum_warps_per_active_cycle_pct": {
+          "value": "41.666667",
+          "unit": "%"
+        },
+        "sm__warps_active.avg.pct_of_peak_sustained_active": {
+          "value": "27.054184",
+          "unit": "%"
+        },
+        "sm__warps_active.avg.per_cycle_active": {
+          "value": "12.986008",
+          "unit": "warp"
+        },
+        "gpu__time_duration.sum": {
+          "value": "1.028768",
+          "unit": "ms"
+        }
+      }
+    },
+    {
+      "n": 65536,
+      "repeat": 1,
+      "command": [
+        "/tmp/var/target/linux-desktop-glibc_2_11_3-x64/ncu",
+        "--clock-control",
+        "none",
+        "--cache-control",
+        "all",
+        "--profile-from-start",
+        "off",
+        "--launch-count",
+        "1",
+        "--section",
+        "SpeedOfLight",
+        "--section",
+        "Occupancy",
+        "--section",
+        "LaunchStats",
+        "--export",
+        "/home/smh/ai_infra/cuda-kernels-from-scratch/flashattention2/results/v2c_bc32_qreg_large_n_20261026_200638/n65536_r1",
+        "/home/smh/ai_infra/cuda-kernels-from-scratch/build/flashattention2/flashattention2_profile",
+        "v2c_bc32_qreg",
+        "65536"
+      ],
+      "metrics": {
+        "launch__grid_size": {
+          "value": "1024",
+          "unit": ""
+        },
+        "launch__block_size": {
+          "value": "128",
+          "unit": ""
+        },
+        "launch__registers_per_thread": {
+          "value": "96",
+          "unit": "register/thread"
+        },
+        "launch__shared_mem_per_block_static": {
+          "value": "16.384000",
+          "unit": "Kbyte/block"
+        },
+        "launch__waves_per_multiprocessor": {
+          "value": "3.10",
+          "unit": ""
+        },
+        "launch__occupancy_limit_registers": {
+          "value": "5.000000",
+          "unit": "block"
+        },
+        "launch__occupancy_limit_shared_mem": {
+          "value": "5.000000",
+          "unit": "block"
+        },
+        "sm__maximum_warps_per_active_cycle_pct": {
+          "value": "41.666667",
+          "unit": "%"
+        },
+        "sm__warps_active.avg.pct_of_peak_sustained_active": {
+          "value": "38.277806",
+          "unit": "%"
+        },
+        "sm__warps_active.avg.per_cycle_active": {
+          "value": "18.373347",
+          "unit": "warp"
+        },
+        "gpu__time_duration.sum": {
+          "value": "16.330496",
+          "unit": "ms"
+        }
+      }
+    },
+    {
+      "n": 65536,
+      "repeat": 2,
+      "command": [
+        "/tmp/var/target/linux-desktop-glibc_2_11_3-x64/ncu",
+        "--clock-control",
+        "none",
+        "--cache-control",
+        "all",
+        "--profile-from-start",
+        "off",
+        "--launch-count",
+        "1",
+        "--section",
+        "SpeedOfLight",
+        "--section",
+        "Occupancy",
+        "--section",
+        "LaunchStats",
+        "--export",
+        "/home/smh/ai_infra/cuda-kernels-from-scratch/flashattention2/results/v2c_bc32_qreg_large_n_20261026_200638/n65536_r2",
+        "/home/smh/ai_infra/cuda-kernels-from-scratch/build/flashattention2/flashattention2_profile",
+        "v2c_bc32_qreg",
+        "65536"
+      ],
+      "metrics": {
+        "launch__grid_size": {
+          "value": "1024",
+          "unit": ""
+        },
+        "launch__block_size": {
+          "value": "128",
+          "unit": ""
+        },
+        "launch__registers_per_thread": {
+          "value": "96",
+          "unit": "register/thread"
+        },
+        "launch__shared_mem_per_block_static": {
+          "value": "16.384000",
+          "unit": "Kbyte/block"
+        },
+        "launch__waves_per_multiprocessor": {
+          "value": "3.10",
+          "unit": ""
+        },
+        "launch__occupancy_limit_registers": {
+          "value": "5.000000",
+          "unit": "block"
+        },
+        "launch__occupancy_limit_shared_mem": {
+          "value": "5.000000",
+          "unit": "block"
+        },
+        "sm__maximum_warps_per_active_cycle_pct": {
+          "value": "41.666667",
+          "unit": "%"
+        },
+        "sm__warps_active.avg.pct_of_peak_sustained_active": {
+          "value": "38.102123",
+          "unit": "%"
+        },
+        "sm__warps_active.avg.per_cycle_active": {
+          "value": "18.289019",
+          "unit": "warp"
+        },
+        "gpu__time_duration.sum": {
+          "value": "15.371264",
+          "unit": "ms"
+        }
+      }
+    },
+    {
+      "n": 32768,
+      "repeat": 2,
+      "command": [
+        "/tmp/var/target/linux-desktop-glibc_2_11_3-x64/ncu",
+        "--clock-control",
+        "none",
+        "--cache-control",
+        "all",
+        "--profile-from-start",
+        "off",
+        "--launch-count",
+        "1",
+        "--section",
+        "SpeedOfLight",
+        "--section",
+        "Occupancy",
+        "--section",
+        "LaunchStats",
+        "--export",
+        "/home/smh/ai_infra/cuda-kernels-from-scratch/flashattention2/results/v2c_bc32_qreg_large_n_20261026_200638/n32768_r2",
+        "/home/smh/ai_infra/cuda-kernels-from-scratch/build/flashattention2/flashattention2_profile",
+        "v2c_bc32_qreg",
+        "32768"
+      ],
+      "metrics": {
+        "launch__grid_size": {
+          "value": "512",
+          "unit": ""
+        },
+        "launch__block_size": {
+          "value": "128",
+          "unit": ""
+        },
+        "launch__registers_per_thread": {
+          "value": "96",
+          "unit": "register/thread"
+        },
+        "launch__shared_mem_per_block_static": {
+          "value": "16.384000",
+          "unit": "Kbyte/block"
+        },
+        "launch__waves_per_multiprocessor": {
+          "value": "1.55",
+          "unit": ""
+        },
+        "launch__occupancy_limit_registers": {
+          "value": "5.000000",
+          "unit": "block"
+        },
+        "launch__occupancy_limit_shared_mem": {
+          "value": "5.000000",
+          "unit": "block"
+        },
+        "sm__maximum_warps_per_active_cycle_pct": {
+          "value": "41.666667",
+          "unit": "%"
+        },
+        "sm__warps_active.avg.pct_of_peak_sustained_active": {
+          "value": "34.436612",
+          "unit": "%"
+        },
+        "sm__warps_active.avg.per_cycle_active": {
+          "value": "16.529574",
+          "unit": "warp"
+        },
+        "gpu__time_duration.sum": {
+          "value": "4.228096",
+          "unit": "ms"
+        }
+      }
+    },
+    {
+      "n": 16384,
+      "repeat": 2,
+      "command": [
+        "/tmp/var/target/linux-desktop-glibc_2_11_3-x64/ncu",
+        "--clock-control",
+        "none",
+        "--cache-control",
+        "all",
+        "--profile-from-start",
+        "off",
+        "--launch-count",
+        "1",
+        "--section",
+        "SpeedOfLight",
+        "--section",
+        "Occupancy",
+        "--section",
+        "LaunchStats",
+        "--export",
+        "/home/smh/ai_infra/cuda-kernels-from-scratch/flashattention2/results/v2c_bc32_qreg_large_n_20261026_200638/n16384_r2",
+        "/home/smh/ai_infra/cuda-kernels-from-scratch/build/flashattention2/flashattention2_profile",
+        "v2c_bc32_qreg",
+        "16384"
+      ],
+      "metrics": {
+        "launch__grid_size": {
+          "value": "256",
+          "unit": ""
+        },
+        "launch__block_size": {
+          "value": "128",
+          "unit": ""
+        },
+        "launch__registers_per_thread": {
+          "value": "96",
+          "unit": "register/thread"
+        },
+        "launch__shared_mem_per_block_static": {
+          "value": "16.384000",
+          "unit": "Kbyte/block"
+        },
+        "launch__waves_per_multiprocessor": {
+          "value": "0.78",
+          "unit": ""
+        },
+        "launch__occupancy_limit_registers": {
+          "value": "5.000000",
+          "unit": "block"
+        },
+        "launch__occupancy_limit_shared_mem": {
+          "value": "5.000000",
+          "unit": "block"
+        },
+        "sm__maximum_warps_per_active_cycle_pct": {
+          "value": "41.666667",
+          "unit": "%"
+        },
+        "sm__warps_active.avg.pct_of_peak_sustained_active": {
+          "value": "27.053265",
+          "unit": "%"
+        },
+        "sm__warps_active.avg.per_cycle_active": {
+          "value": "12.985567",
+          "unit": "warp"
+        },
+        "gpu__time_duration.sum": {
+          "value": "1.022464",
+          "unit": "ms"
+        }
+      }
+    },
+    {
+      "n": 32768,
+      "repeat": 3,
+      "command": [
+        "/tmp/var/target/linux-desktop-glibc_2_11_3-x64/ncu",
+        "--clock-control",
+        "none",
+        "--cache-control",
+        "all",
+        "--profile-from-start",
+        "off",
+        "--launch-count",
+        "1",
+        "--section",
+        "SpeedOfLight",
+        "--section",
+        "Occupancy",
+        "--section",
+        "LaunchStats",
+        "--export",
+        "/home/smh/ai_infra/cuda-kernels-from-scratch/flashattention2/results/v2c_bc32_qreg_large_n_20261026_200638/n32768_r3",
+        "/home/smh/ai_infra/cuda-kernels-from-scratch/build/flashattention2/flashattention2_profile",
+        "v2c_bc32_qreg",
+        "32768"
+      ],
+      "metrics": {
+        "launch__grid_size": {
+          "value": "512",
+          "unit": ""
+        },
+        "launch__block_size": {
+          "value": "128",
+          "unit": ""
+        },
+        "launch__registers_per_thread": {
+          "value": "96",
+          "unit": "register/thread"
+        },
+        "launch__shared_mem_per_block_static": {
+          "value": "16.384000",
+          "unit": "Kbyte/block"
+        },
+        "launch__waves_per_multiprocessor": {
+          "value": "1.55",
+          "unit": ""
+        },
+        "launch__occupancy_limit_registers": {
+          "value": "5.000000",
+          "unit": "block"
+        },
+        "launch__occupancy_limit_shared_mem": {
+          "value": "5.000000",
+          "unit": "block"
+        },
+        "sm__maximum_warps_per_active_cycle_pct": {
+          "value": "41.666667",
+          "unit": "%"
+        },
+        "sm__warps_active.avg.pct_of_peak_sustained_active": {
+          "value": "34.426453",
+          "unit": "%"
+        },
+        "sm__warps_active.avg.per_cycle_active": {
+          "value": "16.524697",
+          "unit": "warp"
+        },
+        "gpu__time_duration.sum": {
+          "value": "4.228640",
+          "unit": "ms"
+        }
+      }
+    },
+    {
+      "n": 65536,
+      "repeat": 3,
+      "command": [
+        "/tmp/var/target/linux-desktop-glibc_2_11_3-x64/ncu",
+        "--clock-control",
+        "none",
+        "--cache-control",
+        "all",
+        "--profile-from-start",
+        "off",
+        "--launch-count",
+        "1",
+        "--section",
+        "SpeedOfLight",
+        "--section",
+        "Occupancy",
+        "--section",
+        "LaunchStats",
+        "--export",
+        "/home/smh/ai_infra/cuda-kernels-from-scratch/flashattention2/results/v2c_bc32_qreg_large_n_20261026_200638/n65536_r3",
+        "/home/smh/ai_infra/cuda-kernels-from-scratch/build/flashattention2/flashattention2_profile",
+        "v2c_bc32_qreg",
+        "65536"
+      ],
+      "metrics": {
+        "launch__grid_size": {
+          "value": "1024",
+          "unit": ""
+        },
+        "launch__block_size": {
+          "value": "128",
+          "unit": ""
+        },
+        "launch__registers_per_thread": {
+          "value": "96",
+          "unit": "register/thread"
+        },
+        "launch__shared_mem_per_block_static": {
+          "value": "16.384000",
+          "unit": "Kbyte/block"
+        },
+        "launch__waves_per_multiprocessor": {
+          "value": "3.10",
+          "unit": ""
+        },
+        "launch__occupancy_limit_registers": {
+          "value": "5.000000",
+          "unit": "block"
+        },
+        "launch__occupancy_limit_shared_mem": {
+          "value": "5.000000",
+          "unit": "block"
+        },
+        "sm__maximum_warps_per_active_cycle_pct": {
+          "value": "41.666667",
+          "unit": "%"
+        },
+        "sm__warps_active.avg.pct_of_peak_sustained_active": {
+          "value": "38.543466",
+          "unit": "%"
+        },
+        "sm__warps_active.avg.per_cycle_active": {
+          "value": "18.500864",
+          "unit": "warp"
+        },
+        "gpu__time_duration.sum": {
+          "value": "16.064736",
+          "unit": "ms"
+        }
+      }
+    },
+    {
+      "n": 16384,
+      "repeat": 3,
+      "command": [
+        "/tmp/var/target/linux-desktop-glibc_2_11_3-x64/ncu",
+        "--clock-control",
+        "none",
+        "--cache-control",
+        "all",
+        "--profile-from-start",
+        "off",
+        "--launch-count",
+        "1",
+        "--section",
+        "SpeedOfLight",
+        "--section",
+        "Occupancy",
+        "--section",
+        "LaunchStats",
+        "--export",
+        "/home/smh/ai_infra/cuda-kernels-from-scratch/flashattention2/results/v2c_bc32_qreg_large_n_20261026_200638/n16384_r3",
+        "/home/smh/ai_infra/cuda-kernels-from-scratch/build/flashattention2/flashattention2_profile",
+        "v2c_bc32_qreg",
+        "16384"
+      ],
+      "metrics": {
+        "launch__grid_size": {
+          "value": "256",
+          "unit": ""
+        },
+        "launch__block_size": {
+          "value": "128",
+          "unit": ""
+        },
+        "launch__registers_per_thread": {
+          "value": "96",
+          "unit": "register/thread"
+        },
+        "launch__shared_mem_per_block_static": {
+          "value": "16.384000",
+          "unit": "Kbyte/block"
+        },
+        "launch__waves_per_multiprocessor": {
+          "value": "0.78",
+          "unit": ""
+        },
+        "launch__occupancy_limit_registers": {
+          "value": "5.000000",
+          "unit": "block"
+        },
+        "launch__occupancy_limit_shared_mem": {
+          "value": "5.000000",
+          "unit": "block"
+        },
+        "sm__maximum_warps_per_active_cycle_pct": {
+          "value": "41.666667",
+          "unit": "%"
+        },
+        "sm__warps_active.avg.pct_of_peak_sustained_active": {
+          "value": "27.064701",
+          "unit": "%"
+        },
+        "sm__warps_active.avg.per_cycle_active": {
+          "value": "12.991057",
+          "unit": "warp"
+        },
+        "gpu__time_duration.sum": {
+          "value": "1.007328",
+          "unit": "ms"
+        }
+      }
+    }
+  ],
+  "gpu_after": "name, clocks.current.sm [MHz], clocks.current.memory [MHz], temperature.gpu, memory.used [MiB]\nNVIDIA GeForce RTX 4070 Ti SUPER, 2805 MHz, 10251 MHz, 49, 3476 MiB\n"
+}

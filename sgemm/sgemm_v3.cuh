@@ -1,0 +1,9 @@
+#pragma once
+#include "sgemm.cuh"
+
+// Fixed, bounded experiment candidates; the regular API uses the selected default.
+constexpr int SGEMM_V3_VARIANTS = 3;
+const char* sgemm_v3_variant_name(int variant);
+void launch_sgemm_v3_variant(
+    int variant, const float* A, const float* B, float* C, int M, int N, int K,
+    float alpha = 1.0f, float beta = 0.0f, cudaStream_t stream = 0);

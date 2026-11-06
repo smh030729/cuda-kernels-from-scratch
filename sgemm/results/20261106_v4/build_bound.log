@@ -1,0 +1,67 @@
+Consolidate compiler generated dependencies of target sgemm_v4_compare
+[ 66%] Building CUDA object sgemm/CMakeFiles/sgemm_v4_compare.dir/sgemm_v4.cu.o
+[ 33%] Building CUDA object sgemm/CMakeFiles/sgemm_v4_compare.dir/benchmark_v4.cu.o
+ptxas info    : 0 bytes gmem
+ptxas info    : 0 bytes gmem
+ptxas info    : Compiling entry function '_ZN44_GLOBAL__N__ec0f3855_11_sgemm_v4_cu_f0eba29515sgemm_v4_kernelILi128ELi128ELi32ELi64ELi2ELb1ELb1ELi2EEEvPK6__halfS3_Pfiiiff' for 'sm_89'
+ptxas info    : Function properties for _ZN44_GLOBAL__N__ec0f3855_11_sgemm_v4_cu_f0eba29515sgemm_v4_kernelILi128ELi128ELi32ELi64ELi2ELb1ELb1ELi2EEEvPK6__halfS3_Pfiiiff
+    8 bytes stack frame, 8 bytes spill stores, 8 bytes spill loads
+ptxas info    : Used 128 registers, used 1 barriers, 8 bytes cumulative stack size, 32768 bytes smem, 396 bytes cmem[0]
+ptxas info    : Compile time = 37.059 ms
+ptxas info    : Compiling entry function '_ZN44_GLOBAL__N__ec0f3855_11_sgemm_v4_cu_f0eba29515sgemm_v4_kernelILi128ELi128ELi32ELi64ELi4ELb1ELb1ELi2EEEvPK6__halfS3_Pfiiiff' for 'sm_89'
+ptxas info    : Function properties for _ZN44_GLOBAL__N__ec0f3855_11_sgemm_v4_cu_f0eba29515sgemm_v4_kernelILi128ELi128ELi32ELi64ELi4ELb1ELb1ELi2EEEvPK6__halfS3_Pfiiiff
+    8 bytes stack frame, 8 bytes spill stores, 8 bytes spill loads
+ptxas info    : Used 128 registers, used 1 barriers, 8 bytes cumulative stack size, 32768 bytes smem, 396 bytes cmem[0]
+ptxas info    : Compile time = 36.179 ms
+ptxas info    : Compiling entry function '_ZN44_GLOBAL__N__ec0f3855_11_sgemm_v4_cu_f0eba29515sgemm_v4_kernelILi128ELi256ELi64ELi64ELi8ELb1ELb1ELi2EEEvPK6__halfS3_Pfiiiff' for 'sm_89'
+ptxas info    : Function properties for _ZN44_GLOBAL__N__ec0f3855_11_sgemm_v4_cu_f0eba29515sgemm_v4_kernelILi128ELi256ELi64ELi64ELi8ELb1ELb1ELi2EEEvPK6__halfS3_Pfiiiff
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 214 registers, used 1 barriers, 49152 bytes smem, 396 bytes cmem[0]
+ptxas info    : Compile time = 47.660 ms
+ptxas info    : Compiling entry function '_ZN44_GLOBAL__N__ec0f3855_11_sgemm_v4_cu_f0eba29515sgemm_v4_kernelILi128ELi128ELi64ELi64ELi8ELb1ELb1ELi2EEEvPK6__halfS3_Pfiiiff' for 'sm_89'
+ptxas info    : Function properties for _ZN44_GLOBAL__N__ec0f3855_11_sgemm_v4_cu_f0eba29515sgemm_v4_kernelILi128ELi128ELi64ELi64ELi8ELb1ELb1ELi2EEEvPK6__halfS3_Pfiiiff
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 215 registers, used 1 barriers, 32768 bytes smem, 396 bytes cmem[0]
+ptxas info    : Compile time = 48.639 ms
+ptxas info    : Compiling entry function '_ZN44_GLOBAL__N__ec0f3855_11_sgemm_v4_cu_f0eba29515sgemm_v4_kernelILi64ELi128ELi32ELi64ELi8ELb1ELb1ELi2EEEvPK6__halfS3_Pfiiiff' for 'sm_89'
+ptxas info    : Function properties for _ZN44_GLOBAL__N__ec0f3855_11_sgemm_v4_cu_f0eba29515sgemm_v4_kernelILi64ELi128ELi32ELi64ELi8ELb1ELb1ELi2EEEvPK6__halfS3_Pfiiiff
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 146 registers, used 1 barriers, 24576 bytes smem, 396 bytes cmem[0]
+ptxas info    : Compile time = 32.320 ms
+ptxas info    : Compiling entry function '_ZN44_GLOBAL__N__ec0f3855_11_sgemm_v4_cu_f0eba29515sgemm_v4_kernelILi128ELi128ELi32ELi64ELi8ELb1ELb1ELi2EEEvPK6__halfS3_Pfiiiff' for 'sm_89'
+ptxas info    : Function properties for _ZN44_GLOBAL__N__ec0f3855_11_sgemm_v4_cu_f0eba29515sgemm_v4_kernelILi128ELi128ELi32ELi64ELi8ELb1ELb1ELi2EEEvPK6__halfS3_Pfiiiff
+    8 bytes stack frame, 8 bytes spill stores, 8 bytes spill loads
+ptxas info    : Used 128 registers, used 1 barriers, 8 bytes cumulative stack size, 32768 bytes smem, 396 bytes cmem[0]
+ptxas info    : Compile time = 36.153 ms
+ptxas info    : Compiling entry function '_ZN44_GLOBAL__N__ec0f3855_11_sgemm_v4_cu_f0eba29515sgemm_v4_kernelILi128ELi128ELi32ELi64ELi1ELb1ELb1ELi2EEEvPK6__halfS3_Pfiiiff' for 'sm_89'
+ptxas info    : Function properties for _ZN44_GLOBAL__N__ec0f3855_11_sgemm_v4_cu_f0eba29515sgemm_v4_kernelILi128ELi128ELi32ELi64ELi1ELb1ELb1ELi2EEEvPK6__halfS3_Pfiiiff
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 126 registers, used 1 barriers, 32768 bytes smem, 396 bytes cmem[0]
+ptxas info    : Compile time = 31.634 ms
+ptxas info    : Compiling entry function '_ZN44_GLOBAL__N__ec0f3855_11_sgemm_v4_cu_f0eba29515sgemm_v4_kernelILi128ELi128ELi32ELi64ELi1ELb1ELb1ELi1EEEvPK6__halfS3_Pfiiiff' for 'sm_89'
+ptxas info    : Function properties for _ZN44_GLOBAL__N__ec0f3855_11_sgemm_v4_cu_f0eba29515sgemm_v4_kernelILi128ELi128ELi32ELi64ELi1ELb1ELb1ELi1EEEvPK6__halfS3_Pfiiiff
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 127 registers, used 1 barriers, 16384 bytes smem, 396 bytes cmem[0]
+ptxas info    : Compile time = 32.544 ms
+ptxas info    : Compiling entry function '_ZN44_GLOBAL__N__ec0f3855_11_sgemm_v4_cu_f0eba29515sgemm_v4_kernelILi128ELi128ELi32ELi64ELi1ELb1ELb0ELi1EEEvPK6__halfS3_Pfiiiff' for 'sm_89'
+ptxas info    : Function properties for _ZN44_GLOBAL__N__ec0f3855_11_sgemm_v4_cu_f0eba29515sgemm_v4_kernelILi128ELi128ELi32ELi64ELi1ELb1ELb0ELi1EEEvPK6__halfS3_Pfiiiff
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 126 registers, used 1 barriers, 16384 bytes smem, 396 bytes cmem[0]
+ptxas info    : Compile time = 36.077 ms
+ptxas info    : Compiling entry function '_ZN44_GLOBAL__N__ec0f3855_11_sgemm_v4_cu_f0eba29515sgemm_v4_kernelILi128ELi128ELi32ELi64ELi1ELb0ELb0ELi1EEEvPK6__halfS3_Pfiiiff' for 'sm_89'
+ptxas info    : Function properties for _ZN44_GLOBAL__N__ec0f3855_11_sgemm_v4_cu_f0eba29515sgemm_v4_kernelILi128ELi128ELi32ELi64ELi1ELb0ELb0ELi1EEEvPK6__halfS3_Pfiiiff
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 127 registers, used 1 barriers, 16384 bytes smem, 396 bytes cmem[0]
+ptxas info    : Compile time = 32.345 ms
+ptxas info    : Compiling entry function '_ZN44_GLOBAL__N__ec0f3855_11_sgemm_v4_cu_f0eba29517sgemm_v4_boundaryEPK6__halfS2_Pfiiiff' for 'sm_89'
+ptxas info    : Function properties for _ZN44_GLOBAL__N__ec0f3855_11_sgemm_v4_cu_f0eba29517sgemm_v4_boundaryEPK6__halfS2_Pfiiiff
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 37 registers, used 1 barriers, 2048 bytes smem, 396 bytes cmem[0]
+ptxas info    : Compile time = 2.994 ms
+ptxas info    : Compiling entry function '_ZN44_GLOBAL__N__ec0f3855_11_sgemm_v4_cu_f0eba29513sgemm_v4_wmmaEPK6__halfS2_Pfiiff' for 'sm_89'
+ptxas info    : Function properties for _ZN44_GLOBAL__N__ec0f3855_11_sgemm_v4_cu_f0eba29513sgemm_v4_wmmaEPK6__halfS2_Pfiiff
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 124 registers, used 1 barriers, 24576 bytes smem, 392 bytes cmem[0]
+ptxas info    : Compile time = 47.582 ms
+[100%] Linking CUDA executable sgemm_v4_compare
+[100%] Built target sgemm_v4_compare

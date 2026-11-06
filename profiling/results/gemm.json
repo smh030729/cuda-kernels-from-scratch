@@ -1,0 +1,650 @@
+{
+  "v1": {
+    "kernel": "void sgemm_v1<128, 128, 8, 8, 8>(const float *, const float *, float *, int, int, int, float, float)",
+    "args": [
+      "--profile",
+      "--impl",
+      1,
+      "--variant",
+      0,
+      "--size",
+      4096
+    ],
+    "sm_mhz_before_after": [
+      "2100",
+      "2100"
+    ],
+    "metrics": {
+      "gpu__time_duration.sum": [
+        6948576.0,
+        "ns"
+      ],
+      "launch__registers_per_thread": [
+        128.0,
+        "register/thread"
+      ],
+      "sm__warps_active.avg.pct_of_peak_sustained_active": [
+        32.67,
+        "%"
+      ],
+      "l1tex__data_bank_conflicts_pipe_lsu_mem_shared_op_ld.sum": [
+        268435456.0,
+        ""
+      ],
+      "smsp__average_warps_issue_stalled_short_scoreboard_per_issue_active.ratio": [
+        1.04,
+        "inst"
+      ],
+      "smsp__average_warps_issue_stalled_long_scoreboard_per_issue_active.ratio": [
+        0.01,
+        "inst"
+      ],
+      "dram__throughput.avg.pct_of_peak_sustained_elapsed": [
+        24.64,
+        "%"
+      ],
+      "sm__throughput.avg.pct_of_peak_sustained_elapsed": [
+        66.96,
+        "%"
+      ]
+    }
+  },
+  "v2": {
+    "kernel": "void sgemm_v2<128, 128, 8, 64, 64, 2, 8, 4>(const float *, const float *, float *, int, int, int, float, float)",
+    "args": [
+      "--profile",
+      "--impl",
+      2,
+      "--variant",
+      0,
+      "--size",
+      4096
+    ],
+    "sm_mhz_before_after": [
+      "2100",
+      "2100"
+    ],
+    "metrics": {
+      "gpu__time_duration.sum": [
+        10810464.0,
+        "ns"
+      ],
+      "launch__registers_per_thread": [
+        206.0,
+        "register/thread"
+      ],
+      "sm__warps_active.avg.pct_of_peak_sustained_active": [
+        16.37,
+        "%"
+      ],
+      "l1tex__data_bank_conflicts_pipe_lsu_mem_shared_op_ld.sum": [
+        0.0,
+        ""
+      ],
+      "smsp__average_warps_issue_stalled_short_scoreboard_per_issue_active.ratio": [
+        0.21,
+        "inst"
+      ],
+      "smsp__average_warps_issue_stalled_long_scoreboard_per_issue_active.ratio": [
+        1.83,
+        "inst"
+      ],
+      "dram__throughput.avg.pct_of_peak_sustained_elapsed": [
+        10.41,
+        "%"
+      ],
+      "sm__throughput.avg.pct_of_peak_sustained_elapsed": [
+        41.91,
+        "%"
+      ]
+    }
+  },
+  "v3_sync": {
+    "kernel": "void <unnamed>::sgemm_v3_kernel<0, 1>(const float *, const float *, float *, int, int, float, float)",
+    "args": [
+      "--profile",
+      "--impl",
+      3,
+      "--variant",
+      0,
+      "--size",
+      4096
+    ],
+    "sm_mhz_before_after": [
+      "2100",
+      "2100"
+    ],
+    "metrics": {
+      "gpu__time_duration.sum": [
+        7277280.0,
+        "ns"
+      ],
+      "launch__registers_per_thread": [
+        125.0,
+        "register/thread"
+      ],
+      "sm__warps_active.avg.pct_of_peak_sustained_active": [
+        32.52,
+        "%"
+      ],
+      "l1tex__data_bank_conflicts_pipe_lsu_mem_shared_op_ld.sum": [
+        0.0,
+        ""
+      ],
+      "smsp__average_warps_issue_stalled_short_scoreboard_per_issue_active.ratio": [
+        0.79,
+        "inst"
+      ],
+      "smsp__average_warps_issue_stalled_long_scoreboard_per_issue_active.ratio": [
+        1.03,
+        "inst"
+      ],
+      "dram__throughput.avg.pct_of_peak_sustained_elapsed": [
+        16.86,
+        "%"
+      ],
+      "sm__throughput.avg.pct_of_peak_sustained_elapsed": [
+        67.68,
+        "%"
+      ]
+    }
+  },
+  "v3_async": {
+    "kernel": "void <unnamed>::sgemm_v3_kernel<1, 1>(const float *, const float *, float *, int, int, float, float)",
+    "args": [
+      "--profile",
+      "--impl",
+      3,
+      "--variant",
+      1,
+      "--size",
+      4096
+    ],
+    "sm_mhz_before_after": [
+      "2100",
+      "2100"
+    ],
+    "metrics": {
+      "gpu__time_duration.sum": [
+        7144512.0,
+        "ns"
+      ],
+      "launch__registers_per_thread": [
+        122.0,
+        "register/thread"
+      ],
+      "sm__warps_active.avg.pct_of_peak_sustained_active": [
+        32.49,
+        "%"
+      ],
+      "l1tex__data_bank_conflicts_pipe_lsu_mem_shared_op_ld.sum": [
+        0.0,
+        ""
+      ],
+      "smsp__average_warps_issue_stalled_short_scoreboard_per_issue_active.ratio": [
+        0.84,
+        "inst"
+      ],
+      "smsp__average_warps_issue_stalled_long_scoreboard_per_issue_active.ratio": [
+        0.73,
+        "inst"
+      ],
+      "dram__throughput.avg.pct_of_peak_sustained_elapsed": [
+        21.61,
+        "%"
+      ],
+      "sm__throughput.avg.pct_of_peak_sustained_elapsed": [
+        68.79,
+        "%"
+      ]
+    }
+  },
+  "v3_double": {
+    "kernel": "void <unnamed>::sgemm_v3_kernel<1, 2>(const float *, const float *, float *, int, int, float, float)",
+    "args": [
+      "--profile",
+      "--impl",
+      3,
+      "--variant",
+      2,
+      "--size",
+      4096
+    ],
+    "sm_mhz_before_after": [
+      "2100",
+      "2100"
+    ],
+    "metrics": {
+      "gpu__time_duration.sum": [
+        6597600.0,
+        "ns"
+      ],
+      "launch__registers_per_thread": [
+        127.0,
+        "register/thread"
+      ],
+      "sm__warps_active.avg.pct_of_peak_sustained_active": [
+        32.66,
+        "%"
+      ],
+      "l1tex__data_bank_conflicts_pipe_lsu_mem_shared_op_ld.sum": [
+        67625.0,
+        ""
+      ],
+      "smsp__average_warps_issue_stalled_short_scoreboard_per_issue_active.ratio": [
+        0.71,
+        "inst"
+      ],
+      "smsp__average_warps_issue_stalled_long_scoreboard_per_issue_active.ratio": [
+        0.04,
+        "inst"
+      ],
+      "dram__throughput.avg.pct_of_peak_sustained_elapsed": [
+        27.19,
+        "%"
+      ],
+      "sm__throughput.avg.pct_of_peak_sustained_elapsed": [
+        75.71,
+        "%"
+      ]
+    }
+  },
+  "cublas_fp32": {
+    "kernel": "void Kernel2<cutlass_80_simt_sgemm_256x128_8x4_nn_align1>(Params)",
+    "args": [
+      "--profile",
+      "--impl",
+      0,
+      "--variant",
+      0,
+      "--size",
+      4096
+    ],
+    "sm_mhz_before_after": [
+      "2100",
+      "2100"
+    ],
+    "metrics": {
+      "gpu__time_duration.sum": [
+        5728896.0,
+        "ns"
+      ],
+      "launch__registers_per_thread": [
+        202.0,
+        "register/thread"
+      ],
+      "sm__warps_active.avg.pct_of_peak_sustained_active": [
+        16.67,
+        "%"
+      ],
+      "l1tex__data_bank_conflicts_pipe_lsu_mem_shared_op_ld.sum": [
+        0.0,
+        ""
+      ],
+      "smsp__average_warps_issue_stalled_short_scoreboard_per_issue_active.ratio": [
+        0.04,
+        "inst"
+      ],
+      "smsp__average_warps_issue_stalled_long_scoreboard_per_issue_active.ratio": [
+        0.05,
+        "inst"
+      ],
+      "dram__throughput.avg.pct_of_peak_sustained_elapsed": [
+        14.24,
+        "%"
+      ],
+      "sm__throughput.avg.pct_of_peak_sustained_elapsed": [
+        80.01,
+        "%"
+      ]
+    }
+  },
+  "v4_wmma": {
+    "kernel": "<unnamed>::sgemm_v4_wmma(const __half *, const __half *, float *, int, int, float, float)",
+    "args": [
+      "--profile",
+      "--impl",
+      3,
+      "--variant",
+      0,
+      "--size",
+      4096
+    ],
+    "sm_mhz_before_after": [
+      "2100",
+      "2100"
+    ],
+    "metrics": {
+      "gpu__time_duration.sum": [
+        3503424.0,
+        "ns"
+      ],
+      "launch__registers_per_thread": [
+        124.0,
+        "register/thread"
+      ],
+      "sm__warps_active.avg.pct_of_peak_sustained_active": [
+        32.59,
+        "%"
+      ],
+      "l1tex__data_bank_conflicts_pipe_lsu_mem_shared_op_ld.sum": [
+        285212672.0,
+        ""
+      ],
+      "smsp__average_warps_issue_stalled_short_scoreboard_per_issue_active.ratio": [
+        8.36,
+        "inst"
+      ],
+      "smsp__average_warps_issue_stalled_long_scoreboard_per_issue_active.ratio": [
+        11.52,
+        "inst"
+      ],
+      "dram__throughput.avg.pct_of_peak_sustained_elapsed": [
+        8.98,
+        "%"
+      ],
+      "sm__throughput.avg.pct_of_peak_sustained_elapsed": [
+        27.64,
+        "%"
+      ]
+    }
+  },
+  "v4_plain": {
+    "kernel": "void <unnamed>::sgemm_v4_kernel<128, 128, 32, 64, 1, 0, 0, 1>(const __half *, const __half *, float *, int, int, int, float, float)",
+    "args": [
+      "--profile",
+      "--impl",
+      3,
+      "--variant",
+      1,
+      "--size",
+      4096
+    ],
+    "sm_mhz_before_after": [
+      "2100",
+      "2100"
+    ],
+    "metrics": {
+      "gpu__time_duration.sum": [
+        3488256.0,
+        "ns"
+      ],
+      "launch__registers_per_thread": [
+        127.0,
+        "register/thread"
+      ],
+      "sm__warps_active.avg.pct_of_peak_sustained_active": [
+        32.57,
+        "%"
+      ],
+      "l1tex__data_bank_conflicts_pipe_lsu_mem_shared_op_ld.sum": [
+        285212672.0,
+        ""
+      ],
+      "smsp__average_warps_issue_stalled_short_scoreboard_per_issue_active.ratio": [
+        5.71,
+        "inst"
+      ],
+      "smsp__average_warps_issue_stalled_long_scoreboard_per_issue_active.ratio": [
+        11.02,
+        "inst"
+      ],
+      "dram__throughput.avg.pct_of_peak_sustained_elapsed": [
+        6.96,
+        "%"
+      ],
+      "sm__throughput.avg.pct_of_peak_sustained_elapsed": [
+        27.76,
+        "%"
+      ]
+    }
+  },
+  "v4_xor": {
+    "kernel": "void <unnamed>::sgemm_v4_kernel<128, 128, 32, 64, 1, 1, 0, 1>(const __half *, const __half *, float *, int, int, int, float, float)",
+    "args": [
+      "--profile",
+      "--impl",
+      3,
+      "--variant",
+      2,
+      "--size",
+      4096
+    ],
+    "sm_mhz_before_after": [
+      "2100",
+      "2100"
+    ],
+    "metrics": {
+      "gpu__time_duration.sum": [
+        2377056.0,
+        "ns"
+      ],
+      "launch__registers_per_thread": [
+        126.0,
+        "register/thread"
+      ],
+      "sm__warps_active.avg.pct_of_peak_sustained_active": [
+        32.51,
+        "%"
+      ],
+      "l1tex__data_bank_conflicts_pipe_lsu_mem_shared_op_ld.sum": [
+        0.0,
+        ""
+      ],
+      "smsp__average_warps_issue_stalled_short_scoreboard_per_issue_active.ratio": [
+        0.19,
+        "inst"
+      ],
+      "smsp__average_warps_issue_stalled_long_scoreboard_per_issue_active.ratio": [
+        7.62,
+        "inst"
+      ],
+      "dram__throughput.avg.pct_of_peak_sustained_elapsed": [
+        9.94,
+        "%"
+      ],
+      "sm__throughput.avg.pct_of_peak_sustained_elapsed": [
+        40.74,
+        "%"
+      ]
+    }
+  },
+  "v4_async": {
+    "kernel": "void <unnamed>::sgemm_v4_kernel<128, 128, 32, 64, 1, 1, 1, 1>(const __half *, const __half *, float *, int, int, int, float, float)",
+    "args": [
+      "--profile",
+      "--impl",
+      3,
+      "--variant",
+      3,
+      "--size",
+      4096
+    ],
+    "sm_mhz_before_after": [
+      "2100",
+      "2100"
+    ],
+    "metrics": {
+      "gpu__time_duration.sum": [
+        2293664.0,
+        "ns"
+      ],
+      "launch__registers_per_thread": [
+        127.0,
+        "register/thread"
+      ],
+      "sm__warps_active.avg.pct_of_peak_sustained_active": [
+        32.31,
+        "%"
+      ],
+      "l1tex__data_bank_conflicts_pipe_lsu_mem_shared_op_ld.sum": [
+        0.0,
+        ""
+      ],
+      "smsp__average_warps_issue_stalled_short_scoreboard_per_issue_active.ratio": [
+        0.12,
+        "inst"
+      ],
+      "smsp__average_warps_issue_stalled_long_scoreboard_per_issue_active.ratio": [
+        1.62,
+        "inst"
+      ],
+      "dram__throughput.avg.pct_of_peak_sustained_elapsed": [
+        8.86,
+        "%"
+      ],
+      "sm__throughput.avg.pct_of_peak_sustained_elapsed": [
+        42.22,
+        "%"
+      ]
+    }
+  },
+  "v4_double": {
+    "kernel": "void <unnamed>::sgemm_v4_kernel<128, 128, 32, 64, 1, 1, 1, 2>(const __half *, const __half *, float *, int, int, int, float, float)",
+    "args": [
+      "--profile",
+      "--impl",
+      3,
+      "--variant",
+      4,
+      "--size",
+      4096
+    ],
+    "sm_mhz_before_after": [
+      "2100",
+      "2100"
+    ],
+    "metrics": {
+      "gpu__time_duration.sum": [
+        2521856.0,
+        "ns"
+      ],
+      "launch__registers_per_thread": [
+        126.0,
+        "register/thread"
+      ],
+      "sm__warps_active.avg.pct_of_peak_sustained_active": [
+        32.33,
+        "%"
+      ],
+      "l1tex__data_bank_conflicts_pipe_lsu_mem_shared_op_ld.sum": [
+        78500.0,
+        ""
+      ],
+      "smsp__average_warps_issue_stalled_short_scoreboard_per_issue_active.ratio": [
+        0.16,
+        "inst"
+      ],
+      "smsp__average_warps_issue_stalled_long_scoreboard_per_issue_active.ratio": [
+        0.14,
+        "inst"
+      ],
+      "dram__throughput.avg.pct_of_peak_sustained_elapsed": [
+        14.66,
+        "%"
+      ],
+      "sm__throughput.avg.pct_of_peak_sustained_elapsed": [
+        43.86,
+        "%"
+      ]
+    }
+  },
+  "v4_group8": {
+    "kernel": "void <unnamed>::sgemm_v4_kernel<128, 128, 32, 64, 8, 1, 1, 2>(const __half *, const __half *, float *, int, int, int, float, float)",
+    "args": [
+      "--profile",
+      "--impl",
+      3,
+      "--variant",
+      5,
+      "--size",
+      4096
+    ],
+    "sm_mhz_before_after": [
+      "2100",
+      "2100"
+    ],
+    "metrics": {
+      "gpu__time_duration.sum": [
+        2182368.0,
+        "ns"
+      ],
+      "launch__registers_per_thread": [
+        128.0,
+        "register/thread"
+      ],
+      "sm__warps_active.avg.pct_of_peak_sustained_active": [
+        32.39,
+        "%"
+      ],
+      "l1tex__data_bank_conflicts_pipe_lsu_mem_shared_op_ld.sum": [
+        47416.0,
+        ""
+      ],
+      "smsp__average_warps_issue_stalled_short_scoreboard_per_issue_active.ratio": [
+        0.26,
+        "inst"
+      ],
+      "smsp__average_warps_issue_stalled_long_scoreboard_per_issue_active.ratio": [
+        0.27,
+        "inst"
+      ],
+      "dram__throughput.avg.pct_of_peak_sustained_elapsed": [
+        15.09,
+        "%"
+      ],
+      "sm__throughput.avg.pct_of_peak_sustained_elapsed": [
+        44.37,
+        "%"
+      ]
+    }
+  },
+  "cublas_half": {
+    "kernel": "ampere_s1688gemm_fp16_128x128_ldg8_stages_32x1_nn",
+    "args": [
+      "--profile",
+      "--impl",
+      0,
+      "--size",
+      4096
+    ],
+    "sm_mhz_before_after": [
+      "2100",
+      "2100"
+    ],
+    "metrics": {
+      "gpu__time_duration.sum": [
+        2384832.0,
+        "ns"
+      ],
+      "launch__registers_per_thread": [
+        234.0,
+        "register/thread"
+      ],
+      "sm__warps_active.avg.pct_of_peak_sustained_active": [
+        16.26,
+        "%"
+      ],
+      "l1tex__data_bank_conflicts_pipe_lsu_mem_shared_op_ld.sum": [
+        45713.0,
+        ""
+      ],
+      "smsp__average_warps_issue_stalled_short_scoreboard_per_issue_active.ratio": [
+        0.05,
+        "inst"
+      ],
+      "smsp__average_warps_issue_stalled_long_scoreboard_per_issue_active.ratio": [
+        0.07,
+        "inst"
+      ],
+      "dram__throughput.avg.pct_of_peak_sustained_elapsed": [
+        16.3,
+        "%"
+      ],
+      "sm__throughput.avg.pct_of_peak_sustained_elapsed": [
+        46.78,
+        "%"
+      ]
+    }
+  }
+}

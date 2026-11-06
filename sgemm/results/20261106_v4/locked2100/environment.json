@@ -1,0 +1,400 @@
+{
+  "source_sha256": {
+    "sgemm/sgemm_v4.cu": "b05855aacf681592d4250e9ce072f195657f1ad517924407b5735c629fc6720d",
+    "sgemm/sgemm_v4.cuh": "2a87adf1992099d714ee6475ff0fa39b7f6c34d4843b5cb5cd020c1ab78c5865",
+    "sgemm/benchmark_v4.cu": "6f4b511763af9453c6eeb07ff791d19f21e2d12faae2fc17b9a7a53546da7075",
+    "sgemm/CMakeLists.txt": "5603c419493a82718870b36da7128df0ae5b06f91e00614605590cad77256207",
+    "sgemm/run_compare_v4.py": "551bf8938fdc26213c850fe26f5f99b906547ef02e4cfb70743de6197b0ec48d"
+  },
+  "binary_sha256": "23c90393e23d8425eae73789cb190d06aaa560d1368d0a90525e9766487e26d5",
+  "NVIDIA_TF32_OVERRIDE": "0",
+  "requested_graphics_MHz": 2100,
+  "precision": "FP16 inputs, FP32 accumulation/output; CUBLAS_COMPUTE_32F + disallow reduced-precision reductions",
+  "timing": "CUDA Events on default stream; rotated/reversed arm order; H2D/validation excluded",
+  "cache": "Repeated resident inputs; warm steady state, no explicit cache flushing",
+  "jobs": [
+    {
+      "name": "m1024_n1024_k1024_p0",
+      "command": [
+        "/home/smh/ai_infra/cuda-kernels-from-scratch/build/sgemm/sgemm_v4_compare",
+        "--m",
+        "1024",
+        "--n",
+        "1024",
+        "--k",
+        "1024",
+        "--rounds",
+        "9",
+        "--repeat",
+        "50"
+      ],
+      "seconds": 0.5617899660001058,
+      "start_unix": 1793932994.6959703,
+      "end_unix": 1793932995.2577622
+    },
+    {
+      "name": "m1024_n1024_k1024_p1",
+      "command": [
+        "/home/smh/ai_infra/cuda-kernels-from-scratch/build/sgemm/sgemm_v4_compare",
+        "--m",
+        "1024",
+        "--n",
+        "1024",
+        "--k",
+        "1024",
+        "--rounds",
+        "9",
+        "--repeat",
+        "50"
+      ],
+      "seconds": 0.5399283720007588,
+      "start_unix": 1793932995.2579641,
+      "end_unix": 1793932995.7978933
+    },
+    {
+      "name": "m1024_n1024_k1024_p2",
+      "command": [
+        "/home/smh/ai_infra/cuda-kernels-from-scratch/build/sgemm/sgemm_v4_compare",
+        "--m",
+        "1024",
+        "--n",
+        "1024",
+        "--k",
+        "1024",
+        "--rounds",
+        "9",
+        "--repeat",
+        "50"
+      ],
+      "seconds": 0.5159988119994523,
+      "start_unix": 1793932995.7980494,
+      "end_unix": 1793932996.3140492
+    },
+    {
+      "name": "m2048_n2048_k2048_p0",
+      "command": [
+        "/home/smh/ai_infra/cuda-kernels-from-scratch/build/sgemm/sgemm_v4_compare",
+        "--m",
+        "2048",
+        "--n",
+        "2048",
+        "--k",
+        "2048",
+        "--rounds",
+        "9",
+        "--repeat",
+        "20"
+      ],
+      "seconds": 0.8923855150005693,
+      "start_unix": 1793932996.3141978,
+      "end_unix": 1793932997.2065842
+    },
+    {
+      "name": "m2048_n2048_k2048_p1",
+      "command": [
+        "/home/smh/ai_infra/cuda-kernels-from-scratch/build/sgemm/sgemm_v4_compare",
+        "--m",
+        "2048",
+        "--n",
+        "2048",
+        "--k",
+        "2048",
+        "--rounds",
+        "9",
+        "--repeat",
+        "20"
+      ],
+      "seconds": 0.8784359900000709,
+      "start_unix": 1793932997.2067516,
+      "end_unix": 1793932998.0851886
+    },
+    {
+      "name": "m2048_n2048_k2048_p2",
+      "command": [
+        "/home/smh/ai_infra/cuda-kernels-from-scratch/build/sgemm/sgemm_v4_compare",
+        "--m",
+        "2048",
+        "--n",
+        "2048",
+        "--k",
+        "2048",
+        "--rounds",
+        "9",
+        "--repeat",
+        "20"
+      ],
+      "seconds": 0.9149464960000842,
+      "start_unix": 1793932998.0853431,
+      "end_unix": 1793932999.0002909
+    },
+    {
+      "name": "m4096_n4096_k4096_p0",
+      "command": [
+        "/home/smh/ai_infra/cuda-kernels-from-scratch/build/sgemm/sgemm_v4_compare",
+        "--m",
+        "4096",
+        "--n",
+        "4096",
+        "--k",
+        "4096",
+        "--rounds",
+        "9",
+        "--repeat",
+        "10"
+      ],
+      "seconds": 3.0928999469997507,
+      "start_unix": 1793932999.0004401,
+      "end_unix": 1793933004.2638648
+    },
+    {
+      "name": "m4096_n4096_k4096_p1",
+      "command": [
+        "/home/smh/ai_infra/cuda-kernels-from-scratch/build/sgemm/sgemm_v4_compare",
+        "--m",
+        "4096",
+        "--n",
+        "4096",
+        "--k",
+        "4096",
+        "--rounds",
+        "9",
+        "--repeat",
+        "10"
+      ],
+      "seconds": 3.1274642580001455,
+      "start_unix": 1793933004.2640502,
+      "end_unix": 1793933007.3915155
+    },
+    {
+      "name": "m4096_n4096_k4096_p2",
+      "command": [
+        "/home/smh/ai_infra/cuda-kernels-from-scratch/build/sgemm/sgemm_v4_compare",
+        "--m",
+        "4096",
+        "--n",
+        "4096",
+        "--k",
+        "4096",
+        "--rounds",
+        "9",
+        "--repeat",
+        "10"
+      ],
+      "seconds": 3.1230556069995146,
+      "start_unix": 1793933007.3916814,
+      "end_unix": 1793933010.5147383
+    },
+    {
+      "name": "m4096_n4096_k4096_p3",
+      "command": [
+        "/home/smh/ai_infra/cuda-kernels-from-scratch/build/sgemm/sgemm_v4_compare",
+        "--m",
+        "4096",
+        "--n",
+        "4096",
+        "--k",
+        "4096",
+        "--rounds",
+        "9",
+        "--repeat",
+        "10"
+      ],
+      "seconds": 3.0787646159997166,
+      "start_unix": 1793933010.5149124,
+      "end_unix": 1793933013.593678
+    },
+    {
+      "name": "m4096_n4096_k4096_p4",
+      "command": [
+        "/home/smh/ai_infra/cuda-kernels-from-scratch/build/sgemm/sgemm_v4_compare",
+        "--m",
+        "4096",
+        "--n",
+        "4096",
+        "--k",
+        "4096",
+        "--rounds",
+        "9",
+        "--repeat",
+        "10"
+      ],
+      "seconds": 3.0843637269999817,
+      "start_unix": 1793933013.5938613,
+      "end_unix": 1793933016.6782262
+    },
+    {
+      "name": "m8192_n8192_k8192_p0",
+      "command": [
+        "/home/smh/ai_infra/cuda-kernels-from-scratch/build/sgemm/sgemm_v4_compare",
+        "--m",
+        "8192",
+        "--n",
+        "8192",
+        "--k",
+        "8192",
+        "--rounds",
+        "7",
+        "--repeat",
+        "2"
+      ],
+      "seconds": 9.319065840999428,
+      "start_unix": 1793933016.6784298,
+      "end_unix": 1793933025.9974968
+    },
+    {
+      "name": "m8192_n8192_k8192_p1",
+      "command": [
+        "/home/smh/ai_infra/cuda-kernels-from-scratch/build/sgemm/sgemm_v4_compare",
+        "--m",
+        "8192",
+        "--n",
+        "8192",
+        "--k",
+        "8192",
+        "--rounds",
+        "7",
+        "--repeat",
+        "2"
+      ],
+      "seconds": 9.239549535999686,
+      "start_unix": 1793933025.9976923,
+      "end_unix": 1793933035.237243
+    },
+    {
+      "name": "m8192_n8192_k8192_p2",
+      "command": [
+        "/home/smh/ai_infra/cuda-kernels-from-scratch/build/sgemm/sgemm_v4_compare",
+        "--m",
+        "8192",
+        "--n",
+        "8192",
+        "--k",
+        "8192",
+        "--rounds",
+        "7",
+        "--repeat",
+        "2"
+      ],
+      "seconds": 9.255592362999778,
+      "start_unix": 1793933035.2374325,
+      "end_unix": 1793933046.673287
+    },
+    {
+      "name": "m1024_n4096_k2048_p0",
+      "command": [
+        "/home/smh/ai_infra/cuda-kernels-from-scratch/build/sgemm/sgemm_v4_compare",
+        "--m",
+        "1024",
+        "--n",
+        "4096",
+        "--k",
+        "2048",
+        "--rounds",
+        "9",
+        "--repeat",
+        "20"
+      ],
+      "seconds": 0.9264819570007603,
+      "start_unix": 1793933046.6734858,
+      "end_unix": 1793933047.5999687
+    },
+    {
+      "name": "m1024_n4096_k2048_p1",
+      "command": [
+        "/home/smh/ai_infra/cuda-kernels-from-scratch/build/sgemm/sgemm_v4_compare",
+        "--m",
+        "1024",
+        "--n",
+        "4096",
+        "--k",
+        "2048",
+        "--rounds",
+        "9",
+        "--repeat",
+        "20"
+      ],
+      "seconds": 0.9838659359993471,
+      "start_unix": 1793933047.6001782,
+      "end_unix": 1793933048.5840456
+    },
+    {
+      "name": "m1024_n4096_k2048_p2",
+      "command": [
+        "/home/smh/ai_infra/cuda-kernels-from-scratch/build/sgemm/sgemm_v4_compare",
+        "--m",
+        "1024",
+        "--n",
+        "4096",
+        "--k",
+        "2048",
+        "--rounds",
+        "9",
+        "--repeat",
+        "20"
+      ],
+      "seconds": 0.9610812060000171,
+      "start_unix": 1793933048.5842822,
+      "end_unix": 1793933049.5453644
+    },
+    {
+      "name": "m4096_n1024_k2048_p0",
+      "command": [
+        "/home/smh/ai_infra/cuda-kernels-from-scratch/build/sgemm/sgemm_v4_compare",
+        "--m",
+        "4096",
+        "--n",
+        "1024",
+        "--k",
+        "2048",
+        "--rounds",
+        "9",
+        "--repeat",
+        "20"
+      ],
+      "seconds": 0.9397743030003767,
+      "start_unix": 1793933049.5455828,
+      "end_unix": 1793933050.485358
+    },
+    {
+      "name": "m4096_n1024_k2048_p1",
+      "command": [
+        "/home/smh/ai_infra/cuda-kernels-from-scratch/build/sgemm/sgemm_v4_compare",
+        "--m",
+        "4096",
+        "--n",
+        "1024",
+        "--k",
+        "2048",
+        "--rounds",
+        "9",
+        "--repeat",
+        "20"
+      ],
+      "seconds": 0.9585822779999944,
+      "start_unix": 1793933050.4855917,
+      "end_unix": 1793933051.4441748
+    },
+    {
+      "name": "m4096_n1024_k2048_p2",
+      "command": [
+        "/home/smh/ai_infra/cuda-kernels-from-scratch/build/sgemm/sgemm_v4_compare",
+        "--m",
+        "4096",
+        "--n",
+        "1024",
+        "--k",
+        "2048",
+        "--rounds",
+        "9",
+        "--repeat",
+        "20"
+      ],
+      "seconds": 1.0095314849995702,
+      "start_unix": 1793933051.4443989,
+      "end_unix": 1793933052.453931
+    }
+  ],
+  "complete": true,
+  "clock_samples": 92,
+  "clock_verified": true
+}

@@ -1,0 +1,9 @@
+/build/
+__pycache__/
+*.pyc
+*.ncu-rep
+*.nsys-rep
+/tensorcore/x1
+/sgemm/results/20261106/sgemm_compare_initial
+/sgemm/results/20261106/sgemm_compare_hybrid_loop2
+/sgemm/results/20261106_v4/*_binary

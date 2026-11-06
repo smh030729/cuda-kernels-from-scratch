@@ -1,0 +1,13 @@
+Consolidate compiler generated dependencies of target sgemm_bench
+[ 40%] Building CUDA object sgemm/CMakeFiles/sgemm_bench.dir/benchmark.cu.o
+[ 60%] Building CUDA object sgemm/CMakeFiles/sgemm_bench.dir/sgemm_v1.cu.o
+[ 60%] Building CXX object sgemm/CMakeFiles/sgemm_bench.dir/sgemm_cpu.cpp.o
+[ 80%] Building CUDA object sgemm/CMakeFiles/sgemm_bench.dir/sgemm_v2.cu.o
+[100%] Linking CXX executable sgemm_bench
+[100%] Built target sgemm_bench
+Consolidate compiler generated dependencies of target sgemm_profile
+[ 50%] Building CUDA object sgemm/CMakeFiles/sgemm_profile.dir/profile.cu.o
+[ 50%] Building CUDA object sgemm/CMakeFiles/sgemm_profile.dir/sgemm_v1.cu.o
+[ 75%] Building CUDA object sgemm/CMakeFiles/sgemm_profile.dir/sgemm_v2.cu.o
+[100%] Linking CUDA executable sgemm_profile
+[100%] Built target sgemm_profile

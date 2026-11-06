@@ -1,0 +1,232 @@
+{
+  "plain": {
+    "gpu__time_duration.sum": {
+      "value": "3.850848",
+      "unit": "ms"
+    },
+    "smsp__warps_active.avg.per_cycle_active": {
+      "value": "3.927775",
+      "unit": "warp"
+    },
+    "smsp__warps_eligible.avg.per_cycle_active": {
+      "value": "0.135163",
+      "unit": "warp"
+    },
+    "smsp__issue_inst0.avg.pct_of_peak_sustained_active": {
+      "value": "89.741140",
+      "unit": "%"
+    },
+    "smsp__issue_active.avg.per_cycle_active": {
+      "value": "0.10",
+      "unit": ""
+    },
+    "sm__inst_executed.avg.per_cycle_active": {
+      "value": "0.410563",
+      "unit": "inst/cycle"
+    },
+    "smsp__inst_executed.sum": {
+      "value": "194510848.000000",
+      "unit": "inst"
+    },
+    "sm__maximum_warps_per_active_cycle_pct": {
+      "value": "33.333333",
+      "unit": "%"
+    },
+    "sm__warps_active.avg.pct_of_peak_sustained_active": {
+      "value": "32.591059",
+      "unit": "%"
+    },
+    "l1tex__data_bank_conflicts_pipe_lsu_mem_shared_op_ld.sum": {
+      "value": "285212672",
+      "unit": ""
+    },
+    "lts__t_sector_op_read_hit_rate.pct": {
+      "value": "94.038432",
+      "unit": "%"
+    }
+  },
+  "xor_sync": {
+    "gpu__time_duration.sum": {
+      "value": "3.218304",
+      "unit": "ms"
+    },
+    "smsp__warps_active.avg.per_cycle_active": {
+      "value": "3.849406",
+      "unit": "warp"
+    },
+    "smsp__warps_eligible.avg.per_cycle_active": {
+      "value": "0.230809",
+      "unit": "warp"
+    },
+    "smsp__issue_inst0.avg.pct_of_peak_sustained_active": {
+      "value": "82.626633",
+      "unit": "%"
+    },
+    "smsp__issue_active.avg.per_cycle_active": {
+      "value": "0.17",
+      "unit": ""
+    },
+    "sm__inst_executed.avg.per_cycle_active": {
+      "value": "0.703722",
+      "unit": "inst/cycle"
+    },
+    "smsp__inst_executed.sum": {
+      "value": "226354075.000000",
+      "unit": "inst"
+    },
+    "sm__maximum_warps_per_active_cycle_pct": {
+      "value": "33.333333",
+      "unit": "%"
+    },
+    "sm__warps_active.avg.pct_of_peak_sustained_active": {
+      "value": "32.873268",
+      "unit": "%"
+    },
+    "l1tex__data_bank_conflicts_pipe_lsu_mem_shared_op_ld.sum": {
+      "value": "0",
+      "unit": ""
+    },
+    "lts__t_sector_op_read_hit_rate.pct": {
+      "value": "92.085621",
+      "unit": "%"
+    }
+  },
+  "v4": {
+    "gpu__time_duration.sum": {
+      "value": "2.522720",
+      "unit": "ms"
+    },
+    "smsp__warps_active.avg.per_cycle_active": {
+      "value": "3.879799",
+      "unit": "warp"
+    },
+    "smsp__warps_eligible.avg.per_cycle_active": {
+      "value": "0.318665",
+      "unit": "warp"
+    },
+    "smsp__issue_inst0.avg.pct_of_peak_sustained_active": {
+      "value": "78.833684",
+      "unit": "%"
+    },
+    "smsp__issue_active.avg.per_cycle_active": {
+      "value": "0.21",
+      "unit": ""
+    },
+    "sm__inst_executed.avg.per_cycle_active": {
+      "value": "0.846747",
+      "unit": "inst/cycle"
+    },
+    "smsp__inst_executed.sum": {
+      "value": "244433133.000000",
+      "unit": "inst"
+    },
+    "sm__maximum_warps_per_active_cycle_pct": {
+      "value": "33.333333",
+      "unit": "%"
+    },
+    "sm__warps_active.avg.pct_of_peak_sustained_active": {
+      "value": "32.336776",
+      "unit": "%"
+    },
+    "l1tex__data_bank_conflicts_pipe_lsu_mem_shared_op_ld.sum": {
+      "value": "77930",
+      "unit": ""
+    },
+    "lts__t_sector_op_read_hit_rate.pct": {
+      "value": "93.875820",
+      "unit": "%"
+    }
+  },
+  "group8": {
+    "gpu__time_duration.sum": {
+      "value": "2.557920",
+      "unit": "ms"
+    },
+    "smsp__warps_active.avg.per_cycle_active": {
+      "value": "3.886287",
+      "unit": "warp"
+    },
+    "smsp__warps_eligible.avg.per_cycle_active": {
+      "value": "0.319008",
+      "unit": "warp"
+    },
+    "smsp__issue_inst0.avg.pct_of_peak_sustained_active": {
+      "value": "79.713511",
+      "unit": "%"
+    },
+    "smsp__issue_active.avg.per_cycle_active": {
+      "value": "0.20",
+      "unit": ""
+    },
+    "sm__inst_executed.avg.per_cycle_active": {
+      "value": "0.811535",
+      "unit": "inst/cycle"
+    },
+    "smsp__inst_executed.sum": {
+      "value": "237764608.000000",
+      "unit": "inst"
+    },
+    "sm__maximum_warps_per_active_cycle_pct": {
+      "value": "33.333333",
+      "unit": "%"
+    },
+    "sm__warps_active.avg.pct_of_peak_sustained_active": {
+      "value": "32.396951",
+      "unit": "%"
+    },
+    "l1tex__data_bank_conflicts_pipe_lsu_mem_shared_op_ld.sum": {
+      "value": "46803",
+      "unit": ""
+    },
+    "lts__t_sector_op_read_hit_rate.pct": {
+      "value": "89.717853",
+      "unit": "%"
+    }
+  },
+  "cublas": {
+    "gpu__time_duration.sum": {
+      "value": "2.018816",
+      "unit": "ms"
+    },
+    "smsp__warps_active.avg.per_cycle_active": {
+      "value": "1.952027",
+      "unit": "warp"
+    },
+    "smsp__warps_eligible.avg.per_cycle_active": {
+      "value": "0.143038",
+      "unit": "warp"
+    },
+    "smsp__issue_inst0.avg.pct_of_peak_sustained_active": {
+      "value": "90.905384",
+      "unit": "%"
+    },
+    "smsp__issue_active.avg.per_cycle_active": {
+      "value": "0.09",
+      "unit": ""
+    },
+    "sm__inst_executed.avg.per_cycle_active": {
+      "value": "0.363835",
+      "unit": "inst/cycle"
+    },
+    "smsp__inst_executed.sum": {
+      "value": "98578432.000000",
+      "unit": "inst"
+    },
+    "sm__maximum_warps_per_active_cycle_pct": {
+      "value": "16.666667",
+      "unit": "%"
+    },
+    "sm__warps_active.avg.pct_of_peak_sustained_active": {
+      "value": "16.269824",
+      "unit": "%"
+    },
+    "l1tex__data_bank_conflicts_pipe_lsu_mem_shared_op_ld.sum": {
+      "value": "44346",
+      "unit": ""
+    },
+    "lts__t_sector_op_read_hit_rate.pct": {
+      "value": "94.512513",
+      "unit": "%"
+    }
+  }
+}

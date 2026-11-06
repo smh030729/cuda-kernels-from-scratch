@@ -1,0 +1,112 @@
+"""FP16-input / FP32-accumulation Tensor Core GEMM runs with rotating arm order and a GPU clock trace."""
+import argparse
+import csv
+import hashlib
+import json
+import os
+from pathlib import Path
+import statistics
+import subprocess
+import threading
+import time
+
+ROOT = Path(__file__).resolve().parents[1]
+
+
+def dump(path, data):
+    path.write_text(json.dumps(data, indent=2, ensure_ascii=False) + '\n')
+
+
+def monitor(stop, path):
+    with path.open('w') as file:
+        file.write('timestamp,pstate,graphics_MHz,sm_MHz,memory_MHz,temperature_C,power_W,util_pct,sw_power_cap,hw_slowdown,sw_thermal_slowdown\n')
+        while not stop.is_set():
+            sample = subprocess.run(['nvidia-smi',
+                '--query-gpu=timestamp,pstate,clocks.current.graphics,clocks.current.sm,clocks.current.memory,temperature.gpu,power.draw,utilization.gpu,clocks_event_reasons.sw_power_cap,clocks_event_reasons.hw_slowdown,clocks_event_reasons.sw_thermal_slowdown',
+                '--format=csv,noheader,nounits'], capture_output=True, text=True, check=True)
+            file.write(sample.stdout)
+            file.flush()
+            stop.wait(.5)
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--output', type=Path, required=True)
+    parser.add_argument('--clock-mhz', type=int, default=2100)
+    args = parser.parse_args()
+    args.output.mkdir(parents=True, exist_ok=False)
+    binary = ROOT / 'build/sgemm/sgemm_v4_compare'
+    sources = [ROOT / 'sgemm' / name for name in
+        ('sgemm_v4.cu', 'sgemm_v4.cuh', 'benchmark_v4.cu', 'CMakeLists.txt', 'run_compare_v4.py')]
+    hashes = {str(p.relative_to(ROOT)): hashlib.sha256(p.read_bytes()).hexdigest() for p in sources}
+    environment = dict(source_sha256=hashes, binary_sha256=hashlib.sha256(binary.read_bytes()).hexdigest(),
+        NVIDIA_TF32_OVERRIDE='0', requested_graphics_MHz=args.clock_mhz,
+        precision='FP16 inputs, FP32 accumulation/output; CUBLAS_COMPUTE_32F + disallow reduced-precision reductions',
+        timing='CUDA Events on default stream; rotated/reversed arm order; H2D/validation excluded',
+        cache='Repeated resident inputs; warm steady state, no explicit cache flushing', jobs=[])
+    specs = [(1024,1024,1024,3,9,50), (2048,2048,2048,3,9,20),
+             (4096,4096,4096,5,9,10), (8192,8192,8192,3,7,2),
+             (1024,4096,2048,3,9,20), (4096,1024,2048,3,9,20)]
+    stop = threading.Event()
+    thread = threading.Thread(target=monitor, args=(stop, args.output / 'telemetry.csv'), daemon=True)
+    thread.start()
+    env = dict(os.environ, NVIDIA_TF32_OVERRIDE='0')
+    observations = []
+    try:
+        for M,N,K,processes,rounds,repeat in specs:
+            for process in range(processes):
+                name = f'm{M}_n{N}_k{K}_p{process}'
+                command = [str(binary), '--m',str(M),'--n',str(N),'--k',str(K),
+                           '--rounds',str(rounds),'--repeat',str(repeat)]
+                print('START',name,flush=True)
+                started_at = time.time()
+                start = time.perf_counter()
+                with (args.output / (name+'.jsonl')).open('w') as out, (args.output / (name+'.log')).open('w') as err:
+                    subprocess.run(command, stdout=out, stderr=err, env=env, check=True)
+                rows = [json.loads(line) for line in (args.output/(name+'.jsonl')).read_text().splitlines()]
+                if any(row['kind']=='check' and row['relative_l2'] > .001 for row in rows):
+                    raise RuntimeError('unexpected numerical error')
+                for row in rows:
+                    if row['kind']=='sample':
+                        observations.append(dict(M=M,N=N,K=K,process=process,**row))
+                environment['jobs'].append(dict(name=name,command=command,seconds=time.perf_counter()-start,
+                                               start_unix=started_at,end_unix=time.time()))
+                dump(args.output/'environment.json',environment)
+                print('DONE',name,round(time.perf_counter()-start,2),'s',flush=True)
+    finally:
+        stop.set()
+        thread.join()
+    for p in sources:
+        if hashlib.sha256(p.read_bytes()).hexdigest() != hashes[str(p.relative_to(ROOT))]:
+            raise RuntimeError(f'source changed during sampling: {p}')
+    summary = {}
+    for M,N,K,processes,rounds,repeat in specs:
+        shape = f'{M}x{N}x{K}'
+        rows = [r for r in observations if (r['M'],r['N'],r['K']) == (M,N,K)]
+        result = {}
+        blas = statistics.median(r['ms'] for r in rows if r['impl']=='cublas_fp16_fp32')
+        for name in dict.fromkeys(r['impl'] for r in rows):
+            values = [r['ms'] for r in rows if r['impl']==name]
+            latency = statistics.median(values)
+            result[name] = dict(observations=len(values),median_ms=latency,range_ms=[min(values),max(values)],
+                tflops=2*M*N*K/(latency*1e9),cublas_throughput_pct=100*blas/latency)
+        summary[shape] = result
+    with (args.output/'samples.csv').open('w') as file:
+        writer = csv.DictWriter(file,fieldnames=list(observations[0]))
+        writer.writeheader(); writer.writerows(observations)
+    dump(args.output/'summary.json',summary)
+    environment['complete'] = True
+    with (args.output/'telemetry.csv').open() as file:
+        clock_rows = list(csv.DictReader(file))
+    environment['clock_samples'] = len(clock_rows)
+    environment['clock_verified'] = bool(clock_rows) and all(
+        float(row['graphics_MHz']) == args.clock_mhz and float(row['sm_MHz']) == args.clock_mhz
+        for row in clock_rows)
+    dump(args.output/'environment.json',environment)
+    if not environment['clock_verified']:
+        raise RuntimeError('observed GPU clocks departed from the requested lock; inspect telemetry.csv')
+    print(json.dumps(summary['4096x4096x4096']),flush=True)
+
+
+if __name__=='__main__':
+    main()

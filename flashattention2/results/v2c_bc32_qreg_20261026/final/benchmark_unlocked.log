@@ -1,0 +1,54 @@
+N=1024 round=1/7
+N=1024 round=2/7
+N=1024 round=3/7
+N=1024 round=4/7
+N=1024 round=5/7
+N=1024 round=6/7
+N=1024 round=7/7
+N= 1024 official_fa2             0.008648 ms
+N= 1024 v0_fp16                  0.136925 ms
+N= 1024 v1_fp16                  0.117074 ms
+N= 1024 v2a_fp16                 0.092780 ms
+N= 1024 v2b                      0.025489 ms
+N= 1024 v2b_with_transpose       0.027822 ms
+N= 1024 v2c                      0.023818 ms
+N= 1024 v2c_with_transpose       0.026278 ms
+N= 1024 v2c_bc32_qreg            0.029011 ms
+N= 1024 v2c_bc32_qreg_with_transpose 0.031301 ms
+N= 1024 transpose_k              0.002370 ms
+N=4096 round=1/7
+N=4096 round=2/7
+N=4096 round=3/7
+N=4096 round=4/7
+N=4096 round=5/7
+N=4096 round=6/7
+N=4096 round=7/7
+N= 4096 official_fa2             0.064892 ms
+N= 4096 v0_fp16                  1.879962 ms
+N= 4096 v1_fp16                  0.455362 ms
+N= 4096 v2a_fp16                 0.355034 ms
+N= 4096 v2b                      0.098979 ms
+N= 4096 v2b_with_transpose       0.105063 ms
+N= 4096 v2c                      0.092026 ms
+N= 4096 v2c_with_transpose       0.098165 ms
+N= 4096 v2c_bc32_qreg            0.111006 ms
+N= 4096 v2c_bc32_qreg_with_transpose 0.117571 ms
+N= 4096 transpose_k              0.006280 ms
+N=16384 round=1/7
+N=16384 round=2/7
+N=16384 round=3/7
+N=16384 round=4/7
+N=16384 round=5/7
+N=16384 round=6/7
+N=16384 round=7/7
+N=16384 official_fa2             0.905409 ms
+N=16384 v0_fp16                  28.068864 ms
+N=16384 v1_fp16                  3.844915 ms
+N=16384 v2a_fp16                 1.751802 ms
+N=16384 v2b                      1.070637 ms
+N=16384 v2b_with_transpose       1.091038 ms
+N=16384 v2c                      1.138365 ms
+N=16384 v2c_with_transpose       1.147979 ms
+N=16384 v2c_bc32_qreg            1.075456 ms
+N=16384 v2c_bc32_qreg_with_transpose 1.079666 ms
+N=16384 transpose_k              0.021597 ms

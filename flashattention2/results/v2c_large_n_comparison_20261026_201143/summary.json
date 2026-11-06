@@ -1,0 +1,359 @@
+[
+  {
+    "n": 16384,
+    "versions": {
+      "v2c": {
+        "gpu__time_duration.sum": {
+          "median": 1.112864,
+          "min": 1.112672,
+          "max": 1.361408,
+          "unit": "ms"
+        },
+        "launch__grid_size": {
+          "median": 256.0,
+          "min": 256.0,
+          "max": 256.0,
+          "unit": ""
+        },
+        "launch__waves_per_multiprocessor": {
+          "median": 1.94,
+          "min": 1.94,
+          "max": 1.94,
+          "unit": ""
+        },
+        "launch__registers_per_thread": {
+          "median": 96.0,
+          "min": 96.0,
+          "max": 96.0,
+          "unit": "register/thread"
+        },
+        "launch__shared_mem_per_block_static": {
+          "median": 40.96,
+          "min": 40.96,
+          "max": 40.96,
+          "unit": "Kbyte/block"
+        },
+        "launch__occupancy_limit_registers": {
+          "median": 5.0,
+          "min": 5.0,
+          "max": 5.0,
+          "unit": "block"
+        },
+        "launch__occupancy_limit_shared_mem": {
+          "median": 2.0,
+          "min": 2.0,
+          "max": 2.0,
+          "unit": "block"
+        },
+        "sm__maximum_warps_per_active_cycle_pct": {
+          "median": 16.666667,
+          "min": 16.666667,
+          "max": 16.666667,
+          "unit": "%"
+        },
+        "sm__warps_active.avg.pct_of_peak_sustained_active": {
+          "median": 15.437481,
+          "min": 15.432919,
+          "max": 15.439408,
+          "unit": "%"
+        }
+      },
+      "v2c_bc32_qreg": {
+        "gpu__time_duration.sum": {
+          "median": 1.023232,
+          "min": 1.001984,
+          "max": 1.02832,
+          "unit": "ms"
+        },
+        "launch__grid_size": {
+          "median": 256.0,
+          "min": 256.0,
+          "max": 256.0,
+          "unit": ""
+        },
+        "launch__waves_per_multiprocessor": {
+          "median": 0.78,
+          "min": 0.78,
+          "max": 0.78,
+          "unit": ""
+        },
+        "launch__registers_per_thread": {
+          "median": 96.0,
+          "min": 96.0,
+          "max": 96.0,
+          "unit": "register/thread"
+        },
+        "launch__shared_mem_per_block_static": {
+          "median": 16.384,
+          "min": 16.384,
+          "max": 16.384,
+          "unit": "Kbyte/block"
+        },
+        "launch__occupancy_limit_registers": {
+          "median": 5.0,
+          "min": 5.0,
+          "max": 5.0,
+          "unit": "block"
+        },
+        "launch__occupancy_limit_shared_mem": {
+          "median": 5.0,
+          "min": 5.0,
+          "max": 5.0,
+          "unit": "block"
+        },
+        "sm__maximum_warps_per_active_cycle_pct": {
+          "median": 41.666667,
+          "min": 41.666667,
+          "max": 41.666667,
+          "unit": "%"
+        },
+        "sm__warps_active.avg.pct_of_peak_sustained_active": {
+          "median": 27.060439,
+          "min": 26.935729,
+          "max": 27.066491,
+          "unit": "%"
+        }
+      }
+    },
+    "latency_change_pct": -8.054173735514869,
+    "throughput_change_pct": 8.759694771078319
+  },
+  {
+    "n": 32768,
+    "versions": {
+      "v2c": {
+        "gpu__time_duration.sum": {
+          "median": 4.681536,
+          "min": 4.666656,
+          "max": 4.685216,
+          "unit": "ms"
+        },
+        "launch__grid_size": {
+          "median": 512.0,
+          "min": 512.0,
+          "max": 512.0,
+          "unit": ""
+        },
+        "launch__waves_per_multiprocessor": {
+          "median": 3.88,
+          "min": 3.88,
+          "max": 3.88,
+          "unit": ""
+        },
+        "launch__registers_per_thread": {
+          "median": 96.0,
+          "min": 96.0,
+          "max": 96.0,
+          "unit": "register/thread"
+        },
+        "launch__shared_mem_per_block_static": {
+          "median": 40.96,
+          "min": 40.96,
+          "max": 40.96,
+          "unit": "Kbyte/block"
+        },
+        "launch__occupancy_limit_registers": {
+          "median": 5.0,
+          "min": 5.0,
+          "max": 5.0,
+          "unit": "block"
+        },
+        "launch__occupancy_limit_shared_mem": {
+          "median": 2.0,
+          "min": 2.0,
+          "max": 2.0,
+          "unit": "block"
+        },
+        "sm__maximum_warps_per_active_cycle_pct": {
+          "median": 16.666667,
+          "min": 16.666667,
+          "max": 16.666667,
+          "unit": "%"
+        },
+        "sm__warps_active.avg.pct_of_peak_sustained_active": {
+          "median": 15.893625,
+          "min": 15.844228,
+          "max": 15.907159,
+          "unit": "%"
+        }
+      },
+      "v2c_bc32_qreg": {
+        "gpu__time_duration.sum": {
+          "median": 3.886272,
+          "min": 3.808224,
+          "max": 4.195872,
+          "unit": "ms"
+        },
+        "launch__grid_size": {
+          "median": 512.0,
+          "min": 512.0,
+          "max": 512.0,
+          "unit": ""
+        },
+        "launch__waves_per_multiprocessor": {
+          "median": 1.55,
+          "min": 1.55,
+          "max": 1.55,
+          "unit": ""
+        },
+        "launch__registers_per_thread": {
+          "median": 96.0,
+          "min": 96.0,
+          "max": 96.0,
+          "unit": "register/thread"
+        },
+        "launch__shared_mem_per_block_static": {
+          "median": 16.384,
+          "min": 16.384,
+          "max": 16.384,
+          "unit": "Kbyte/block"
+        },
+        "launch__occupancy_limit_registers": {
+          "median": 5.0,
+          "min": 5.0,
+          "max": 5.0,
+          "unit": "block"
+        },
+        "launch__occupancy_limit_shared_mem": {
+          "median": 5.0,
+          "min": 5.0,
+          "max": 5.0,
+          "unit": "block"
+        },
+        "sm__maximum_warps_per_active_cycle_pct": {
+          "median": 41.666667,
+          "min": 41.666667,
+          "max": 41.666667,
+          "unit": "%"
+        },
+        "sm__warps_active.avg.pct_of_peak_sustained_active": {
+          "median": 34.461232,
+          "min": 34.387063,
+          "max": 35.320019,
+          "unit": "%"
+        }
+      }
+    },
+    "latency_change_pct": -16.98724521182792,
+    "throughput_change_pct": 20.4634158391384
+  },
+  {
+    "n": 65536,
+    "versions": {
+      "v2c": {
+        "gpu__time_duration.sum": {
+          "median": 17.43616,
+          "min": 17.42048,
+          "max": 17.5,
+          "unit": "ms"
+        },
+        "launch__grid_size": {
+          "median": 1024.0,
+          "min": 1024.0,
+          "max": 1024.0,
+          "unit": ""
+        },
+        "launch__waves_per_multiprocessor": {
+          "median": 7.76,
+          "min": 7.76,
+          "max": 7.76,
+          "unit": ""
+        },
+        "launch__registers_per_thread": {
+          "median": 96.0,
+          "min": 96.0,
+          "max": 96.0,
+          "unit": "register/thread"
+        },
+        "launch__shared_mem_per_block_static": {
+          "median": 40.96,
+          "min": 40.96,
+          "max": 40.96,
+          "unit": "Kbyte/block"
+        },
+        "launch__occupancy_limit_registers": {
+          "median": 5.0,
+          "min": 5.0,
+          "max": 5.0,
+          "unit": "block"
+        },
+        "launch__occupancy_limit_shared_mem": {
+          "median": 2.0,
+          "min": 2.0,
+          "max": 2.0,
+          "unit": "block"
+        },
+        "sm__maximum_warps_per_active_cycle_pct": {
+          "median": 16.666667,
+          "min": 16.666667,
+          "max": 16.666667,
+          "unit": "%"
+        },
+        "sm__warps_active.avg.pct_of_peak_sustained_active": {
+          "median": 16.266437,
+          "min": 16.256786,
+          "max": 16.275621,
+          "unit": "%"
+        }
+      },
+      "v2c_bc32_qreg": {
+        "gpu__time_duration.sum": {
+          "median": 15.946176,
+          "min": 15.867232,
+          "max": 16.531712,
+          "unit": "ms"
+        },
+        "launch__grid_size": {
+          "median": 1024.0,
+          "min": 1024.0,
+          "max": 1024.0,
+          "unit": ""
+        },
+        "launch__waves_per_multiprocessor": {
+          "median": 3.1,
+          "min": 3.1,
+          "max": 3.1,
+          "unit": ""
+        },
+        "launch__registers_per_thread": {
+          "median": 96.0,
+          "min": 96.0,
+          "max": 96.0,
+          "unit": "register/thread"
+        },
+        "launch__shared_mem_per_block_static": {
+          "median": 16.384,
+          "min": 16.384,
+          "max": 16.384,
+          "unit": "Kbyte/block"
+        },
+        "launch__occupancy_limit_registers": {
+          "median": 5.0,
+          "min": 5.0,
+          "max": 5.0,
+          "unit": "block"
+        },
+        "launch__occupancy_limit_shared_mem": {
+          "median": 5.0,
+          "min": 5.0,
+          "max": 5.0,
+          "unit": "block"
+        },
+        "sm__maximum_warps_per_active_cycle_pct": {
+          "median": 41.666667,
+          "min": 41.666667,
+          "max": 41.666667,
+          "unit": "%"
+        },
+        "sm__warps_active.avg.pct_of_peak_sustained_active": {
+          "median": 38.111267,
+          "min": 38.040702,
+          "max": 38.175929,
+          "unit": "%"
+        }
+      }
+    },
+    "latency_change_pct": -8.545367787402736,
+    "throughput_change_pct": 9.34383265304486
+  }
+]

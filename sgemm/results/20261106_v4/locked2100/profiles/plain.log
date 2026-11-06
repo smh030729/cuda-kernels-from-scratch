@@ -1,0 +1,8 @@
+==WARNING== Note: Running with unmodified GPU clocks. If not controlled otherwise, profiling results may be inconsistent.
+==PROF== Connected to process 7133 (/home/smh/ai_infra/cuda-kernels-from-scratch/build/sgemm/sgemm_v4_compare)
+==PROF== Profiling "sgemm_v4_kernel" - 0: 0%....50%....100% - 31 passes
+{"kind":"environment","gpu":"NVIDIA GeForce RTX 4070 Ti SUPER","cublas_version":120805,"math":"FP16_input_FP32_accum_output_no_reduced_reduction","M":4096,"N":4096,"K":4096}
+{"kind":"cpu_sample_check","samples":128,"max_abs":0.0001043449047}
+{"kind":"check","label":"ptx_plain_sync","max_abs":0,"relative_l2":0}
+==PROF== Disconnected from process 7133
+==PROF== Report: /home/smh/ai_infra/cuda-kernels-from-scratch/sgemm/results/20261106_v4/locked2100/profiles/plain_n4096.ncu-rep

@@ -1,0 +1,5 @@
+Consolidate compiler generated dependencies of target sgemm_compare
+[ 20%] Building CUDA object sgemm/CMakeFiles/sgemm_compare.dir/benchmark_compare.cu.o
+ptxas info    : 0 bytes gmem
+[ 40%] Linking CUDA executable sgemm_compare
+[100%] Built target sgemm_compare

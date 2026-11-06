@@ -1,0 +1,542 @@
+{
+  "v0": {
+    "kernel": "flashattention2_v0(const float *, const float *, const float *, float *, int)",
+    "args": [
+      "v0",
+      16384
+    ],
+    "sm_mhz_before_after": [
+      "2100",
+      "2100"
+    ],
+    "metrics": {
+      "gpu__time_duration.sum": [
+        66710784.0,
+        "ns"
+      ],
+      "launch__registers_per_thread": [
+        39.0,
+        "register/thread"
+      ],
+      "sm__warps_active.avg.pct_of_peak_sustained_active": [
+        16.67,
+        "%"
+      ],
+      "l1tex__data_bank_conflicts_pipe_lsu_mem_shared_op_ld.sum": [
+        4486.0,
+        ""
+      ],
+      "smsp__average_warps_issue_stalled_short_scoreboard_per_issue_active.ratio": [
+        0.54,
+        "inst"
+      ],
+      "smsp__average_warps_issue_stalled_long_scoreboard_per_issue_active.ratio": [
+        4.87,
+        "inst"
+      ],
+      "dram__throughput.avg.pct_of_peak_sustained_elapsed": [
+        0.17,
+        "%"
+      ],
+      "sm__throughput.avg.pct_of_peak_sustained_elapsed": [
+        50.86,
+        "%"
+      ]
+    }
+  },
+  "v0_br64": {
+    "kernel": "flashattention2_v0_br64(const float *, const float *, const float *, float *, int)",
+    "args": [
+      "v0_br64",
+      16384
+    ],
+    "sm_mhz_before_after": [
+      "2100",
+      "2100"
+    ],
+    "metrics": {
+      "gpu__time_duration.sum": [
+        19163040.0,
+        "ns"
+      ],
+      "launch__registers_per_thread": [
+        255.0,
+        "register/thread"
+      ],
+      "sm__warps_active.avg.pct_of_peak_sustained_active": [
+        16.21,
+        "%"
+      ],
+      "l1tex__data_bank_conflicts_pipe_lsu_mem_shared_op_ld.sum": [
+        3526507.0,
+        ""
+      ],
+      "smsp__average_warps_issue_stalled_short_scoreboard_per_issue_active.ratio": [
+        2.55,
+        "inst"
+      ],
+      "smsp__average_warps_issue_stalled_long_scoreboard_per_issue_active.ratio": [
+        3.55,
+        "inst"
+      ],
+      "dram__throughput.avg.pct_of_peak_sustained_elapsed": [
+        4.09,
+        "%"
+      ],
+      "sm__throughput.avg.pct_of_peak_sustained_elapsed": [
+        51.8,
+        "%"
+      ]
+    }
+  },
+  "v1": {
+    "kernel": "flashattention2_v1(const float *, const float *, const float *, float *, int)",
+    "args": [
+      "v1",
+      16384
+    ],
+    "sm_mhz_before_after": [
+      "2100",
+      "2100"
+    ],
+    "metrics": {
+      "gpu__time_duration.sum": [
+        5752896.0,
+        "ns"
+      ],
+      "launch__registers_per_thread": [
+        72.0,
+        "register/thread"
+      ],
+      "sm__warps_active.avg.pct_of_peak_sustained_active": [
+        32.35,
+        "%"
+      ],
+      "l1tex__data_bank_conflicts_pipe_lsu_mem_shared_op_ld.sum": [
+        293606723.0,
+        ""
+      ],
+      "smsp__average_warps_issue_stalled_short_scoreboard_per_issue_active.ratio": [
+        9.45,
+        "inst"
+      ],
+      "smsp__average_warps_issue_stalled_long_scoreboard_per_issue_active.ratio": [
+        7.85,
+        "inst"
+      ],
+      "dram__throughput.avg.pct_of_peak_sustained_elapsed": [
+        1.1,
+        "%"
+      ],
+      "sm__throughput.avg.pct_of_peak_sustained_elapsed": [
+        16.79,
+        "%"
+      ]
+    }
+  },
+  "v2a": {
+    "kernel": "flashattention2_v2a(const float *, const float *, const float *, float *, int)",
+    "args": [
+      "v2a",
+      16384
+    ],
+    "sm_mhz_before_after": [
+      "2100",
+      "2100"
+    ],
+    "metrics": {
+      "gpu__time_duration.sum": [
+        3225120.0,
+        "ns"
+      ],
+      "launch__registers_per_thread": [
+        96.0,
+        "register/thread"
+      ],
+      "sm__warps_active.avg.pct_of_peak_sustained_active": [
+        32.29,
+        "%"
+      ],
+      "l1tex__data_bank_conflicts_pipe_lsu_mem_shared_op_ld.sum": [
+        13325.0,
+        ""
+      ],
+      "smsp__average_warps_issue_stalled_short_scoreboard_per_issue_active.ratio": [
+        0.1,
+        "inst"
+      ],
+      "smsp__average_warps_issue_stalled_long_scoreboard_per_issue_active.ratio": [
+        7.7,
+        "inst"
+      ],
+      "dram__throughput.avg.pct_of_peak_sustained_elapsed": [
+        0.6,
+        "%"
+      ],
+      "sm__throughput.avg.pct_of_peak_sustained_elapsed": [
+        27.99,
+        "%"
+      ]
+    }
+  },
+  "v0_fp16": {
+    "kernel": "flashattention2_v0_fp16(const __half *, const __half *, const __half *, __half *, int)",
+    "args": [
+      "v0_fp16",
+      16384
+    ],
+    "sm_mhz_before_after": [
+      "2100",
+      "2100"
+    ],
+    "metrics": {
+      "gpu__time_duration.sum": [
+        38578464.0,
+        "ns"
+      ],
+      "launch__registers_per_thread": [
+        38.0,
+        "register/thread"
+      ],
+      "sm__warps_active.avg.pct_of_peak_sustained_active": [
+        40.57,
+        "%"
+      ],
+      "l1tex__data_bank_conflicts_pipe_lsu_mem_shared_op_ld.sum": [
+        2542.0,
+        ""
+      ],
+      "smsp__average_warps_issue_stalled_short_scoreboard_per_issue_active.ratio": [
+        0.51,
+        "inst"
+      ],
+      "smsp__average_warps_issue_stalled_long_scoreboard_per_issue_active.ratio": [
+        3.99,
+        "inst"
+      ],
+      "dram__throughput.avg.pct_of_peak_sustained_elapsed": [
+        0.24,
+        "%"
+      ],
+      "sm__throughput.avg.pct_of_peak_sustained_elapsed": [
+        87.14,
+        "%"
+      ]
+    }
+  },
+  "v0_br64_fp16": {
+    "kernel": "flashattention2_v0_br64_fp16(const __half *, const __half *, const __half *, __half *, int)",
+    "args": [
+      "v0_br64_fp16",
+      16384
+    ],
+    "sm_mhz_before_after": [
+      "2100",
+      "2100"
+    ],
+    "metrics": {
+      "gpu__time_duration.sum": [
+        47490784.0,
+        "ns"
+      ],
+      "launch__registers_per_thread": [
+        255.0,
+        "register/thread"
+      ],
+      "sm__warps_active.avg.pct_of_peak_sustained_active": [
+        16.42,
+        "%"
+      ],
+      "l1tex__data_bank_conflicts_pipe_lsu_mem_shared_op_ld.sum": [
+        0.0,
+        ""
+      ],
+      "smsp__average_warps_issue_stalled_short_scoreboard_per_issue_active.ratio": [
+        2.62,
+        "inst"
+      ],
+      "smsp__average_warps_issue_stalled_long_scoreboard_per_issue_active.ratio": [
+        11.45,
+        "inst"
+      ],
+      "dram__throughput.avg.pct_of_peak_sustained_elapsed": [
+        66.83,
+        "%"
+      ],
+      "sm__throughput.avg.pct_of_peak_sustained_elapsed": [
+        26.76,
+        "%"
+      ]
+    }
+  },
+  "v1_fp16": {
+    "kernel": "void flashattention2_v1_fp16<__half>(const __half *, const __half *, const __half *, T1 *, int)",
+    "args": [
+      "v1_fp16",
+      16384
+    ],
+    "sm_mhz_before_after": [
+      "2100",
+      "2100"
+    ],
+    "metrics": {
+      "gpu__time_duration.sum": [
+        5241856.0,
+        "ns"
+      ],
+      "launch__registers_per_thread": [
+        72.0,
+        "register/thread"
+      ],
+      "sm__warps_active.avg.pct_of_peak_sustained_active": [
+        32.37,
+        "%"
+      ],
+      "l1tex__data_bank_conflicts_pipe_lsu_mem_shared_op_ld.sum": [
+        293603778.0,
+        ""
+      ],
+      "smsp__average_warps_issue_stalled_short_scoreboard_per_issue_active.ratio": [
+        9.72,
+        "inst"
+      ],
+      "smsp__average_warps_issue_stalled_long_scoreboard_per_issue_active.ratio": [
+        8.18,
+        "inst"
+      ],
+      "dram__throughput.avg.pct_of_peak_sustained_elapsed": [
+        0.37,
+        "%"
+      ],
+      "sm__throughput.avg.pct_of_peak_sustained_elapsed": [
+        16.6,
+        "%"
+      ]
+    }
+  },
+  "v1_fp16_out32": {
+    "kernel": "void flashattention2_v1_fp16<float>(const __half *, const __half *, const __half *, T1 *, int)",
+    "args": [
+      "v1_fp16_out32",
+      16384
+    ],
+    "sm_mhz_before_after": [
+      "2100",
+      "2100"
+    ],
+    "metrics": {
+      "gpu__time_duration.sum": [
+        5236480.0,
+        "ns"
+      ],
+      "launch__registers_per_thread": [
+        72.0,
+        "register/thread"
+      ],
+      "sm__warps_active.avg.pct_of_peak_sustained_active": [
+        32.37,
+        "%"
+      ],
+      "l1tex__data_bank_conflicts_pipe_lsu_mem_shared_op_ld.sum": [
+        293606423.0,
+        ""
+      ],
+      "smsp__average_warps_issue_stalled_short_scoreboard_per_issue_active.ratio": [
+        9.73,
+        "inst"
+      ],
+      "smsp__average_warps_issue_stalled_long_scoreboard_per_issue_active.ratio": [
+        8.15,
+        "inst"
+      ],
+      "dram__throughput.avg.pct_of_peak_sustained_elapsed": [
+        0.43,
+        "%"
+      ],
+      "sm__throughput.avg.pct_of_peak_sustained_elapsed": [
+        16.62,
+        "%"
+      ]
+    }
+  },
+  "v2a_fp16": {
+    "kernel": "flashattention2_v2a_fp16(const __half *, const __half *, const __half *, __half *, int)",
+    "args": [
+      "v2a_fp16",
+      16384
+    ],
+    "sm_mhz_before_after": [
+      "2100",
+      "2100"
+    ],
+    "metrics": {
+      "gpu__time_duration.sum": [
+        3202080.0,
+        "ns"
+      ],
+      "launch__registers_per_thread": [
+        96.0,
+        "register/thread"
+      ],
+      "sm__warps_active.avg.pct_of_peak_sustained_active": [
+        32.28,
+        "%"
+      ],
+      "l1tex__data_bank_conflicts_pipe_lsu_mem_shared_op_ld.sum": [
+        8609.0,
+        ""
+      ],
+      "smsp__average_warps_issue_stalled_short_scoreboard_per_issue_active.ratio": [
+        0.08,
+        "inst"
+      ],
+      "smsp__average_warps_issue_stalled_long_scoreboard_per_issue_active.ratio": [
+        7.67,
+        "inst"
+      ],
+      "dram__throughput.avg.pct_of_peak_sustained_elapsed": [
+        0.7,
+        "%"
+      ],
+      "sm__throughput.avg.pct_of_peak_sustained_elapsed": [
+        27.22,
+        "%"
+      ]
+    }
+  },
+  "v2b": {
+    "kernel": "flashattention2_v2b(const __half *, const __half *, const __half *, __half *, int)",
+    "args": [
+      "v2b",
+      16384
+    ],
+    "sm_mhz_before_after": [
+      "2100",
+      "2100"
+    ],
+    "metrics": {
+      "gpu__time_duration.sum": [
+        1323456.0,
+        "ns"
+      ],
+      "launch__registers_per_thread": [
+        96.0,
+        "register/thread"
+      ],
+      "sm__warps_active.avg.pct_of_peak_sustained_active": [
+        26.56,
+        "%"
+      ],
+      "l1tex__data_bank_conflicts_pipe_lsu_mem_shared_op_ld.sum": [
+        25483.0,
+        ""
+      ],
+      "smsp__average_warps_issue_stalled_short_scoreboard_per_issue_active.ratio": [
+        0.12,
+        "inst"
+      ],
+      "smsp__average_warps_issue_stalled_long_scoreboard_per_issue_active.ratio": [
+        0.41,
+        "inst"
+      ],
+      "dram__throughput.avg.pct_of_peak_sustained_elapsed": [
+        1.6,
+        "%"
+      ],
+      "sm__throughput.avg.pct_of_peak_sustained_elapsed": [
+        40.06,
+        "%"
+      ]
+    }
+  },
+  "v2c": {
+    "kernel": "flashattention2_v2c(const __half *, const __half *, const __half *, __half *, int)",
+    "args": [
+      "v2c",
+      16384
+    ],
+    "sm_mhz_before_after": [
+      "2100",
+      "2100"
+    ],
+    "metrics": {
+      "gpu__time_duration.sum": [
+        1755808.0,
+        "ns"
+      ],
+      "launch__registers_per_thread": [
+        96.0,
+        "register/thread"
+      ],
+      "sm__warps_active.avg.pct_of_peak_sustained_active": [
+        15.44,
+        "%"
+      ],
+      "l1tex__data_bank_conflicts_pipe_lsu_mem_shared_op_ld.sum": [
+        5361.0,
+        ""
+      ],
+      "smsp__average_warps_issue_stalled_short_scoreboard_per_issue_active.ratio": [
+        0.11,
+        "inst"
+      ],
+      "smsp__average_warps_issue_stalled_long_scoreboard_per_issue_active.ratio": [
+        0.1,
+        "inst"
+      ],
+      "dram__throughput.avg.pct_of_peak_sustained_elapsed": [
+        1.39,
+        "%"
+      ],
+      "sm__throughput.avg.pct_of_peak_sustained_elapsed": [
+        37.33,
+        "%"
+      ]
+    }
+  },
+  "v2c_bc32_qreg": {
+    "kernel": "flashattention2_v2c_bc32_qreg(const __half *, const __half *, const __half *, __half *, int)",
+    "args": [
+      "v2c_bc32_qreg",
+      16384
+    ],
+    "sm_mhz_before_after": [
+      "2100",
+      "2100"
+    ],
+    "metrics": {
+      "gpu__time_duration.sum": [
+        1298944.0,
+        "ns"
+      ],
+      "launch__registers_per_thread": [
+        96.0,
+        "register/thread"
+      ],
+      "sm__warps_active.avg.pct_of_peak_sustained_active": [
+        27.04,
+        "%"
+      ],
+      "l1tex__data_bank_conflicts_pipe_lsu_mem_shared_op_ld.sum": [
+        5935.0,
+        ""
+      ],
+      "smsp__average_warps_issue_stalled_short_scoreboard_per_issue_active.ratio": [
+        0.68,
+        "inst"
+      ],
+      "smsp__average_warps_issue_stalled_long_scoreboard_per_issue_active.ratio": [
+        0.09,
+        "inst"
+      ],
+      "dram__throughput.avg.pct_of_peak_sustained_elapsed": [
+        0.99,
+        "%"
+      ],
+      "sm__throughput.avg.pct_of_peak_sustained_elapsed": [
+        40.82,
+        "%"
+      ]
+    }
+  }
+}

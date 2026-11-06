@@ -1,0 +1,300 @@
+#include "sgemm_v4.cuh"
+#include <mma.h>
+#include <cstdint>
+#include <stdexcept>
+
+namespace {
+constexpr int BK = 32;
+
+template<bool SWIZZLE>
+__device__ __forceinline__ int a_index(int row, int col) {
+  if constexpr (SWIZZLE) return row * BK + ((col / 8) ^ ((row >> 1) & 3)) * 8 + col % 8;
+  return row * BK + col;
+}
+
+template<bool SWIZZLE>
+__device__ __forceinline__ int b_index(int row, int col) {
+  // Consecutive BK x 64 panels, matching the user's reference GEMM layout.
+  const int panel = col / 64, within = col % 64;
+  if constexpr (SWIZZLE)
+    return panel * BK * 64 + row * 64 + ((within / 8) ^ (row & 7)) * 8 + within % 8;
+  return panel * BK * 64 + row * 64 + within;
+}
+
+template<bool ASYNC>
+__device__ __forceinline__ void copy16(half* dst, const half* src, bool valid) {
+  if constexpr (ASYNC) {
+    const unsigned address = static_cast<unsigned>(__cvta_generic_to_shared(dst));
+    const int bytes = valid ? 16 : 0;
+    asm volatile("cp.async.cg.shared.global [%0], [%1], 16, %2;" ::
+                 "r"(address), "l"(src), "r"(bytes) : "memory");
+  } else {
+    const uint4 value = valid ? *reinterpret_cast<const uint4*>(src) : make_uint4(0,0,0,0);
+    *reinterpret_cast<uint4*>(dst) = value;
+  }
+}
+
+template<int BM, int BN, int THREADS, bool SWIZZLE, bool ASYNC>
+__device__ __forceinline__ void load_tile(const half* A, const half* B, half* As, half* Bs,
+    int M, int N, int K, int row0, int col0, int k0) {
+  #pragma unroll
+  for (int index = threadIdx.x * 8; index < BM * BK; index += THREADS * 8) {
+    const int row = index / BK, col = index % BK;
+    const bool valid = row0 + row < M && k0 + col < K;
+    const half* src = valid ? A + size_t(row0 + row) * K + k0 + col : A;
+    copy16<ASYNC>(As + a_index<SWIZZLE>(row,col), src, valid);
+  }
+  #pragma unroll
+  for (int index = threadIdx.x * 8; index < BK * BN; index += THREADS * 8) {
+    const int row = index / BN, col = index % BN;
+    const bool valid = k0 + row < K && col0 + col < N;
+    const half* src = valid ? B + size_t(k0 + row) * N + col0 + col : B;
+    copy16<ASYNC>(Bs + b_index<SWIZZLE>(row,col), src, valid);
+  }
+  if constexpr (ASYNC) asm volatile("cp.async.commit_group;" ::: "memory");
+}
+
+template<bool ASYNC>
+__device__ __forceinline__ void wait_tile() {
+  if constexpr (ASYNC) asm volatile("cp.async.wait_group 0;" ::: "memory");
+  __syncthreads();
+}
+
+template<int BM, int BN, int WM, int WN, int GROUP_M, bool SWIZZLE, bool ASYNC, int STAGES, bool FULL_GROUPS>
+__global__ __launch_bounds__((BM/WM)*(BN/WN)*32,
+    (BM==128 && BN==128 && WM==32 ? 2 : 1)) void sgemm_v4_kernel(
+    const half* __restrict__ A, const half* __restrict__ B, float* __restrict__ C,
+    int M, int N, int K, float alpha, float beta) {
+  constexpr int THREADS = (BM / WM) * (BN / WN) * 32;
+  constexpr int MI = WM / 16, NI = WN / 8;
+  static_assert(WM % 16 == 0 && WN % 16 == 0 && BN % 64 == 0);
+  __shared__ __align__(128) half As[STAGES][BM * BK];
+  __shared__ __align__(128) half Bs[STAGES][BK * BN];
+  int tile_m = blockIdx.y, tile_n = blockIdx.x;
+  if constexpr (GROUP_M > 1) {
+    if constexpr (FULL_GROUPS) {
+      // Equivalent grouped order, with power-of-two divisions instead of a variable divisor.
+      tile_m = (blockIdx.y / GROUP_M) * GROUP_M + blockIdx.x % GROUP_M;
+      tile_n = blockIdx.x / GROUP_M + (blockIdx.y % GROUP_M) * (gridDim.x / GROUP_M);
+    } else {
+    const int tiles_m = (M + BM - 1) / BM;
+    const int linear = blockIdx.y * gridDim.x + blockIdx.x;
+    const int group = linear / (GROUP_M * gridDim.x);
+    const int first_m = group * GROUP_M;
+    const int actual_m = min(GROUP_M, tiles_m - first_m);
+    const int within = linear % (GROUP_M * gridDim.x);
+    tile_m = first_m + within % actual_m;
+    tile_n = within / actual_m;
+    }
+  }
+  const int row0 = tile_m * BM, col0 = tile_n * BN;
+  const int lane = threadIdx.x % 32, warp = threadIdx.x / 32;
+  const int warp_m = warp / (BN / WN), warp_n = warp % (BN / WN);
+  const int load_row = (lane & 7) + ((lane >> 3) & 1) * 8;
+  const int load_col = (lane >> 4) * 8;
+  float sum[MI][NI][4] = {};
+  load_tile<BM,BN,THREADS,SWIZZLE,ASYNC>(A,B,As[0],Bs[0],M,N,K,row0,col0,0);
+  wait_tile<ASYNC>();
+  int stage = 0;
+  for (int k0 = 0; k0 < K; k0 += BK) {
+    const int next = k0 + BK;
+    if constexpr (STAGES == 2) {
+      if (next < K)
+        load_tile<BM,BN,THREADS,SWIZZLE,ASYNC>(A,B,As[stage^1],Bs[stage^1],M,N,K,row0,col0,next);
+    }
+    #pragma unroll
+    for (int kk = 0; kk < BK; kk += 16) {
+      unsigned af[MI][4], bf[NI][2];
+      #pragma unroll
+      for (int m = 0; m < MI; ++m) {
+        const int row = warp_m * WM + m * 16 + load_row;
+        const int col = kk + load_col;
+        const unsigned address = static_cast<unsigned>(__cvta_generic_to_shared(
+            &As[stage][a_index<SWIZZLE>(row,col)]));
+        asm volatile("ldmatrix.sync.aligned.m8n8.x4.shared.b16 {%0,%1,%2,%3}, [%4];"
+            : "=r"(af[m][0]),"=r"(af[m][1]),"=r"(af[m][2]),"=r"(af[m][3]) : "r"(address));
+      }
+      #pragma unroll
+      for (int n = 0; n < NI; n += 2) {
+        const int row = kk + load_row;
+        const int col = warp_n * WN + n * 8 + load_col;
+        const unsigned address = static_cast<unsigned>(__cvta_generic_to_shared(
+            &Bs[stage][b_index<SWIZZLE>(row,col)]));
+        unsigned frag[4];
+        asm volatile("ldmatrix.sync.aligned.m8n8.x4.trans.shared.b16 {%0,%1,%2,%3}, [%4];"
+            : "=r"(frag[0]),"=r"(frag[1]),"=r"(frag[2]),"=r"(frag[3]) : "r"(address));
+        bf[n][0] = frag[0]; bf[n][1] = frag[1];
+        bf[n+1][0] = frag[2]; bf[n+1][1] = frag[3];
+      }
+      #pragma unroll
+      for (int m = 0; m < MI; ++m) {
+        #pragma unroll
+        for (int n = 0; n < NI; ++n) {
+          asm volatile("mma.sync.aligned.m16n8k16.row.col.f32.f16.f16.f32 "
+              "{%0,%1,%2,%3}, {%4,%5,%6,%7}, {%8,%9}, {%0,%1,%2,%3};"
+              : "+f"(sum[m][n][0]),"+f"(sum[m][n][1]),"+f"(sum[m][n][2]),"+f"(sum[m][n][3])
+              : "r"(af[m][0]),"r"(af[m][1]),"r"(af[m][2]),"r"(af[m][3]),"r"(bf[n][0]),"r"(bf[n][1]));
+        }
+      }
+    }
+    if (next < K) {
+      if constexpr (STAGES == 1) {
+        __syncthreads();
+        load_tile<BM,BN,THREADS,SWIZZLE,ASYNC>(A,B,As[0],Bs[0],M,N,K,row0,col0,next);
+      }
+      wait_tile<ASYNC>();
+      if constexpr (STAGES == 2) stage ^= 1;
+    }
+  }
+  #pragma unroll
+  for (int m = 0; m < MI; ++m) {
+    #pragma unroll
+    for (int n = 0; n < NI; ++n) {
+      const int row = row0 + warp_m * WM + m * 16 + lane / 4;
+      const int col = col0 + warp_n * WN + n * 8 + 2 * (lane % 4);
+      #pragma unroll
+      for (int r = 0; r < 2; ++r) {
+        const int rr = row + r * 8;
+        if (rr < M && col + 1 < N) {
+          const size_t index = size_t(rr) * N + col;
+          float2 out = {alpha * sum[m][n][r*2], alpha * sum[m][n][r*2+1]};
+          if (beta != 0.f) {
+            const float2 old = *reinterpret_cast<const float2*>(C + index);
+            out.x = fmaf(beta,old.x,out.x); out.y = fmaf(beta,old.y,out.y);
+          }
+          *reinterpret_cast<float2*>(C + index) = out;
+        }
+      }
+    }
+  }
+}
+
+// A WMMA baseline with the same 128x128 CTA / 32x64 warp output decomposition.
+// WMMA fragment element coordinates are unspecified: use per-warp shared epilogues.
+__global__ __launch_bounds__(256) void sgemm_v4_wmma(
+    const half* A, const half* B, float* C, int N, int K, float alpha, float beta) {
+  using namespace nvcuda;
+  __shared__ __align__(128) half As[128*BK], Bs[BK*128];
+  __shared__ __align__(128) float epilogue[8][256];
+  const int lane = threadIdx.x % 32, warp = threadIdx.x / 32;
+  const int warp_m = warp / 2, warp_n = warp % 2;
+  const int row0 = blockIdx.y * 128, col0 = blockIdx.x * 128;
+  wmma::fragment<wmma::accumulator,16,16,16,float> accum[2][4];
+  #pragma unroll
+  for (int m=0;m<2;++m) {
+    #pragma unroll
+    for (int n=0;n<4;++n) wmma::fill_fragment(accum[m][n],0.f);
+  }
+  for (int k0=0;k0<K;k0+=BK) {
+    #pragma unroll
+    for (int i=threadIdx.x*8;i<128*BK;i+=256*8)
+      *reinterpret_cast<uint4*>(As+i) = *reinterpret_cast<const uint4*>(A+size_t(row0+i/BK)*K+k0+i%BK);
+    #pragma unroll
+    for (int i=threadIdx.x*8;i<BK*128;i+=256*8)
+      *reinterpret_cast<uint4*>(Bs+i) = *reinterpret_cast<const uint4*>(B+size_t(k0+i/128)*N+col0+i%128);
+    __syncthreads();
+    #pragma unroll
+    for (int kk=0;kk<BK;kk+=16) {
+      wmma::fragment<wmma::matrix_a,16,16,16,half,wmma::row_major> af[2];
+      wmma::fragment<wmma::matrix_b,16,16,16,half,wmma::row_major> bf[4];
+      #pragma unroll
+      for (int m=0;m<2;++m) wmma::load_matrix_sync(af[m],As+(warp_m*32+m*16)*BK+kk,BK);
+      #pragma unroll
+      for (int n=0;n<4;++n) wmma::load_matrix_sync(bf[n],Bs+kk*128+warp_n*64+n*16,128);
+      #pragma unroll
+      for (int m=0;m<2;++m) {
+        #pragma unroll
+        for (int n=0;n<4;++n) wmma::mma_sync(accum[m][n],af[m],bf[n],accum[m][n]);
+      }
+    }
+    __syncthreads();
+  }
+  #pragma unroll
+  for (int m=0;m<2;++m) {
+    #pragma unroll
+    for (int n=0;n<4;++n) {
+      wmma::store_matrix_sync(epilogue[warp],accum[m][n],16,wmma::mem_row_major);
+      __syncwarp();
+      #pragma unroll
+      for (int i=lane;i<256;i+=32) {
+        const size_t index = size_t(row0+warp_m*32+m*16+i/16)*N+col0+warp_n*64+n*16+i%16;
+        const float value = alpha*epilogue[warp][i];
+        C[index] = beta==0.f ? value : fmaf(beta,C[index],value);
+      }
+      __syncwarp();
+    }
+  }
+}
+
+__global__ void sgemm_v4_boundary(const half* A,const half* B,float* C,
+    int M,int N,int K,float alpha,float beta) {
+  __shared__ float a[16][16],b[16][16];
+  const int x=threadIdx.x,y=threadIdx.y,row=blockIdx.y*16+y,col=blockIdx.x*16+x;
+  float sum=0.f;
+  for(int k0=0;k0<K;k0+=16) {
+    a[y][x]=row<M&&k0+x<K ? __half2float(A[size_t(row)*K+k0+x]) : 0.f;
+    b[y][x]=col<N&&k0+y<K ? __half2float(B[size_t(k0+y)*N+col]) : 0.f;
+    __syncthreads();
+    #pragma unroll
+    for(int k=0;k<16;++k) sum=fmaf(a[y][k],b[k][x],sum);
+    __syncthreads();
+  }
+  if(row<M&&col<N) {
+    const size_t i=size_t(row)*N+col;
+    C[i]=beta==0.f ? alpha*sum : fmaf(beta,C[i],alpha*sum);
+  }
+}
+
+template<int BM,int BN,int WM,int WN,int GROUP,bool SWIZZLE,bool ASYNC,int STAGES>
+void launch(const half* A,const half* B,float* C,int M,int N,int K,float alpha,float beta,cudaStream_t stream) {
+  const dim3 grid((N+BN-1)/BN,(M+BM-1)/BM);
+  if constexpr (GROUP > 1) {
+    if (grid.x % GROUP == 0 && grid.y % GROUP == 0) {
+      sgemm_v4_kernel<BM,BN,WM,WN,GROUP,SWIZZLE,ASYNC,STAGES,true>
+          <<<grid,(BM/WM)*(BN/WN)*32,0,stream>>>(A,B,C,M,N,K,alpha,beta);
+      return;
+    }
+  }
+  sgemm_v4_kernel<BM,BN,WM,WN,GROUP,SWIZZLE,ASYNC,STAGES,false>
+      <<<grid,(BM/WM)*(BN/WN)*32,0,stream>>>(A,B,C,M,N,K,alpha,beta);
+}
+} // namespace
+
+const char* sgemm_v4_variant_name(int variant) {
+  static const char* names[]={"wmma_plain","ptx_plain_sync","ptx_xor_sync","ptx_xor_async_single",
+      "ptx_xor_async_double","ptx_xor_double_group8","tile64x128_group8",
+      "warp64x64_group8","tile128x256_group8","ptx_xor_double_group4","ptx_xor_double_group2"};
+  if(variant<0||variant>=SGEMM_V4_VARIANTS) throw std::invalid_argument("invalid V4 variant");
+  return names[variant];
+}
+
+void launch_sgemm_v4_variant(int variant,const half* A,const half* B,float* C,
+    int M,int N,int K,float alpha,float beta,cudaStream_t stream) {
+  if(M<0||N<0||K<0) throw std::invalid_argument("negative GEMM dimension");
+  if(variant<0||variant>=SGEMM_V4_VARIANTS) throw std::invalid_argument("invalid V4 variant");
+  if(M==0||N==0) return;
+  const bool aligned = ((reinterpret_cast<uintptr_t>(A)|reinterpret_cast<uintptr_t>(B))&15)==0
+                       && (reinterpret_cast<uintptr_t>(C)&7)==0;
+  if(K==0||K%8||N%8||!aligned||(variant==0&&(M%128||N%128||K%BK))) {
+    sgemm_v4_boundary<<<dim3((N+15)/16,(M+15)/16),dim3(16,16),0,stream>>>(A,B,C,M,N,K,alpha,beta);
+    return;
+  }
+  switch(variant) {
+    case 0: return sgemm_v4_wmma<<<dim3(N/128,M/128),256,0,stream>>>(A,B,C,N,K,alpha,beta);
+    case 1: return launch<128,128,32,64,1,false,false,1>(A,B,C,M,N,K,alpha,beta,stream);
+    case 2: return launch<128,128,32,64,1,true,false,1>(A,B,C,M,N,K,alpha,beta,stream);
+    case 3: return launch<128,128,32,64,1,true,true,1>(A,B,C,M,N,K,alpha,beta,stream);
+    case 4: return launch<128,128,32,64,1,true,true,2>(A,B,C,M,N,K,alpha,beta,stream);
+    case 5: return launch<128,128,32,64,8,true,true,2>(A,B,C,M,N,K,alpha,beta,stream);
+    case 6: return launch<64,128,32,64,8,true,true,2>(A,B,C,M,N,K,alpha,beta,stream);
+    case 7: return launch<128,128,64,64,8,true,true,2>(A,B,C,M,N,K,alpha,beta,stream);
+    case 8: return launch<128,256,64,64,8,true,true,2>(A,B,C,M,N,K,alpha,beta,stream);
+    case 9: return launch<128,128,32,64,4,true,true,2>(A,B,C,M,N,K,alpha,beta,stream);
+    case 10: return launch<128,128,32,64,2,true,true,2>(A,B,C,M,N,K,alpha,beta,stream);
+  }
+}
+
+void launch_sgemm_v4(const half* A,const half* B,float* C,int M,int N,int K,
+    float alpha,float beta,cudaStream_t stream) {
+  launch_sgemm_v4_variant(5,A,B,C,M,N,K,alpha,beta,stream);
+}

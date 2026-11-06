@@ -1,0 +1,47 @@
+{
+  "flashattention2/bench_official.py": {
+    "recorded": "a33ef15abd817df477f84823722c40621fb4ae6f875bf729d22df279cc601240",
+    "current": "a33ef15abd817df477f84823722c40621fb4ae6f875bf729d22df279cc601240",
+    "matches": true
+  },
+  "flashattention2/benchmark_api.cu": {
+    "recorded": "c73b743aed5caba22933664039766efae407ea3b8f182d6e38596257928b0ba0",
+    "current": "c73b743aed5caba22933664039766efae407ea3b8f182d6e38596257928b0ba0",
+    "matches": true
+  },
+  "flashattention2/flashattention2.cuh": {
+    "recorded": "d81861b8c948594df17c23651c00c81d277a57149744f500b3effa1fc2f97b28",
+    "current": "d81861b8c948594df17c23651c00c81d277a57149744f500b3effa1fc2f97b28",
+    "matches": true
+  },
+  "build/flashattention2/libflashattention2_benchmark.so": {
+    "recorded": "16ef7618d7c0c1a9ba783ffd0dfea958f8eff93144bc37a859e62106241e047c",
+    "current": "16ef7618d7c0c1a9ba783ffd0dfea958f8eff93144bc37a859e62106241e047c",
+    "matches": true
+  },
+  "flashattention2/flashattention2_v0_fp16.cu": {
+    "recorded": "79a82482ac3cf68b1462eb921a9a94962c1c4d2030930787b83bc88646d05136",
+    "current": "79a82482ac3cf68b1462eb921a9a94962c1c4d2030930787b83bc88646d05136",
+    "matches": true
+  },
+  "flashattention2/flashattention2_v1_fp16.cu": {
+    "recorded": "778205cbe4888d8578582650dbcc7f134a86a5e2016455abe44bdd2bf6447c14",
+    "current": "eb1b92ecfd0817e1944f4dd533288a17419e241933b989ce361d9277aa0d681e",
+    "matches": false
+  },
+  "flashattention2/flashattention2_v2a_fp16.cu": {
+    "recorded": "96c5e9bd98fa711011de0d149335a9bd4aaebda478d45c49cb355b3793d0ab7b",
+    "current": "96c5e9bd98fa711011de0d149335a9bd4aaebda478d45c49cb355b3793d0ab7b",
+    "matches": true
+  },
+  "flashattention2/flashattention2_v2_BC.cu": {
+    "recorded": "48f3dd03ae245c2744c534eabc951f12cd202743b0129ed9967eb119fdbd31bb",
+    "current": "48f3dd03ae245c2744c534eabc951f12cd202743b0129ed9967eb119fdbd31bb",
+    "matches": true
+  },
+  "flashattention2/flashattention2_v2c_bc32_qreg.cu": {
+    "recorded": "a12cc684a3689130cccf4829c14e56bfaa69619c4661bb4a5a0cecc4801dc1df",
+    "current": "a12cc684a3689130cccf4829c14e56bfaa69619c4661bb4a5a0cecc4801dc1df",
+    "matches": true
+  }
+}

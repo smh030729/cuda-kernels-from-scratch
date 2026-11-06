@@ -1,0 +1,12 @@
+[
+  "/home/smh/ai_infra/nano-vllm/.venv/bin/python",
+  "flashattention2/bench_official.py",
+  "--lengths",
+  "16384",
+  "32768",
+  "65536",
+  "--repeats",
+  "7",
+  "--output",
+  "/home/smh/ai_infra/cuda-kernels-from-scratch/flashattention2/results/v2c_bc32_qreg_official_large_n_20261026_201702/official_comparison_unlocked.json"
+]

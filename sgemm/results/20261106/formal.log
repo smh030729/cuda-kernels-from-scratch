@@ -1,0 +1,41 @@
+START m1024_n1024_k1024_p0
+DONE m1024_n1024_k1024_p0 0.69 s
+START m1024_n1024_k1024_p1
+DONE m1024_n1024_k1024_p1 0.62 s
+START m1024_n1024_k1024_p2
+DONE m1024_n1024_k1024_p2 0.66 s
+START m2048_n2048_k2048_p0
+DONE m2048_n2048_k2048_p0 1.38 s
+START m2048_n2048_k2048_p1
+DONE m2048_n2048_k2048_p1 1.34 s
+START m2048_n2048_k2048_p2
+DONE m2048_n2048_k2048_p2 1.34 s
+START m4096_n4096_k4096_p0
+DONE m4096_n4096_k4096_p0 5.45 s
+START m4096_n4096_k4096_p1
+DONE m4096_n4096_k4096_p1 5.41 s
+START m4096_n4096_k4096_p2
+DONE m4096_n4096_k4096_p2 5.44 s
+START m4096_n4096_k4096_p3
+DONE m4096_n4096_k4096_p3 5.37 s
+START m4096_n4096_k4096_p4
+DONE m4096_n4096_k4096_p4 5.38 s
+START m8192_n8192_k8192_p0
+DONE m8192_n8192_k8192_p0 15.54 s
+START m8192_n8192_k8192_p1
+DONE m8192_n8192_k8192_p1 15.58 s
+START m8192_n8192_k8192_p2
+DONE m8192_n8192_k8192_p2 15.72 s
+START m1024_n4096_k2048_p0
+DONE m1024_n4096_k2048_p0 1.45 s
+START m1024_n4096_k2048_p1
+DONE m1024_n4096_k2048_p1 1.4 s
+START m1024_n4096_k2048_p2
+DONE m1024_n4096_k2048_p2 1.4 s
+START m4096_n1024_k2048_p0
+DONE m4096_n1024_k2048_p0 1.37 s
+START m4096_n1024_k2048_p1
+DONE m4096_n1024_k2048_p1 1.46 s
+START m4096_n1024_k2048_p2
+DONE m4096_n1024_k2048_p2 1.4 s
+{"cublas_fp32": {"observations": 45, "median_ms": 4.880793571, "range_ms": [4.821299553, 5.044633389], "tflops": 28.159140818537193, "cublas_throughput_pct": 100.0}, "v1": {"observations": 45, "median_ms": 5.979753494, "range_ms": [5.935513496, 6.137362957], "tflops": 22.98405002980546, "cublas_throughput_pct": 81.62198618885076}, "v2": {"observations": 45, "median_ms": 9.856921196, "range_ms": [9.790361404, 9.991168022], "tflops": 13.94339578648286, "cublas_throughput_pct": 49.516410590567126}, "v3_sync_single": {"observations": 45, "median_ms": 6.241996765, "range_ms": [6.192332745, 6.392524719], "tflops": 22.018427539508664, "cublas_throughput_pct": 78.19282442386847}, "v3_async_single": {"observations": 45, "median_ms": 6.184140682, "range_ms": [6.117053032, 6.310707092], "tflops": 22.224422201784574, "cublas_throughput_pct": 78.92436187951522}, "v3_async_double": {"observations": 45, "median_ms": 5.675724983, "range_ms": [5.648589134, 5.818489552], "tflops": 24.215224290052603, "cublas_throughput_pct": 85.99418727332652}}
